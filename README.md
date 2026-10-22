@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/favicon.png" alt="Bitzy logo" width="128" />
+<img src="assets/icons/binary-exchange.svg" alt="Binary conversion exchange icon" width="150" />
 
 # Bitzy — Your Number System Bestie & CS Study Guide
 
@@ -208,6 +208,7 @@ Bitzy is 100% static client-side web technology — no installation, no node dep
 ├── assets/
 │   ├── favicon.png      # Bitzy mascot — app logo, header mark & browser-tab favicon
 │   └── icons/           # Standalone SVG icons used by this README
+│                        # (binary-exchange.svg is hand-drawn; the rest are generated)
 ├── css/
 │   └── style.css       # Twilight Sunset palette, SVG icon system & responsive design
 ├── js/

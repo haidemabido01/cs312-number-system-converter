@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <style>
+    @media (prefers-color-scheme: dark) {
+      .bx-stroke-teal { stroke: #1EA9C0; }
+      .bx-fill-teal { fill: #1EA9C0; }
+      .bx-stroke-rose { stroke: #E6849B; }
+      .bx-fill-rose { fill: #E6849B; }
+    }
+  </style>
+  <g class="bx-stroke-teal" stroke="#0E5B6A" stroke-width="8" fill="none">
+    <path d="M16.79 44.27 A46 46 0 0 1 103.21 44.27"/>
+    <path d="M103.21 75.73 A46 46 0 0 1 16.79 75.73"/>
+  </g>
+  <path class="bx-fill-teal" fill="#0E5B6A" stroke="none" d="M107.66 56.49 L97.57 46.32 L108.85 42.22 Z"/>
+  <path class="bx-fill-teal" fill="#0E5B6A" stroke="none" d="M12.34 63.51 L22.43 73.68 L11.15 77.78 Z"/>
+  <rect class="bx-fill-rose" fill="#B7687C" stroke="none" x="28" y="51" width="13" height="18" rx="3.5"/>
+  <rect class="bx-stroke-teal" stroke="#0E5B6A" stroke-width="3.5" fill="none" x="45" y="51" width="13" height="18" rx="3.5"/>
+  <rect class="bx-fill-rose" fill="#B7687C" stroke="none" x="62" y="51" width="13" height="18" rx="3.5"/>
+  <rect class="bx-stroke-teal" stroke="#0E5B6A" stroke-width="3.5" fill="none" x="79" y="51" width="13" height="18" rx="3.5"/>
+</svg>
