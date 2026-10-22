@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/icons/binary-exchange.svg" alt="Binary conversion exchange icon" width="150" />
+<img src="assets/binary-conversion-exchange.png" alt="Binary Conversion Exchange icon: a binary card and a decimal card joined by exchange arrows" width="280" />
 
 # Bitzy — Your Number System Bestie & CS Study Guide
 
@@ -206,9 +206,11 @@ Bitzy is 100% static client-side web technology — no installation, no node dep
 ├── cheatsheet.html     # Student Exam Cheat Sheet & CS Hacks
 ├── ascii.html          # 7-Bit ASCII Character Lab
 ├── assets/
-│   ├── favicon.png      # Bitzy mascot — app logo, header mark & browser-tab favicon
-│   └── icons/           # Standalone SVG icons used by this README
-│                        # (binary-exchange.svg is hand-drawn; the rest are generated)
+│   ├── binary-conversion-exchange.png # Binary Conversion Exchange icon (transparent)
+│   ├── favicon.png                    # Bitzy mascot — app logo, header mark & browser-tab favicon
+│   ├── Logo.jpg                       # Bitzy robot logo with wordmark (source artwork)
+│   ├── number-system-converter-logo.png # Number System Converter logo with text
+│   └── icons/                         # Standalone SVG icons used by this README
 ├── css/
 │   └── style.css       # Twilight Sunset palette, SVG icon system & responsive design
 ├── js/
