@@ -79,7 +79,7 @@ Bitzy is a **focused four-page study system**. The landing page is deliberately 
 - **Instant Conversion** <img src="assets/icons/bolt.svg" alt="" width="15" height="15" align="middle"> — Converts as you type across Bases 2, 8, 10, and 16 from the quick-pick dropdown, with a dedicated result pane. (The engine underneath handles *any* base from 2 to 36.)
 - **Step Breakdown** <img src="assets/icons/steps.svg" alt="" width="15" height="15" align="middle"> — Hit *"Show me how Bitzy did it"* to see the full equation, the per-digit weighting, and the repeated-division table.
 - **Toast Notifications** <img src="assets/icons/alert.svg" alt="" width="15" height="15" align="middle"> — Every conversion, invalid digit, hint and achievement is reported in a colour-coded toast notification at the top centre of the screen — no inline status lines anywhere. Repeated feedback reuses the same toast instead of stacking duplicates.
-- **Switchy Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — A fresh fact pops open **automatically every 10 seconds**, no hovering required. Switchy reveals themselves for each fact and the bubble is replaced in place. They wait for you to pause typing so their bubble never flickers mid-conversion.
+- **Switchy Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — Every 10 seconds Switchy pops up a **trivia fact**, a **study tip** or a **cheer** — no hovering required. Switchy reveals themselves for each message and the bubble is replaced in place. They wait for you to pause typing so their bubble never flickers mid-conversion.
 - **Base Palette** <img src="assets/icons/flower.svg" alt="" width="15" height="15" align="middle"> — The toast accents and colours shift to match the base you are working in.
 
 <details>
@@ -141,14 +141,18 @@ Check: $256 - 5 = 251 = \texttt{0xFB}$ — the two's complement of 5 is -5.
 - **Two-Way Decoder** <img src="assets/icons/arrowRight.svg" alt="" width="15" height="15" align="middle"> — Type a decimal code point (0–127) or type a character — Bitzy resolves the other side instantly.
 - **Bit-Level Readouts** <img src="assets/icons/chip.svg" alt="" width="15" height="15" align="middle"> — Every character shows its 8-bit binary form and its hexadecimal form side by side.
 - **Control Character Names** <img src="assets/icons/tag.svg" alt="" width="15" height="15" align="middle"> — The full 0–127 table with friendly names (NUL, SOH, LF, CR, DEL, …).
-- **Quick High-Yield Examples** <img src="assets/icons/wand.svg" alt="" width="15" height="15" align="middle"> — One-click chips for `A = 65`, `a = 97`, `0 = 48`, `Space = 32`, and `! = 33`.
+- **Quick High-Yield Examples** <img src="assets/icons/star.svg" alt="" width="15" height="15" align="middle"> — One-click chips for `A = 65`, `a = 97`, `0 = 48`, `Space = 32`, and `! = 33`.
 
 ### 5. <img src="assets/icons/bulb.svg" alt="" width="18" height="18" align="middle"> Switchy Companion
 
 Switchy is the **only voice of the app** — all trivia, study tips and blessings are spoken by them, never by a separate panel.
 
 - The Binary Conversion Exchange mascot: a binary card and a decimal card swapping values through two curved arrows, floating at the bottom-right corner of every page.
-- **Automatic Trivia** <img src="assets/icons/sparkle.svg" alt="" width="15" height="15" align="middle"> — a fresh fact pops open **every 10 seconds on its own**. Switchy reveals themselves for each fact, the bubble is replaced in place, and the linger countdown keeps them on screen while the facts keep coming.
+- **Every 10 Seconds** <img src="assets/icons/sparkle.svg" alt="" width="15" height="15" align="middle"> — Switchy speaks up on their own, cycling through three kinds of message with their own bubble icon:
+  - **Trivia** <img src="assets/icons/bulb.svg" alt="" width="14" height="14" align="middle"> — a computing-history fact, weighted to appear most often.
+  - **Study tip** <img src="assets/icons/book.svg" alt="" width="14" height="14" align="middle"> — a practical trick for exams (chunking, two's complement, powers of 2).
+  - **Cheer** <img src="assets/icons/heart.svg" alt="" width="14" height="14" align="middle"> — a bit of encouragement, because studying should feel good.
+- The Binary Conversion Exchange mascot: a binary card and a decimal card swapping values through two curved arrows, floating at the bottom-right corner of every page.
 - **Matched to your conversion** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — type a number and Switchy answers with a fact tied to the base you are working in (why 255 is a byte, why octal groups 3 bits, why base-20 exists, and more).
 - **Never interrupted** <img src="assets/icons/bulb.svg" alt="" width="15" height="15" align="middle"> — a greeting or blessing already on screen is never cut short, and the tick is skipped while the tab is in the background.
 - Use the little pill button under them to minimize them or bring them back for distraction-free focus; a study blessing greets you when they return.
@@ -159,7 +163,7 @@ Switchy is the **only voice of the app** — all trivia, study tips and blessing
 
 ---
 
-## <img src="assets/icons/wand.svg" alt="" width="20" height="20" align="middle"> Icon System
+## <img src="assets/icons/chip.svg" alt="" width="20" height="20" align="middle"> Icon System
 
 Every emoji has been replaced with a hand-picked **inline SVG icon set** (`js/icons.js`):
 

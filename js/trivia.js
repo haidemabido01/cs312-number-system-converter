@@ -15,19 +15,19 @@
    ========================================================== */
 
 const CONTEXT_TRIVIA = [
-    { match: (v, f, o, t) => v === "255" || o === "255", text: "Did you know? 255 is the max value of one byte - that is why color channels go 0 to 255!" },
+    { match: (v, f, o, t) => v === "255" || o === "255", text: "Bit of knowledge: 255 is the max value of one byte - that is why color channels go 0 to 255!" },
     { match: (v, f, o, t) => f === 16 || t === 16, text: "Did you know? Hexadecimal is used in web colors - #FF5733 is just 3 bytes packed into 6 characters!" },
     { match: (v, f, o, t) => f === 2 || t === 2, text: "Did you know? Every computer chip speaks binary - 1s and 0s controlling billions of transistors!" },
     { match: (v, f, o, t) => f === 8 || t === 8, text: "Did you know? Octal was popular in early computing because it groups 3 bits neatly." },
-    { match: (v, f, o, t) => f === 20 || t === 20, text: "Did you know? The Maya civilization used base-20 - counting on fingers AND toes!" },
+    { match: (v, f, o, t) => f === 20 || t === 20, text: "Base-20 bonus: the Maya civilization counted on fingers AND toes!" },
     { match: (v, f, o, t) => (v && v.includes('.')) || (o && o.includes('.')), text: "Did you know? Fractions in binary can be infinite - 0.1 in decimal is 0.000110011... in binary!" }
 ];
 
 const FALLBACK_TRIVIA = [
-    "Did you know? 'Nibble' is the cute name for 4 bits - half a byte!",
+    "Switch fact: 'Nibble' is the cute name for 4 bits - half a byte!",
     "Did you know? The number zero was invented independently by the Maya, the Babylonians, and the Indians.",
-    "Did you know? Base-60 is still used today for telling time and measuring angles (thanks, Sumerians!).",
-    "Did you know? 1024 bytes make a kilobyte because 1024 is 2 to the power of 10.",
+    "Base-60 is still used today for telling time and measuring angles (thanks, Sumerians!).",
+    "Bit math: 1024 bytes make a kilobyte because 1024 is 2 to the power of 10.",
     "Did you know? Some ancient systems used base-12 because you can count it on the finger joints of one hand!"
 ];
 
@@ -74,36 +74,70 @@ function showTrivia(factText) {
    PART 2 - SWITCHY COMPANION
    ========================================================== */
 
-const SWITCHY_BLESSINGS = [
-    "Ta-da! Switchy blessed your CS exam with +100 Brainpower!",
+const SWITCHY_CHEERS = [
+    "Swapped in +100 Brainpower - your CS exam is going to love this!",
+    "Base-2, base-8, base-10, base-16 - I can convert between all of them in my sleep!",
     "Every complex algorithm starts with a single tiny bit!",
-    "Study tip: drink some water and take a stretch - your brain needs hydration.",
-    "May all your compiler bugs turn into butterflies!",
-    "Easter egg found! You are officially a Number System Wizard in the making!",
-    "Hexadecimal is just 4-bit nibbles holding hands!",
+    "Every bug you fix is just a number you decoded the right way!",
+    "Level up! You are officially a Number System Wizard in the making!",
+    "Hexadecimal is just 4-bit nibbles lined up side by side!",
     "Believe in yourself! Even supercomputers started with just 0 and 1!",
     "You are working hard today and Switchy is so proud of you!"
 ];
 
-const SWITCHY_SPARKLE_ICONS = ['sparkle', 'star', 'flower', 'heart'];
+const SWITCHY_STUDY_TIPS = [
+    "Study tip: chunk binary into 4-bit groups and hex becomes trivial.",
+    "Study tip: the last bit (2^0) tells you if a number is even or odd.",
+    "Study tip: two's complement is just flipping every bit after the first 1.",
+    "Study tip: memorise 1 byte = 8 bits and 1 nibble = 4 bits - exams hide them.",
+    "Study tip: 0xFF is 255 in decimal - spot that pattern in hex dumps.",
+    "Study tip: ASCII only covers 0-127, anything higher needs Unicode.",
+    "Study tip: read the question twice - 'convert to' and 'convert from' flip the answer.",
+    "Study tip: write the powers of 2 from memory, every exam hides one."
+];
+
+/**
+ * The three things Switchy says on their 10 second beat. Trivia is weighted
+ * highest because it is the most useful thing they can tell you.
+ */
+const SWITCHY_BEATS = [
+    { variant: 'trivia', icon: 'bulb', weight: 3 },
+    { variant: 'tip', icon: 'book', weight: 2 },
+    { variant: 'cheer', icon: 'heart', weight: 2 }
+];
+
+const SWITCHY_BUBBLE_ICONS = {
+    greeting: 'sparkle',
+    blessing: 'star',
+    trivia: 'bulb',
+    tip: 'book',
+    cheer: 'heart'
+};
+
+const SWITCHY_SPARKLE_ICONS = ['sparkle', 'star', 'bolt', 'chip'];
 
 const SWITCHY_BUBBLE_DURATIONS = {
     greeting: 5000,
     blessing: 6000,
-    trivia: 12000
+    trivia: 12000,
+    tip: 12000,
+    cheer: 12000
 };
 
 // Once you hover Switchy they stay revealed for up to one minute.
 const SWITCHY_LINGER_DURATION = 60000;
 
-// While Switchy is revealed, the trivia fact rotates every 10 seconds.
-const SWITCHY_TRIVIA_ROTATE_INTERVAL = 10000;
+// Every 10 seconds Switchy says something new: a trivia fact, a study tip
+// or a bit of cheering.
+const SWITCHY_BEAT_INTERVAL = 10000;
 
-const SWITCHY_GREETING = "Hi! I'm Switchy - your number system bestie. I pop up a fresh trivia fact every 10 seconds while you convert!";
+const SWITCHY_GREETING = "Hi! I'm Switchy - your number system bestie. Every 10 seconds I pop up a trivia fact, a study tip or a cheer while you convert!";
 
 let switchyRefs = null;
 let switchyWired = false;
 let switchyBlessingIdx = 0;
+let switchyTipIdx = -1;
+let switchyCheerIdx = -1;
 let switchyTriviaTimer = null;
 let switchyLingerTimer = null;
 
@@ -207,11 +241,40 @@ function startSwitchyLinger() {
 }
 
 /**
- * Switchy speaks up on their own every 10 seconds: a fresh trivia fact pops
- * open automatically, without the student needing to hover anything.
+ * Picks which kind of message Switchy says next. Trivia is weighted higher
+ * than tips and cheers because it carries the most learning value.
+ * @returns {object} one of the SWITCHY_BEATS entries
+ */
+function pickSwitchyBeat() {
+    const total = SWITCHY_BEATS.reduce((sum, beat) => sum + beat.weight, 0);
+    let roll = Math.random() * total;
+    for (const beat of SWITCHY_BEATS) {
+        roll -= beat.weight;
+        if (roll <= 0) return beat;
+    }
+    return SWITCHY_BEATS[0];
+}
+
+/**
+ * Walks a list one step at a time, wrapping around, so Switchy never
+ * repeats the same tip or cheer twice in a row.
+ * @param {string[]} list
+ * @param {number} currentIndex
+ * @returns {{ text: string, index: number }}
+ */
+function nextInList(list, currentIndex) {
+    if (!list.length) return { text: '', index: currentIndex };
+    const index = (currentIndex + 1) % list.length;
+    return { text: list[index], index };
+}
+
+/**
+ * Switchy speaks up on their own every 10 seconds: a trivia fact, a study
+ * tip or a cheer pops open automatically, without the student needing to
+ * hover anything.
  *
  * Each tick reveals Switchy (so the bubble is actually visible), restarts the
- * linger countdown, and replaces the fact on screen in place. The tick is
+ * linger countdown, and replaces the message on screen in place. The tick is
  * skipped while Switchy is minimized or the tab is in the background, and a
  * greeting or blessing already on screen is never interrupted.
  */
@@ -223,19 +286,35 @@ function startSwitchyTriviaLoop() {
         if (document.hidden) return;
 
         const bubble = switchyRefs.bubble;
-        const alreadyTrivia = !bubble.classList.contains('hidden') && bubble.dataset.variant === 'trivia';
-        if (!bubble.classList.contains('hidden') && !alreadyTrivia) return;
+        const onScreen = !bubble.classList.contains('hidden');
+        const current = bubble.dataset.variant;
+        // Never interrupt a short-lived greeting or blessing.
+        if (onScreen && (current === 'greeting' || current === 'blessing')) return;
 
-        // Reveal Switchy so the fact is actually on screen, and keep the
+        // Reveal Switchy so the message is actually on screen, and keep the
         // linger countdown running so they do not tuck away mid-sentence.
         switchyRefs.widget.classList.add('switchy-active');
         startSwitchyLinger();
 
-        const fact = (typeof getTriviaForConversion === 'function')
-            ? getTriviaForConversion('', 10, '', 10)
-            : null;
-        if (fact) saySwitchyMessage(fact, 'trivia');
-    }, SWITCHY_TRIVIA_ROTATE_INTERVAL);
+        const beat = pickSwitchyBeat();
+        let text = '';
+
+        if (beat.variant === 'trivia') {
+            text = (typeof getTriviaForConversion === 'function')
+                ? getTriviaForConversion('', 10, '', 10)
+                : '';
+        } else if (beat.variant === 'tip') {
+            const tip = nextInList(SWITCHY_STUDY_TIPS, switchyTipIdx);
+            switchyTipIdx = tip.index;
+            text = tip.text;
+        } else {
+            const cheer = nextInList(SWITCHY_CHEERS, switchyCheerIdx);
+            switchyCheerIdx = cheer.index;
+            text = cheer.text;
+        }
+
+        if (text) saySwitchyMessage(text, beat.variant);
+    }, SWITCHY_BEAT_INTERVAL);
 }
 
 function buildSwitchyWidget() {
@@ -257,7 +336,7 @@ function buildSwitchyWidget() {
         <div id="switchy-avatar-wrap" class="switchy-avatar-wrap" title="Switchy - your study companion">
             <div class="switchy-aura"></div>
             <img src="assets/favicon.png" alt="Binary Conversion Exchange icon" class="switchy-avatar-img">
-            <span class="switchy-wand-star">${icon('star')}</span>
+            <span class="switchy-corner-star">${icon('star')}</span>
             <div class="switchy-sparkles" aria-hidden="true"></div>
         </div>
         <button type="button" id="switchy-toggle-btn" class="switchy-toggle-btn" title="${isMinimized ? 'Show Switchy' : 'Hide Switchy'}">
@@ -271,7 +350,7 @@ function buildSwitchyWidget() {
 /**
  * Makes Switchy say something. Every message they speak goes through here.
  * @param {string} message - The text they say.
- * @param {string} [variant] - greeting | blessing | trivia
+ * @param {string} [variant] - greeting | blessing | trivia | tip | cheer
  * @param {number} [duration] - Optional override for how long the bubble stays open.
  * @returns {boolean} true when the message was delivered.
  */
@@ -284,10 +363,10 @@ function saySwitchyMessage(message, variant = 'blessing', duration) {
     bubble.classList.remove('hidden');
 
     if (bubbleIcon) {
-        bubbleIcon.innerHTML = variant === 'trivia' ? icon('bulb') : icon('sparkle');
+        bubbleIcon.innerHTML = icon(SWITCHY_BUBBLE_ICONS[variant] || 'sparkle');
     }
 
-    // Trigger magical sparkle shower
+    // Trigger the sparkle particle shower
     createSparkles(avatarWrap);
 
     // Gentle cute wobble
@@ -299,9 +378,11 @@ function saySwitchyMessage(message, variant = 'blessing', duration) {
 
     const ms = duration || SWITCHY_BUBBLE_DURATIONS[variant] || SWITCHY_BUBBLE_DURATIONS.blessing;
     clearTimeout(window.switchyBubbleTimer);
-    // A trivia bubble stays on screen while Switchy is revealed; the 10s
-    // rotation loop replaces it in place. Other messages auto-hide normally.
-    if (variant === 'trivia' && switchyRefs.widget && switchyRefs.widget.classList.contains('switchy-active')) {
+    // A rotating message (trivia, tip or cheer) stays on screen while Switchy
+    // is revealed; the 10 second beat replaces it in place. Greetings and
+    // blessings are short-lived and auto-hide on their own.
+    const rotating = variant === 'trivia' || variant === 'tip' || variant === 'cheer';
+    if (rotating && switchyRefs.widget && switchyRefs.widget.classList.contains('switchy-active')) {
         return true;
     }
     window.switchyBubbleTimer = setTimeout(() => {
@@ -325,16 +406,16 @@ function showSwitchyTrivia(fact) {
 }
 
 /**
- * Delivers a study blessing through Switchy.
+ * Delivers a cheer through Switchy.
  */
 function showSwitchyBlessing(blessing) {
     if (!switchyRefs) initSwitchy();
-    return saySwitchyMessage(blessing || SWITCHY_BLESSINGS[0], 'blessing');
+    return saySwitchyMessage(blessing || SWITCHY_CHEERS[0], 'blessing');
 }
 
 function triggerBlessing() {
-    switchyBlessingIdx = (switchyBlessingIdx + 1) % SWITCHY_BLESSINGS.length;
-    saySwitchyMessage(SWITCHY_BLESSINGS[switchyBlessingIdx], 'blessing');
+    switchyBlessingIdx = (switchyBlessingIdx + 1) % SWITCHY_CHEERS.length;
+    saySwitchyMessage(SWITCHY_CHEERS[switchyBlessingIdx], 'blessing');
 }
 
 function createSparkles(targetEl) {

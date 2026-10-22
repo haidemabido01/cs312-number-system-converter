@@ -41,7 +41,7 @@ const ICON_NAMES = [
     'alert', 'arrowRight', 'bolt', 'book', 'bulb', 'cap', 'chat', 'check',
     'chip', 'clipboard', 'converter', 'flower', 'grid', 'heart',
     'key', 'moon', 'refresh', 'rocket', 'search', 'sparkle', 'star', 'steps',
-    'tag', 'target', 'toggle', 'type', 'wand'
+    'tag', 'target', 'toggle', 'type'
 ];
 
 /* Colour swatches for the palette table */

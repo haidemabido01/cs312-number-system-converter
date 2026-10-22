@@ -1544,17 +1544,17 @@ input[readonly] {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
-.switchy-wand-star {
+.switchy-corner-star {
     position: absolute;
     top: 4px;
     left: 4px;
     z-index: 3;
-    animation: wandStarTwinkle 1.5s ease-in-out infinite alternate;
+    animation: cornerStarTwinkle 1.5s ease-in-out infinite alternate;
     pointer-events: none;
     color: #FFD36E;
 }
 
-.switchy-wand-star .icon {
+.switchy-corner-star .icon {
     width: 1.25rem;
     height: 1.25rem;
 }
@@ -1566,7 +1566,7 @@ input[readonly] {
     z-index: 4;
 }
 
-@keyframes wandStarTwinkle {
+@keyframes cornerStarTwinkle {
     0% { transform: scale(0.9) rotate(0deg); filter: drop-shadow(0 0 2px #FFF); }
     100% { transform: scale(1.3) rotate(20deg); filter: drop-shadow(0 0 8px #FFD700); }
 }
