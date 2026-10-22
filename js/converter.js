@@ -1,5 +1,5 @@
 /**
- * Bitzy Core Conversion Engine
+ * BitSeen Core Conversion Engine
  * Pure number system conversion logic
  */
 

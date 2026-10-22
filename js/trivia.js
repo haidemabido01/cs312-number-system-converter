@@ -1,5 +1,5 @@
 /**
- * Bitzy Trivia & Switchy Companion Engine
+ * BitSeen Trivia & Switchy Companion Engine
  * ---------------------------------------------
  * Switchy is the ONE voice of the app: every trivia fact, study tip and
  * cheer is delivered inside their speech bubble. Nothing else on a page
@@ -206,7 +206,7 @@ function initSwitchy() {
         toggleBtn.addEventListener('click', () => {
             widget.classList.toggle('minimized');
             const nowMinimized = widget.classList.contains('minimized');
-            localStorage.setItem('bitzy-switchy-minimized', nowMinimized);
+            localStorage.setItem('bitseen-switchy-minimized', nowMinimized);
             toggleBtn.title = nowMinimized ? 'Show Switchy' : 'Hide Switchy';
             const hint = toggleBtn.querySelector('.switchy-toggle-hint');
             if (hint) hint.textContent = nowMinimized ? 'Bring Switchy back' : 'Minimize Switchy';
@@ -293,7 +293,6 @@ function startSwitchyTriviaLoop() {
     if (switchyTriviaTimer) return;
     switchyTriviaTimer = setInterval(() => {
         if (!switchyRefs || !switchyRefs.widget || !switchyRefs.bubble) return;
-        if (switchyRefs.widget.classList.contains('minimized')) return;
         if (document.hidden) return;
 
         const bubble = switchyRefs.bubble;
@@ -301,11 +300,6 @@ function startSwitchyTriviaLoop() {
         const current = bubble.dataset.variant;
         // Never interrupt a short-lived greeting.
         if (onScreen && current === 'greeting') return;
-
-        // Reveal Switchy so the message is actually on screen, and keep the
-        // linger countdown running so they do not tuck away mid-sentence.
-        switchyRefs.widget.classList.add('switchy-active');
-        startSwitchyLinger();
 
         const beat = pickSwitchyBeat();
         let text = '';
@@ -324,13 +318,29 @@ function startSwitchyTriviaLoop() {
             text = cheer.text;
         }
 
-        if (text) saySwitchyMessage(text, beat.variant);
+        if (!text) return;
+
+        // Minimized? The message still goes out, just as a toast, so the
+        // student never has to trigger anything to hear from Switchy.
+        if (switchyRefs.widget.classList.contains('minimized')) {
+            if (typeof setFeedback === 'function') setFeedback(text, 'hint', 'trivia');
+            return;
+        }
+
+        // Reveal Switchy so the message is actually on screen, and keep the
+        // linger countdown running so they do not tuck away mid-sentence.
+        switchyRefs.widget.classList.add('switchy-active');
+        startSwitchyLinger();
+        saySwitchyMessage(text, beat.variant);
     }, SWITCHY_BEAT_INTERVAL);
 }
 
 function buildSwitchyWidget() {
     // Check if the student minimized Switchy previously
-    const isMinimized = localStorage.getItem('bitzy-switchy-minimized') === 'true';
+    // Fall back to the pre-rebrand key so an existing student's choice
+    // survives the Bitzy -> BitSeen rename.
+    const isMinimized = localStorage.getItem('bitseen-switchy-minimized') === 'true'
+        || localStorage.getItem('bitzy-switchy-minimized') === 'true';
 
     const widget = document.createElement('div');
     widget.id = 'switchy-widget';
@@ -380,11 +390,14 @@ function saySwitchyMessage(message, variant = 'cheer', duration) {
     // Trigger the bit particle shower
     createParticles(avatarWrap);
 
-    // Gentle cute wobble
-    if (avatarWrap) {
-        avatarWrap.classList.remove('switchy-wobble');
-        void avatarWrap.offsetWidth;
-        avatarWrap.classList.add('switchy-wobble');
+    // Jiggle the Switchy logo so every message lands with a little bounce.
+    // The jiggle lives on the image, not the wrapper, so the wrapper keeps
+    // floating continuously.
+    const avatarImg = avatarWrap ? avatarWrap.querySelector('.switchy-avatar-img') : null;
+    if (avatarImg) {
+        avatarImg.classList.remove('switchy-jiggle');
+        void avatarImg.offsetWidth;
+        avatarImg.classList.add('switchy-jiggle');
     }
 
     const ms = duration || SWITCHY_BUBBLE_DURATIONS[variant] || SWITCHY_BUBBLE_DURATIONS.cheer;

@@ -1,6 +1,6 @@
-# Bitzy — Netlify configuration
+# BitSeen — Netlify configuration
 #
-# Bitzy is a 100% static site: no build step, no dependencies, no backend.
+# BitSeen is a 100% static site: no build step, no dependencies, no backend.
 # Netlify simply publishes the repository root exactly as it is on GitHub.
 
 [build]

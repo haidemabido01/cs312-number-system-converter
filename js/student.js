@@ -1,5 +1,5 @@
 /**
- * Bitzy Student Tools & Features
+ * BitSeen Student Tools & Features
  * - 8-Bit Interactive Register Playground
  * - Student Exam Cheat Sheet Hub (Powers of 2, Nibbles, Exam Hacks)
  * - Auto-rotating concept carousel (one card at a time)

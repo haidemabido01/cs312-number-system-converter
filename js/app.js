@@ -3,9 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
     function setTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('bitzy-theme', theme);
+        localStorage.setItem('bitseen-theme', theme);
     }
-    const savedTheme = localStorage.getItem('bitzy-theme');
+    // Fall back to the pre-rebrand key so an existing student's saved
+    // theme survives the Bitzy -> BitSeen rename.
+    const savedTheme = localStorage.getItem('bitseen-theme') || localStorage.getItem('bitzy-theme');
     if (savedTheme) {
         setTheme(savedTheme);
     } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -180,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (char.length > 0) {
                 let val = char.charCodeAt(0);
                 if (val > 127) {
-                    setFeedback('Bitzy only knows standard ASCII (0-127) right now.', 'error', 'ascii');
+                    setFeedback('BitSeen only knows standard ASCII (0-127) right now.', 'error', 'ascii');
                     asciiDec.value = '';
                     if (asciiBin) asciiBin.textContent = '—';
                     if (asciiHex) asciiHex.textContent = '—';

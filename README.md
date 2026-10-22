@@ -2,7 +2,7 @@
 
 <img src="assets/binary-conversion-exchange.png" alt="Binary Conversion Exchange icon: a binary card and a decimal card joined by exchange arrows" width="280" />
 
-# Bitzy — Your Number System Bestie & CS Study Guide
+# BitSeen — Your Number System Bestie & CS Study Guide
 
 > *"Tiny bits, big numbers — you've got this, bestie!"*
 
@@ -33,14 +33,14 @@
 - [Icon System](#icon-system)
 - [How to Run](#how-to-run)
 - [Project Structure](#project-structure)
-- [Why Students Love Bitzy](#why-students-love-bitzy)
+- [Why Students Love BitSeen](#why-students-love-bitseen)
 - [License](#license)
 
 ---
 
 ## <img src="assets/icons/glint.svg" alt="" width="20" height="20" align="middle"> Twilight Beach Sunset Color Palette
 
-Bitzy features a soothing, modern color palette inspired by an evening twilight sunset over the ocean:
+BitSeen features a soothing, modern color palette inspired by an evening twilight sunset over the ocean:
 
 | Swatch | Color | Hex | Role |
 | :---: | :--- | :--- | :--- |
@@ -58,11 +58,11 @@ Bitzy features a soothing, modern color palette inspired by an evening twilight 
 
 ## <img src="assets/icons/steps.svg" alt="" width="20" height="20" align="middle"> App Architecture
 
-Bitzy is a **focused four-page study system**. The landing page is deliberately trimmed to just the **Live Base Converter**, with every other tool reachable from the top navigation bar and **all trivia delivered by Switchy**.
+BitSeen is a **focused four-page study system**. The landing page is deliberately trimmed to just the **Live Base Converter**, with every other tool reachable from the top navigation bar and **all trivia delivered by Switchy**.
 
 | Path | Page | Description |
 | :--- | :--- | :--- |
-| `index.html` | **Live Base Converter** | The home page: instant, as-you-type conversion across Bases 2–36 with a "Show me how Bitzy did it" step breakdown, toast notifications, and trivia spoken by Switchy (on each conversion and automatically every 10 seconds). |
+| `index.html` | **Live Base Converter** | The home page: instant, as-you-type conversion across Bases 2–36 with a "Show me how BitSeen did it" step breakdown, toast notifications, and trivia spoken by Switchy (on each conversion and automatically every 10 seconds). |
 | `register.html` | **8-Bit Register Playground** | Interactive visual bit-flipper ($b_7$ to $b_0$), High/Low nibbles, signed two's complement sign-bit, and live formula sum. |
 | `cheatsheet.html` | **Exam Cheat Sheet & CS Hacks** | Segmented-tab reference: searchable Powers of 2 lookup ($2^0$ to $2^{16}$) with 1-click copy, an 8-column nibble decoder grid, and 4 legendary exam shortcuts. |
 | `ascii.html` | **ASCII Character Lab** | 7-bit ASCII decimal-to-character interactive laboratory with quick high-yield example chips. |
@@ -77,7 +77,7 @@ Bitzy is a **focused four-page study system**. The landing page is deliberately 
 ### 1. <img src="assets/icons/converter.svg" alt="" width="18" height="18" align="middle"> Live Base Converter (Home Page)
 
 - **Instant Conversion** <img src="assets/icons/bolt.svg" alt="" width="15" height="15" align="middle"> — Converts as you type across Bases 2, 8, 10, and 16 from the quick-pick dropdown, with a dedicated result pane. (The engine underneath handles *any* base from 2 to 36.)
-- **Step Breakdown** <img src="assets/icons/steps.svg" alt="" width="15" height="15" align="middle"> — Hit *"Show me how Bitzy did it"* to see the full equation, the per-digit weighting, and the repeated-division table.
+- **Step Breakdown** <img src="assets/icons/steps.svg" alt="" width="15" height="15" align="middle"> — Hit *"Show me how BitSeen did it"* to see the full equation, the per-digit weighting, and the repeated-division table.
 - **Toast Notifications** <img src="assets/icons/alert.svg" alt="" width="15" height="15" align="middle"> — Every conversion, invalid digit, hint and achievement is reported in a colour-coded toast notification at the top centre of the screen — no inline status lines anywhere. Repeated feedback reuses the same toast instead of stacking duplicates.
 - **Switchy Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — Every 10 seconds Switchy pops up a **trivia fact**, a **study tip** or a **cheer** — no hovering required. Switchy reveals themselves for each message and the bubble is replaced in place. They wait for you to pause typing so their bubble never flickers mid-conversion.
 - **Base Palette** <img src="assets/icons/bulb.svg" alt="" width="15" height="15" align="middle"> — The toast accents and colours shift to match the base you are working in.
@@ -104,7 +104,7 @@ The dropdown presets are the four you'll actually use in class — Binary (2), O
 - **Powers of 2 Table ($2^0$ to $2^{16}$)** <img src="assets/icons/search.svg" alt="" width="15" height="15" align="middle"> — Searchable reference table with decimal values, hex equivalents, and real-world CS memory usage (1 Byte, 1 KiB, 4 KiB OS page, 64 KiB port range).
 - **1-Click Copy** <img src="assets/icons/check.svg" alt="" width="15" height="15" align="middle"> — Tap the **Common CS Usage** chip in any row to copy that usage note to your clipboard (then just hit <kbd>Ctrl</kbd>+<kbd>C</kbd> / <kbd>⌘</kbd>+<kbd>C</kbd> to paste), so the table needs no extra column or icon.
 - **4-Bit Hex Nibble Grid** <img src="assets/icons/grid.svg" alt="" width="15" height="15" align="middle"> — A tight 2×8 decoder grid connecting binary `0000`–`1111` to hex `0`–`F`; click a tile to copy its binary.
-- **Professor Bitzy's Exam Shortcuts** <img src="assets/icons/cap.svg" alt="" width="15" height="15" align="middle"> — One numbered list panel, four shortcuts.
+- **Professor BitSeen's Exam Shortcuts** <img src="assets/icons/cap.svg" alt="" width="15" height="15" align="middle"> — One numbered list panel, four shortcuts.
   - *The 4-Bit Chunking Trick*: Convert binary to hex in seconds without division.
   - *The Two's Complement 3-Second Rule*: Keep bits from the right up to the first `1`, invert the rest!
   - *Instant Even/Odd Rule*: Check the least significant bit ($2^0$).
@@ -138,7 +138,7 @@ Check: $256 - 5 = 251 = \texttt{0xFB}$ — the two's complement of 5 is -5.
 
 ### 4. <img src="assets/icons/type.svg" alt="" width="18" height="18" align="middle"> ASCII Character Lab
 
-- **Two-Way Decoder** <img src="assets/icons/arrowRight.svg" alt="" width="15" height="15" align="middle"> — Type a decimal code point (0–127) or type a character — Bitzy resolves the other side instantly.
+- **Two-Way Decoder** <img src="assets/icons/arrowRight.svg" alt="" width="15" height="15" align="middle"> — Type a decimal code point (0–127) or type a character — BitSeen resolves the other side instantly.
 - **Bit-Level Readouts** <img src="assets/icons/chip.svg" alt="" width="15" height="15" align="middle"> — Every character shows its 8-bit binary form and its hexadecimal form side by side.
 - **Control Character Names** <img src="assets/icons/tag.svg" alt="" width="15" height="15" align="middle"> — The full 0–127 table with friendly names (NUL, SOH, LF, CR, DEL, …).
 - **Quick High-Yield Examples** <img src="assets/icons/star.svg" alt="" width="15" height="15" align="middle"> — One-click chips for `A = 65`, `a = 97`, `0 = 48`, `Space = 32`, and `! = 33`.
@@ -147,19 +147,18 @@ Check: $256 - 5 = 251 = \texttt{0xFB}$ — the two's complement of 5 is -5.
 
 Switchy is the **only voice of the app** — all trivia, study tips and cheers are spoken by them, never by a separate panel.
 
-- The Binary Conversion Exchange mascot: a binary card and a decimal card swapping values through two curved arrows, floating at the bottom-right corner of every page.
-- **Every 10 Seconds** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — Switchy speaks up on their own, cycling through three kinds of message with their own bubble icon:
+- The Binary Conversion Exchange mascot: a binary card and a decimal card swapping values through two curved arrows, docked in the **bottom-right corner** of every page, floating gently and **giggling every time it speaks**.
+- **Every 10 Seconds** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — Switchy speaks up **on their own, with no trigger at all**. The beat cycles through three kinds of message, each with its own bubble icon:
   - **Trivia** <img src="assets/icons/bulb.svg" alt="" width="14" height="14" align="middle"> — a computing-history fact, weighted to appear most often.
   - **Study tip** <img src="assets/icons/book.svg" alt="" width="14" height="14" align="middle"> — a practical exam trick: flip it both ways, build a place-value chart, memorise the nibble table, or drill for 10 minutes a day.
   - **Cheer** <img src="assets/icons/heart.svg" alt="" width="14" height="14" align="middle"> — a bit of encouragement, because studying should feel good.
-- The Binary Conversion Exchange mascot: a binary card and a decimal card swapping values through two curved arrows, floating at the bottom-right corner of every page.
 - **Matched to your conversion** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — type a number and Switchy answers with a fact tied to the base you are working in (why a byte is 8 bits, why a hex digit is exactly one nibble, why octal divides cleanly by 3, and more).
 - **Never interrupted** <img src="assets/icons/bulb.svg" alt="" width="15" height="15" align="middle"> — a greeting already on screen is never cut short, and the tick is skipped while the tab is in the background.
 - Use the little pill button under them to minimize them or bring them back for distraction-free focus; a cheer greets you when they return.
-- If they are minimized, trivia falls back to a toast so no fact is ever lost.
+- Even while minimized the 10-second beat keeps running — the message simply arrives as a toast, so **no fact is ever lost**.
 
 > [!IMPORTANT]
-> If you'd rather study in silence, minimize them once and they go quiet — **no fact is ever lost**, trivia simply arrives as a toast instead.
+> If you'd rather study in silence, minimize them once and they go quiet — **no fact is ever lost**, the 10-second beat simply arrives as a toast instead.
 
 ---
 
@@ -184,7 +183,7 @@ Each generated file carries its own theme awareness: presentation attributes pro
 
 ## <img src="assets/icons/rocket.svg" alt="" width="20" height="20" align="middle"> How to Run
 
-Bitzy is 100% static client-side web technology — no installation, no node dependencies, no backend, and completely private (works offline):
+BitSeen is 100% static client-side web technology — no installation, no node dependencies, no backend, and completely private (works offline):
 
 1. Clone or download this repository.
 
@@ -243,10 +242,10 @@ Bitzy is 100% static client-side web technology — no installation, no node dep
 
 ---
 
-## <img src="assets/icons/heart.svg" alt="" width="20" height="20" align="middle"> Why Students Love Bitzy
+## <img src="assets/icons/heart.svg" alt="" width="20" height="20" align="middle"> Why Students Love BitSeen
 
 - **Focused by Design** <img src="assets/icons/target.svg" alt="" width="15" height="15" align="middle"> — The home page does two things brilliantly — convert and teach — with no duplicated tool listings.
-- **Zero Judgment** <img src="assets/icons/heart.svg" alt="" width="15" height="15" align="middle"> — Made a typo? Bitzy explains exactly what went wrong without any penalty.
+- **Zero Judgment** <img src="assets/icons/heart.svg" alt="" width="15" height="15" align="middle"> — Made a typo? BitSeen explains exactly what went wrong without any penalty.
 - **Visual Intuition** <img src="assets/icons/bulb.svg" alt="" width="15" height="15" align="middle"> — Turn abstract binary formulas into interactive buttons you can click and experiment with.
 - **Dark Mode Included** <img src="assets/icons/moon.svg" alt="" width="15" height="15" align="middle"> — Easy on tired eyes during late-night study sessions.
 - **Completely Private** <img src="assets/icons/key.svg" alt="" width="15" height="15" align="middle"> — Everything runs locally in your browser — no tracking, no ads, no sign-ups.

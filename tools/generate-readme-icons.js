@@ -1,5 +1,5 @@
 /**
- * Bitzy README Icon Generator
+ * BitSeen README Icon Generator
  * ----------------------------
  * Renders standalone SVG files for the README from the *same* source of truth
  * as the app: the inline SVG sprite in `js/icons.js`.
@@ -55,7 +55,7 @@ const SWATCHES = [
 ];
 
 /* ------------------------------------------------------------------ *
- * Parse BITZY_ICON_DEFS out of js/icons.js without evaluating it
+ * Parse BITSEEN_ICON_DEFS out of js/icons.js without evaluating it
  * ------------------------------------------------------------------ */
 function readIconDefs() {
     const source = fs.readFileSync(path.join(ROOT, 'js', 'icons.js'), 'utf8');
@@ -88,18 +88,18 @@ function buildIconSvg(def) {
     const style = [
         '<style>',
         `@media (prefers-color-scheme: dark){`,
-        `.bz-stroke{stroke:${DARK.stroke}}`,
-        `.bz-solid{fill:${DARK.solid}}`,
+        `.bs-stroke{stroke:${DARK.stroke}}`,
+        `.bs-solid{fill:${DARK.solid}}`,
         `}`,
         '</style>'
     ].join('');
 
     const groups = [];
     if (stroked.length) {
-        groups.push(`<g class="bz-stroke" fill="none" stroke="${LIGHT.stroke}">${stroked.join('')}</g>`);
+        groups.push(`<g class="bs-stroke" fill="none" stroke="${LIGHT.stroke}">${stroked.join('')}</g>`);
     }
     if (solid.length) {
-        groups.push(`<g class="bz-solid" fill="${LIGHT.solid}" stroke="none">${solid.join('')}</g>`);
+        groups.push(`<g class="bs-solid" fill="${LIGHT.solid}" stroke="none">${solid.join('')}</g>`);
     }
 
     return [

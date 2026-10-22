@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8-Bit Register Playground - Bitzy</title>
+    <title>8-Bit Register Playground - BitSeen</title>
     <!-- Google Font: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,15 +22,15 @@
                 <a href="index.html" class="header-logo-link">
                     <h1>
                         <img src="assets/binary-conversion-exchange.png" alt="" class="header-logo-img" aria-hidden="true">
-                        <span>Bitzy</span>
+                        <span>BitSeen</span>
                     </h1>
                 </a>
                 <p class="tagline">tiny bits, big numbers &bull; register lab</p>
             </div>
             <div class="header-actions">
                 <button id="theme-toggle-btn" class="theme-btn" aria-label="Toggle dark mode">
-                    <svg class="icon icon-moon" aria-hidden="true" focusable="false"><use href="#bz-moon"></use></svg>
-                    <svg class="icon icon-sun" aria-hidden="true" focusable="false"><use href="#bz-sun"></use></svg>
+                    <svg class="icon icon-moon" aria-hidden="true" focusable="false"><use href="#bs-moon"></use></svg>
+                    <svg class="icon icon-sun" aria-hidden="true" focusable="false"><use href="#bs-sun"></use></svg>
                 </button>
             </div>
         </header>
@@ -38,19 +38,19 @@
         <!-- MULTI-PATH NAVIGATION -->
         <nav class="student-nav" aria-label="Main Navigation">
             <a href="index.html" class="nav-pill">
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-converter"></use></svg>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-converter"></use></svg>
                 <span>Converter</span>
             </a>
             <a href="register.html" class="nav-pill active">
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-chip"></use></svg>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-chip"></use></svg>
                 <span>8-Bit Register</span>
             </a>
             <a href="cheatsheet.html" class="nav-pill">
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-clipboard"></use></svg>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-clipboard"></use></svg>
                 <span>Cheat Sheet</span>
             </a>
             <a href="ascii.html" class="nav-pill">
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-type"></use></svg>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-type"></use></svg>
                 <span>ASCII Lab</span>
             </a>
         </nav>
@@ -60,13 +60,13 @@
             <div class="section-header-row">
                 <div>
                     <h2>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-chip"></use></svg>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-chip"></use></svg>
                         <span>8-Bit Visual Register Playground</span>
                     </h2>
                     <p class="section-subtitle">Flip bits to watch powers of 2 build a number in real time.</p>
                 </div>
                 <span class="badge-student-good">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-cap"></use></svg>
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-cap"></use></svg>
                     <span>Interactive Lab</span>
                 </span>
             </div>
@@ -157,26 +157,26 @@
             <!-- Action Rail -->
             <div class="reg-actions-bar">
                 <button type="button" id="reg-clear-btn" class="reg-tool-btn" title="Clear every bit (0x00)" aria-label="Clear every bit">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-eraser"></use></svg>
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-eraser"></use></svg>
                 </button>
                 <button type="button" id="reg-set-all-btn" class="reg-tool-btn" title="Turn every bit on (0xFF)" aria-label="Turn every bit on">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-toggle"></use></svg>
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-toggle"></use></svg>
                 </button>
                 <button type="button" id="reg-invert-btn" class="reg-tool-btn" title="Invert every bit (NOT)" aria-label="Invert every bit">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-refresh"></use></svg>
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-refresh"></use></svg>
                 </button>
                 <button type="button" id="reg-shift-l-btn" class="reg-tool-btn" title="Shift left (double the value)" aria-label="Shift left">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-arrowLeft"></use></svg>
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-arrowLeft"></use></svg>
                 </button>
                 <button type="button" id="reg-shift-r-btn" class="reg-tool-btn" title="Shift right (halve the value)" aria-label="Shift right">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-arrowRight"></use></svg>
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-arrowRight"></use></svg>
                 </button>
                 <button type="button" id="reg-random-btn" class="reg-tool-btn" title="Random byte" aria-label="Random byte">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-dice"></use></svg>
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-dice"></use></svg>
                 </button>
                 <button type="button" id="reg-send-conv-btn" class="btn-primary-action">
                     <span>Send to Converter</span>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-arrowRight"></use></svg>
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-arrowRight"></use></svg>
                 </button>
             </div>
         </section>
@@ -186,7 +186,7 @@
             <div class="section-header-row">
                 <div>
                     <h2>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-bulb"></use></svg>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-bulb"></use></svg>
                         <span>How Computer Registers Work</span>
                     </h2>
                     <p class="section-subtitle">Core concepts tested in computer architecture and digital logic exams.</p>
@@ -194,7 +194,7 @@
                 <div class="section-header-actions">
                     <span class="badge-student-good">CS Theory</span>
                     <button type="button" class="hack-play-btn" id="hack-play-btn" aria-label="Pause auto-advance" aria-pressed="false">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-pause"></use></svg>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-pause"></use></svg>
                     </button>
                 </div>
             </div>
@@ -205,7 +205,7 @@
                     <div class="hack-carousel-track" id="hack-track">
                         <div class="hack-card hack-slide" role="group" aria-roledescription="slide" aria-label="Concept 1 of 3">
                             <div class="hack-title">
-                                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-key"></use></svg>
+                                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-key"></use></svg>
                                 <span>Why Nibbles Matter</span>
                             </div>
                             <p>A <strong>Nibble</strong> is exactly 4 bits. Because 2&#8308; = 16, any 4-bit combination maps directly to one hexadecimal symbol (0 to F). This is why an 8-bit byte is always written as two hex characters (e.g. <code>0xA9</code>)!</p>
@@ -213,7 +213,7 @@
 
                         <div class="hack-card hack-slide" role="group" aria-roledescription="slide" aria-label="Concept 2 of 3">
                             <div class="hack-title">
-                                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-minus"></use></svg>
+                                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-minus"></use></svg>
                                 <span>Two's Complement (Signed Mode)</span>
                             </div>
                             <p>In signed 8-bit math, the Most Significant Bit (b&#8327;) is the <strong>Sign Bit</strong> with a negative weight of -128. All other bits (b&#8312; to b&#8320;) remain positive. That's why <code>11111111</code> is -128 + 127 = -1!</p>
@@ -221,7 +221,7 @@
 
                         <div class="hack-card hack-slide" role="group" aria-roledescription="slide" aria-label="Concept 3 of 3">
                             <div class="hack-title">
-                                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-bolt"></use></svg>
+                                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-bolt"></use></svg>
                                 <span>Bitwise Shifts</span>
                             </div>
                             <p>Shifting bits to the left (<code>&laquo; 1</code>) multiplies an integer by 2. Shifting to the right (<code>&raquo; 1</code>) performs integer floor division by 2. Hardware uses this instead of slow arithmetic multipliers!</p>
@@ -230,11 +230,11 @@
                 </div>
                 <div class="hack-carousel-controls">
                     <button type="button" class="hack-nav-btn" id="hack-prev-btn" aria-label="Previous concept">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-chevronLeft"></use></svg>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-chevronLeft"></use></svg>
                     </button>
                     <div class="hack-dots" id="hack-dots"></div>
                     <button type="button" class="hack-nav-btn" id="hack-next-btn" aria-label="Next concept">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-chevronRight"></use></svg>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-chevronRight"></use></svg>
                     </button>
                 </div>
             </div>

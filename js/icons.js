@@ -1,18 +1,18 @@
 /**
- * Bitzy Inline SVG Icon Library
+ * BitSeen Inline SVG Icon Library
  * ---------------------------------------------
  * A zero-dependency, offline-friendly icon set that replaces every emoji in
  * the app with crisp, themeable SVG stroke icons.
  *
  * Usage in HTML:
- *   <svg class="icon" aria-hidden="true"><use href="#bz-converter"></use></svg>
+ *   <svg class="icon" aria-hidden="true"><use href="#bs-converter"></use></svg>
  *
  * Usage in JavaScript:
  *   element.innerHTML = icon('converter');
  *   element.innerHTML = icon('check', 'icon-success');
  */
 
-const BITZY_ICON_DEFS = {
+const BITSEEN_ICON_DEFS = {
     // --- Navigation ---
     converter: `<path d="M4 8.5h13M14 5l3 3.5-3 3.5M20 15.5H7M10 12l-3 3.5 3 3.5"/>`,
     chip: `<rect x="6" y="6" width="12" height="12" rx="2.5"/>
@@ -86,32 +86,32 @@ const BITZY_ICON_DEFS = {
     close: `<path d="M6 6l12 12M18 6 6 18"/>`
 };
 
-const BITZY_ICON_STROKE = 'fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+const BITSEEN_ICON_STROKE = 'fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
 
 /**
  * Builds the hidden inline SVG sprite that holds every icon definition.
  * @returns {string}
  */
 function buildIconSprite() {
-    const symbols = Object.keys(BITZY_ICON_DEFS).map(name => {
-        return `<symbol id="bz-${name}" viewBox="0 0 24 24" ${BITZY_ICON_STROKE}>${BITZY_ICON_DEFS[name]}</symbol>`;
+    const symbols = Object.keys(BITSEEN_ICON_DEFS).map(name => {
+        return `<symbol id="bs-${name}" viewBox="0 0 24 24" ${BITSEEN_ICON_STROKE}>${BITSEEN_ICON_DEFS[name]}</symbol>`;
     }).join('');
 
-    return `<svg xmlns="http://www.w3.org/2000/svg" class="bz-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">${symbols}</svg>`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" class="bs-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">${symbols}</svg>`;
 }
 
 /**
  * Returns inline SVG markup for a named icon.
- * @param {string} name - Key from BITZY_ICON_DEFS (case-insensitive)
+ * @param {string} name - Key from BITSEEN_ICON_DEFS (case-insensitive)
  * @param {string} [extraClass] - Additional CSS classes for the <svg> element
  * @returns {string} SVG markup
  */
 function icon(name, extraClass = '') {
     const key = String(name).replace(/[-_\s]/g, '').toLowerCase();
-    const resolved = Object.keys(BITZY_ICON_DEFS).find(k => k.toLowerCase() === key);
+    const resolved = Object.keys(BITSEEN_ICON_DEFS).find(k => k.toLowerCase() === key);
     if (!resolved) return '';
     const cls = extraClass ? `icon ${extraClass}` : 'icon';
-    return `<svg class="${cls}" aria-hidden="true" focusable="false"><use href="#bz-${resolved}"></use></svg>`;
+    return `<svg class="${cls}" aria-hidden="true" focusable="false"><use href="#bs-${resolved}"></use></svg>`;
 }
 
 /**
@@ -128,9 +128,9 @@ function setIcon(element, name) {
  * Injects the SVG sprite into the document. Safe to call more than once.
  */
 function mountIconSprite() {
-    if (!document.body || document.getElementById('bz-icon-sprite')) return;
+    if (!document.body || document.getElementById('bs-icon-sprite')) return;
     const host = document.createElement('div');
-    host.id = 'bz-icon-sprite';
+    host.id = 'bs-icon-sprite';
     host.setAttribute('aria-hidden', 'true');
     host.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden';
     host.innerHTML = buildIconSprite();

@@ -1,7 +1,7 @@
 /**
- * Bitzy Toast Notification Engine
+ * BitSeen Toast Notification Engine
  * ---------------------------------------------
- * Every notification in Bitzy is a floating toast. There is no inline status
+ * Every notification in BitSeen is a floating toast. There is no inline status
  * line anywhere in the app.
  *   1. showToast(message, kind, key)  - creates a toast, or updates the toast
  *      that already owns the same `key` so live typing never stacks duplicates.
@@ -22,10 +22,10 @@ const TOAST_FADE = 250;
 const MAX_TOASTS = 3;
 
 function getToastHost() {
-    let host = document.getElementById('bz-toast-host');
+    let host = document.getElementById('bs-toast-host');
     if (!host) {
         host = document.createElement('div');
-        host.id = 'bz-toast-host';
+        host.id = 'bs-toast-host';
         host.className = 'toast-host';
         host.setAttribute('role', 'status');
         host.setAttribute('aria-live', 'polite');
