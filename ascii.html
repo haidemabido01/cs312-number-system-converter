@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Character Lab - Bitzy</title>
+    <!-- Google Font: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- 1. HEADER -->
+        <header class="header">
+            <div class="header-spacer"></div>
+            <div class="header-title">
+                <a href="index.html" class="header-logo-link">
+                    <h1>
+                        <svg class="icon icon-logo" aria-hidden="true" focusable="false"><use href="#bz-chick"></use></svg>
+                        <span>Bitzy</span>
+                    </h1>
+                </a>
+                <p class="tagline">tiny bits, big numbers &bull; ascii lab</p>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle-btn" class="theme-btn" aria-label="Toggle dark mode">
+                    <svg class="icon icon-moon" aria-hidden="true" focusable="false"><use href="#bz-moon"></use></svg>
+                    <svg class="icon icon-sun" aria-hidden="true" focusable="false"><use href="#bz-sun"></use></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- MULTI-PATH NAVIGATION -->
+        <nav class="student-nav" aria-label="Main Navigation">
+            <a href="index.html" class="nav-pill">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-converter"></use></svg>
+                <span>Converter</span>
+            </a>
+            <a href="register.html" class="nav-pill">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-chip"></use></svg>
+                <span>8-Bit Register</span>
+            </a>
+            <a href="cheatsheet.html" class="nav-pill">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-clipboard"></use></svg>
+                <span>Cheat Sheet</span>
+            </a>
+            <a href="ascii.html" class="nav-pill active">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-type"></use></svg>
+                <span>ASCII Lab</span>
+            </a>
+        </nav>
+
+        <!-- 2. ASCII MODE -->
+        <section id="ascii-section" class="card">
+            <div class="section-header-row">
+                <div>
+                    <h2>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-type"></use></svg>
+                        <span>ASCII Character Lab</span>
+                    </h2>
+                    <p class="section-subtitle">American Standard Code for Information Interchange: mapping 7-bit numbers (0&ndash;127) to text.</p>
+                </div>
+                <span class="badge-student-good">7-Bit ASCII</span>
+            </div>
+
+            <div class="ascii-container">
+                <div class="converter-panes">
+                    <div class="pane">
+                        <label for="ascii-dec">Decimal (0&ndash;127)</label>
+                        <input type="number" id="ascii-dec" min="0" max="127" placeholder="e.g. 65">
+                    </div>
+                    <div class="pane">
+                        <label for="ascii-char">Character</label>
+                        <input type="text" id="ascii-char" maxlength="1" placeholder="e.g. A">
+                    </div>
+                </div>
+
+                <div class="ascii-readouts">
+                    <p>Binary: <span id="ascii-bin">&mdash;</span> | Hex: <span id="ascii-hex">&mdash;</span></p>
+                </div>
+
+                <div class="ascii-examples">
+                    <p class="ascii-examples-label">Quick High-Yield Examples:</p>
+                    <div class="ascii-chips">
+                        <button type="button" class="ascii-chip" data-val="65">A = 65 (0x41)</button>
+                        <button type="button" class="ascii-chip" data-val="97">a = 97 (0x61)</button>
+                        <button type="button" class="ascii-chip" data-val="48">0 = 48 (0x30)</button>
+                        <button type="button" class="ascii-chip" data-val="32">Space = 32 (0x20)</button>
+                        <button type="button" class="ascii-chip" data-val="33">! = 33 (0x21)</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/icons.js"></script>
+    <script src="js/feedback.js"></script>
+    <script src="js/converter.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/fairy.js"></script>
+</body>
+
+</html>

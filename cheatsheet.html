@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Exam Cheat Sheet - Bitzy</title>
+    <!-- Google Font: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- 1. HEADER -->
+        <header class="header">
+            <div class="header-spacer"></div>
+            <div class="header-title">
+                <a href="index.html" class="header-logo-link">
+                    <h1>
+                        <svg class="icon icon-logo" aria-hidden="true" focusable="false"><use href="#bz-chick"></use></svg>
+                        <span>Bitzy</span>
+                    </h1>
+                </a>
+                <p class="tagline">tiny bits, big numbers &bull; exam reference</p>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle-btn" class="theme-btn" aria-label="Toggle dark mode">
+                    <svg class="icon icon-moon" aria-hidden="true" focusable="false"><use href="#bz-moon"></use></svg>
+                    <svg class="icon icon-sun" aria-hidden="true" focusable="false"><use href="#bz-sun"></use></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- MULTI-PATH NAVIGATION -->
+        <nav class="student-nav" aria-label="Main Navigation">
+            <a href="index.html" class="nav-pill">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-converter"></use></svg>
+                <span>Converter</span>
+            </a>
+            <a href="register.html" class="nav-pill">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-chip"></use></svg>
+                <span>8-Bit Register</span>
+            </a>
+            <a href="cheatsheet.html" class="nav-pill active">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-clipboard"></use></svg>
+                <span>Cheat Sheet</span>
+            </a>
+            <a href="ascii.html" class="nav-pill">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-type"></use></svg>
+                <span>ASCII Lab</span>
+            </a>
+        </nav>
+
+        <!-- 2. STUDENT EXAM CHEAT SHEET -->
+        <section id="cheatsheet-section" class="card">
+            <div class="section-header-row">
+                <div>
+                    <h2>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-clipboard"></use></svg>
+                        <span>Student Exam Cheat Sheet &amp; CS Hacks</span>
+                    </h2>
+                    <p class="section-subtitle">Fast reference tables and shortcuts for digital logic and computer architecture exams.</p>
+                </div>
+                <span class="badge-student-good">
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-bolt"></use></svg>
+                    <span>High Yield</span>
+                </span>
+            </div>
+
+            <!-- Tabs -->
+            <div class="cs-tabs-header" role="tablist" aria-label="Cheat sheet sections">
+                <button type="button" class="cs-tab-btn active" data-target="pane-powers" role="tab" aria-selected="true">
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-bolt"></use></svg>
+                    <span>Powers of 2</span>
+                </button>
+                <button type="button" class="cs-tab-btn" data-target="pane-nibbles" role="tab" aria-selected="false">
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-grid"></use></svg>
+                    <span>Hex Nibbles</span>
+                </button>
+                <button type="button" class="cs-tab-btn" data-target="pane-hacks" role="tab" aria-selected="false">
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-bulb"></use></svg>
+                    <span>Exam Hacks</span>
+                </button>
+            </div>
+
+            <!-- Pane 1: Powers of 2 -->
+            <div id="pane-powers" class="cs-tab-pane" role="tabpanel">
+                <div class="powers-search-row">
+                    <svg class="icon search-icon" aria-hidden="true" focusable="false"><use href="#bz-search"></use></svg>
+                    <input type="text" id="powers-search-input" placeholder="Search power, decimal, hex or note (e.g. 1024, 16, page)..." aria-label="Search powers of two">
+                </div>
+                <div class="table-responsive">
+                    <table class="cs-table">
+                        <thead>
+                            <tr>
+                                <th>Power (2&#8319;)</th>
+                                <th>Decimal</th>
+                                <th>Hex</th>
+                                <th>Common CS Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody id="powers-table-body">
+                            <!-- Rendered by student.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pane 2: Nibbles Grid -->
+            <div id="pane-nibbles" class="cs-tab-pane hidden" role="tabpanel">
+                <p class="tab-helper-text">Every 4 bits map to 1 hex symbol. Click a tile to copy its binary.</p>
+                <div id="nibble-grid" class="nibble-grid">
+                    <!-- Rendered by student.js -->
+                </div>
+            </div>
+
+            <!-- Pane 3: Exam Hacks -->
+            <div id="pane-hacks" class="cs-tab-pane hidden" role="tabpanel">
+                <div class="hacks-list">
+                    <article class="hack-item">
+                        <div class="hack-item-head">
+                            <span class="hack-index">1</span>
+                            <h3 class="hack-item-title">The 4-Bit Chunking Magic</h3>
+                        </div>
+                        <p class="hack-lead">Never do long division! To convert binary to hex (e.g. <code>11010110&#8322;</code>):</p>
+                        <ol class="hack-steps">
+                            <li>Group into sets of 4 from the right: <code>1101</code> and <code>0110</code>.</li>
+                            <li>Decode each 4-bit nibble: <code>1101 = 13 = D</code>, <code>0110 = 6</code>.</li>
+                            <li>Result: <code>0xD6</code> in 3 seconds flat!</li>
+                        </ol>
+                    </article>
+
+                    <article class="hack-item">
+                        <div class="hack-item-head">
+                            <span class="hack-index">2</span>
+                            <h3 class="hack-item-title">Two's Complement Speed Trick</h3>
+                        </div>
+                        <p class="hack-lead">To negate an 8-bit number without subtracting:</p>
+                        <ol class="hack-steps">
+                            <li><strong>Method 1:</strong> Flip all bits (0 to 1, 1 to 0) and add 1.</li>
+                            <li><strong>Method 2 (Fastest):</strong> Scan from right to left. Leave all bits unchanged up to and including the very first <code>1</code>. Flip all bits to the left of it!</li>
+                            <li>Example: <code>0010 1100</code> &rarr; Right part: <code>... 100</code>, Flip left: <code>1101 0100</code>!</li>
+                        </ol>
+                    </article>
+
+                    <article class="hack-item">
+                        <div class="hack-item-head">
+                            <span class="hack-index">3</span>
+                            <h3 class="hack-item-title">Even vs Odd Binary Rule</h3>
+                        </div>
+                        <p class="hack-lead">Look only at the Least Significant Bit (LSB / Bit 0):</p>
+                        <ul class="hack-steps">
+                            <li>If Bit 0 is <code>1</code>, the number is <strong>ODD</strong> (since 2&#176; = 1 and all other powers of 2 are even!).</li>
+                            <li>If Bit 0 is <code>0</code>, the number is <strong>EVEN</strong>.</li>
+                        </ul>
+                    </article>
+
+                    <article class="hack-item">
+                        <div class="hack-item-head">
+                            <span class="hack-index">4</span>
+                            <h3 class="hack-item-title">Standard Prefixes &amp; Notations</h3>
+                        </div>
+                        <p class="hack-lead">Recognize numbers in code and homework:</p>
+                        <ul class="hack-steps">
+                            <li><code>0b1011</code> = Binary (Prefix <code>0b</code>)</li>
+                            <li><code>0o755</code> = Octal (Prefix <code>0o</code>)</li>
+                            <li><code>0xDEADBEEF</code> = Hexadecimal (Prefix <code>0x</code>)</li>
+                            <li><code>1011&#8322;</code> or <code>FFA&#8321;&#8326;</code> = Subscript base notation</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/icons.js"></script>
+    <script src="js/feedback.js"></script>
+    <script src="js/converter.js"></script>
+    <script src="js/student.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/fairy.js"></script>
+</body>
+
+</html>

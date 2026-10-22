@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitzy - Live Base Converter &amp; Number System Bestie</title>
+    <!-- Google Font: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- 1. HEADER -->
+        <header class="header">
+            <div class="header-spacer"></div>
+            <div class="header-title">
+                <a href="index.html" class="header-logo-link">
+                    <h1>
+                        <svg class="icon icon-logo" aria-hidden="true" focusable="false"><use href="#bz-chick"></use></svg>
+                        <span>Bitzy</span>
+                    </h1>
+                </a>
+                <p class="tagline">tiny bits, big numbers &bull; live converter &amp; fairy chick trivia</p>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle-btn" class="theme-btn" aria-label="Toggle dark mode">
+                    <svg class="icon icon-moon" aria-hidden="true" focusable="false"><use href="#bz-moon"></use></svg>
+                    <svg class="icon icon-sun" aria-hidden="true" focusable="false"><use href="#bz-sun"></use></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- MULTI-PATH NAVIGATION -->
+        <nav class="student-nav" aria-label="Main Navigation">
+            <a href="index.html" class="nav-pill active">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-converter"></use></svg>
+                <span>Converter</span>
+            </a>
+            <a href="register.html" class="nav-pill">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-chip"></use></svg>
+                <span>8-Bit Register</span>
+            </a>
+            <a href="cheatsheet.html" class="nav-pill">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-clipboard"></use></svg>
+                <span>Cheat Sheet</span>
+            </a>
+            <a href="ascii.html" class="nav-pill">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-type"></use></svg>
+                <span>ASCII Lab</span>
+            </a>
+        </nav>
+
+        <!-- 2. CONVERTER SECTION -->
+        <section id="converter-section" class="card">
+            <div class="section-header-row">
+                <div>
+                    <h2>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-converter"></use></svg>
+                        <span>Live Base Converter</span>
+                    </h2>
+                    <p class="section-subtitle">Converts as you type across Bases 2 through 36 with instant math feedback.</p>
+                </div>
+                <span class="badge-student-good">Bases 2&ndash;36</span>
+            </div>
+
+            <div class="converter-panes">
+                <!-- Input Pane -->
+                <div class="pane input-pane">
+                    <label for="input-value">Your number</label>
+                    <input type="text" id="input-value" placeholder="e.g. 255" autocomplete="off">
+
+                    <select id="input-base">
+                        <option value="2">Binary (2)</option>
+                        <option value="8">Octal (8)</option>
+                        <option value="10" selected>Decimal (10)</option>
+                        <option value="16">Hexadecimal (16)</option>
+                    </select>
+                </div>
+
+                <!-- Output Pane -->
+                <div class="pane output-pane">
+                    <label for="output-value">Result</label>
+                    <input type="text" id="output-value" placeholder="&mdash;" readonly>
+
+                    <select id="output-base">
+                        <option value="2">Binary (2)</option>
+                        <option value="8">Octal (8)</option>
+                        <option value="10">Decimal (10)</option>
+                        <option value="16" selected>Hexadecimal (16)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="button" id="show-steps-btn" class="btn-secondary">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-steps"></use></svg>
+                <span>Show me how Bitzy did it</span>
+            </button>
+
+            <p class="section-hint">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#bz-chick"></use></svg>
+                <span>Your Easter Fairy Chick is the one who shares the trivia &mdash; she pops up a fact every time you convert.</span>
+            </p>
+
+            <div id="steps-panel" class="steps-panel hidden">
+                <!-- Rendered by app.js -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/icons.js"></script>
+    <script src="js/feedback.js"></script>
+    <script src="js/converter.js"></script>
+    <script src="js/trivia.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/fairy.js"></script>
+</body>
+
+</html>
