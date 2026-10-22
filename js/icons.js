@@ -13,12 +13,6 @@
  */
 
 const BITZY_ICON_DEFS = {
-    // --- Brand ---
-    chick: `<path fill="currentColor" stroke="none" d="M12 4.6c-3 0-5.4 3.1-5.4 6.6 0 2.9 2 4.8 5.4 4.8s5.4-1.9 5.4-4.8c0-3.5-2.4-6.6-5.4-6.6Z"/>
-            <path d="M12 4.6c0-1.3.9-2.2 2.2-2.2.5 0 .9.1 1.3.4"/>
-            <circle fill="currentColor" stroke="none" cx="10.2" cy="11" r="0.9"/>
-            <circle fill="currentColor" stroke="none" cx="13.8" cy="11" r="0.9"/>`,
-
     // --- Navigation ---
     converter: `<path d="M4 8.5h13M14 5l3 3.5-3 3.5M20 15.5H7M10 12l-3 3.5 3 3.5"/>`,
     chip: `<rect x="6" y="6" width="12" height="12" rx="2.5"/>
@@ -85,7 +79,7 @@ const BITZY_ICON_DEFS = {
     info: `<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6h.01"/>`,
     chat: `<path d="M20.5 11.7c0 4-3.8 7.2-8.5 7.2-1 0-2-.2-2.9-.4L4 20.5l1.4-3.6A6.9 6.9 0 0 1 3.5 11.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/>`,
 
-    // --- Decorative (fairy companion) ---
+    // --- Decorative (Switchy companion) ---
     heart: `<path fill="currentColor" stroke="none" d="M12 20.5s-7.6-4.6-7.6-9.4A4.4 4.4 0 0 1 12 8.2a4.4 4.4 0 0 1 7.6 2.9c0 4.8-7.6 9.4-7.6 9.4Z"/>`,
     sparkle: `<path fill="currentColor" stroke="none" d="M12 2.5c.5 3.6 1.4 4.5 5 5-3.6.5-4.5 1.4-5 5-.5-3.6-1.4-4.5-5-5 3.6-.5 4.5-1.4 5-5Z"/>`,
     star: `<path fill="currentColor" stroke="none" d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.8 6.7 19.7l1.1-6.1L3.4 9.4l6-.8L12 3Z"/>`,

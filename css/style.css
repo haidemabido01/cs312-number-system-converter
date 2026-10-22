@@ -510,7 +510,7 @@ input[readonly] {
     line-height: 1.6;
 }
 
-/* Section Hint (points the student at the Fairy Chick) */
+/* Section Hint (points the student at Switchy) */
 .section-hint {
     display: flex;
     align-items: center;
@@ -1481,9 +1481,9 @@ input[readonly] {
 }
 
 /* ==========================================================
-   FAIRY EASTER CHICK COMPANION
+   SWITCHY COMPANION
    ========================================================== */
-.fairy-chick-container {
+.switchy-container {
     position: fixed;
     bottom: 24px;
     right: 24px;
@@ -1496,11 +1496,11 @@ input[readonly] {
     user-select: none;
 }
 
-.fairy-chick-container * {
+.switchy-container * {
     pointer-events: auto;
 }
 
-.fairy-avatar-wrap {
+.switchy-avatar-wrap {
     width: 84px;
     height: 84px;
     border-radius: 50%;
@@ -1509,16 +1509,16 @@ input[readonly] {
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: fairyFloat 3.2s ease-in-out infinite;
+    animation: switchyFloat 3.2s ease-in-out infinite;
     transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     -webkit-tap-highlight-color: transparent !important;
 }
 
-.fairy-avatar-wrap:hover {
+.switchy-avatar-wrap:hover {
     transform: scale(1.12);
 }
 
-.fairy-aura {
+.switchy-aura {
     position: absolute;
     inset: -6px;
     border-radius: 50%;
@@ -1528,7 +1528,7 @@ input[readonly] {
     pointer-events: none;
 }
 
-.fairy-chick-img {
+.switchy-avatar-img {
     width: 84px;
     height: 84px;
     border-radius: 50%;
@@ -1539,12 +1539,12 @@ input[readonly] {
     border: 3px solid #FFFFFF;
 }
 
-[data-theme="dark"] .fairy-chick-img {
+[data-theme="dark"] .switchy-avatar-img {
     border-color: var(--palette-plum);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
-.fairy-wand-star {
+.switchy-wand-star {
     position: absolute;
     top: 4px;
     left: 4px;
@@ -1554,12 +1554,12 @@ input[readonly] {
     color: #FFD36E;
 }
 
-.fairy-wand-star .icon {
+.switchy-wand-star .icon {
     width: 1.25rem;
     height: 1.25rem;
 }
 
-.fairy-sparkles {
+.switchy-sparkles {
     position: absolute;
     inset: 0;
     pointer-events: none;
@@ -1571,7 +1571,7 @@ input[readonly] {
     100% { transform: scale(1.3) rotate(20deg); filter: drop-shadow(0 0 8px #FFD700); }
 }
 
-@keyframes fairyFloat {
+@keyframes switchyFloat {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
 }
@@ -1581,11 +1581,11 @@ input[readonly] {
     100% { transform: scale(1.12); opacity: 1; }
 }
 
-.fairy-wobble {
-    animation: fairyWobbleAnim 0.5s ease-out;
+.switchy-wobble {
+    animation: switchyWobbleAnim 0.5s ease-out;
 }
 
-@keyframes fairyWobbleAnim {
+@keyframes switchyWobbleAnim {
     0% { transform: rotate(0deg) scale(1.15); }
     25% { transform: rotate(-12deg) scale(1.2); }
     50% { transform: rotate(12deg) scale(1.2); }
@@ -1593,8 +1593,8 @@ input[readonly] {
     100% { transform: rotate(0deg) scale(1); }
 }
 
-/* Fairy Speech Bubble */
-.fairy-bubble {
+/* Switchy Speech Bubble */
+.switchy-bubble {
     background: var(--white);
     color: var(--text-color);
     border: 1.5px solid var(--accent);
@@ -1606,45 +1606,45 @@ input[readonly] {
     font-weight: 700;
     line-height: 1.5;
     position: relative;
-    animation: fairyPopIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: switchyPopIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     margin-right: 6px;
 }
 
-@keyframes fairyPopIn {
+@keyframes switchyPopIn {
     from { opacity: 0; transform: scale(0.85) translateY(10px); }
     to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 /* The bubble is the app's only trivia surface */
-.fairy-bubble-icon {
+.switchy-bubble-icon {
     display: inline-flex;
     align-items: center;
     vertical-align: -0.22em;
     margin-right: 7px;
 }
 
-.fairy-bubble-icon .icon {
+.switchy-bubble-icon .icon {
     width: 1.15rem;
     height: 1.15rem;
     color: var(--accent);
 }
 
-.fairy-bubble[data-variant="trivia"] {
+.switchy-bubble[data-variant="trivia"] {
     background: var(--trivia-bg);
     border-color: rgba(183, 104, 124, 0.35);
     max-width: 300px;
     font-size: 0.9rem;
 }
 
-.fairy-bubble[data-variant="trivia"] .fairy-bubble-icon .icon {
+.switchy-bubble[data-variant="trivia"] .switchy-bubble-icon .icon {
     color: var(--palette-rose);
 }
 
-.fairy-bubble[data-variant="greeting"] {
+.switchy-bubble[data-variant="greeting"] {
     background: var(--trivia-bg);
 }
 
-.fairy-bubble-close {
+.switchy-bubble-close {
     position: absolute;
     top: 4px;
     right: 8px;
@@ -1660,16 +1660,16 @@ input[readonly] {
     border-radius: 6px;
 }
 
-.fairy-bubble-close .icon {
+.switchy-bubble-close .icon {
     width: 1.05rem;
     height: 1.05rem;
 }
 
-.fairy-bubble-close:hover {
+.switchy-bubble-close:hover {
     color: var(--accent);
 }
 
-.fairy-toggle-btn {
+.switchy-toggle-btn {
     background: var(--white);
     border: 1px solid var(--input-border);
     border-radius: 14px;
@@ -1686,18 +1686,18 @@ input[readonly] {
     gap: 5px;
 }
 
-.fairy-toggle-btn .icon {
+.switchy-toggle-btn .icon {
     width: 1.05rem;
     height: 1.05rem;
 }
 
-.fairy-toggle-btn:hover {
+.switchy-toggle-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
 }
 
 /* Floating Sparkle Particles */
-.fairy-floating-sparkle {
+.switchy-floating-sparkle {
     position: absolute;
     pointer-events: none;
     animation: sparkleFloatUp 1.2s ease-out forwards;
@@ -1705,7 +1705,7 @@ input[readonly] {
     color: #FFD36E;
 }
 
-.fairy-floating-sparkle .icon {
+.switchy-floating-sparkle .icon {
     width: 1.15rem;
     height: 1.15rem;
 }
@@ -1717,34 +1717,34 @@ input[readonly] {
 }
 
 /* Minimized State */
-.fairy-chick-container.minimized .fairy-avatar-wrap {
+.switchy-container.minimized .switchy-avatar-wrap {
     display: none;
 }
-.fairy-chick-container.minimized .fairy-bubble {
-    display: none;
-}
-
-/* Hover reveal: the chick and her bubble only appear while the Fairy is active */
-.fairy-chick-container:not(.minimized):not(.fairy-active) .fairy-avatar-wrap,
-.fairy-chick-container:not(.minimized):not(.fairy-active) .fairy-bubble {
+.switchy-container.minimized .switchy-bubble {
     display: none;
 }
 
-/* Once the cursor hovers the Fairy, the "Hover to show Fairy" prompt hides */
-.fairy-chick-container.fairy-active .fairy-toggle-hint {
+/* Hover reveal: Switchy and their bubble only appear while Switchy is active */
+.switchy-container:not(.minimized):not(.switchy-active) .switchy-avatar-wrap,
+.switchy-container:not(.minimized):not(.switchy-active) .switchy-bubble {
+    display: none;
+}
+
+/* Once the cursor hovers Switchy, the "Hover to show Switchy" prompt hides */
+.switchy-container.switchy-active .switchy-toggle-hint {
     display: none;
 }
 
 @media (max-width: 650px) {
-    .fairy-chick-container {
+    .switchy-container {
         bottom: 16px;
         right: 16px;
     }
-    .fairy-avatar-wrap {
+    .switchy-avatar-wrap {
         width: 70px;
         height: 70px;
     }
-    .fairy-chick-img {
+    .switchy-avatar-img {
         width: 70px;
         height: 70px;
     }

@@ -39,7 +39,7 @@ const DARK = {
 /* Icons referenced by README.md */
 const ICON_NAMES = [
     'alert', 'arrowRight', 'bolt', 'book', 'bulb', 'cap', 'chat', 'check',
-    'chick', 'chip', 'clipboard', 'converter', 'flower', 'grid', 'heart',
+    'chip', 'clipboard', 'converter', 'flower', 'grid', 'heart',
     'key', 'moon', 'refresh', 'rocket', 'search', 'sparkle', 'star', 'steps',
     'tag', 'target', 'toggle', 'type', 'wand'
 ];

@@ -29,7 +29,7 @@
   - [2. 8-Bit Register Playground (Visual Bit Flipper)](#2-8-bit-register-playground-visual-bit-flipper)
   - [3. Student Exam Cheat Sheet & CS Hacks](#3-student-exam-cheat-sheet--cs-hacks)
   - [4. ASCII Character Lab](#4-ascii-character-lab)
-  - [5. Easter Fairy Chick Companion](#5-easter-fairy-chick-companion)
+  - [5. Switchy Companion](#5-switchy-companion)
 - [Icon System](#icon-system)
 - [How to Run](#how-to-run)
 - [Project Structure](#project-structure)
@@ -58,11 +58,11 @@ Bitzy features a soothing, modern color palette inspired by an evening twilight 
 
 ## <img src="assets/icons/steps.svg" alt="" width="20" height="20" align="middle"> App Architecture
 
-Bitzy is a **focused four-page study system**. The landing page is deliberately trimmed to just the **Live Base Converter**, with every other tool reachable from the top navigation bar and **all trivia delivered by the Easter Fairy Chick**.
+Bitzy is a **focused four-page study system**. The landing page is deliberately trimmed to just the **Live Base Converter**, with every other tool reachable from the top navigation bar and **all trivia delivered by Switchy**.
 
 | Path | Page | Description |
 | :--- | :--- | :--- |
-| `index.html` | **Live Base Converter** | The home page: instant, as-you-type conversion across Bases 2–36 with a "Show me how Bitzy did it" step breakdown, toast notifications, and trivia spoken by the Fairy Chick (on each conversion and every 10 seconds while she is revealed). |
+| `index.html` | **Live Base Converter** | The home page: instant, as-you-type conversion across Bases 2–36 with a "Show me how Bitzy did it" step breakdown, toast notifications, and trivia spoken by Switchy (on each conversion and every 10 seconds while they are revealed). |
 | `register.html` | **8-Bit Register Playground** | Interactive visual bit-flipper ($b_7$ to $b_0$), High/Low nibbles, signed two's complement sign-bit, and live formula sum. |
 | `cheatsheet.html` | **Exam Cheat Sheet & CS Hacks** | Segmented-tab reference: searchable Powers of 2 lookup ($2^0$ to $2^{16}$) with 1-click copy, an 8-column nibble decoder grid, and 4 legendary exam shortcuts. |
 | `ascii.html` | **ASCII Character Lab** | 7-bit ASCII decimal-to-character interactive laboratory with quick high-yield example chips. |
@@ -79,7 +79,7 @@ Bitzy is a **focused four-page study system**. The landing page is deliberately 
 - **Instant Conversion** <img src="assets/icons/bolt.svg" alt="" width="15" height="15" align="middle"> — Converts as you type across Bases 2, 8, 10, and 16 from the quick-pick dropdown, with a dedicated result pane. (The engine underneath handles *any* base from 2 to 36.)
 - **Step Breakdown** <img src="assets/icons/steps.svg" alt="" width="15" height="15" align="middle"> — Hit *"Show me how Bitzy did it"* to see the full equation, the per-digit weighting, and the repeated-division table.
 - **Toast Notifications** <img src="assets/icons/alert.svg" alt="" width="15" height="15" align="middle"> — Every conversion, invalid digit, hint and achievement is reported in a colour-coded toast notification at the top centre of the screen — no inline status lines anywhere. Repeated feedback reuses the same toast instead of stacking duplicates.
-- **Fairy Chick Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — Every conversion makes the Easter Fairy Chick pop up a computing-history fact in her speech bubble (why 255 is a byte, why octal groups 3 bits, why base-20 exists, and more), and while she is revealed she rotates in a fresh fact every 10 seconds. She waits for you to pause typing so her bubble never flickers.
+- **Switchy Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — Every conversion makes Switchy pop up a computing-history fact in their speech bubble (why 255 is a byte, why octal groups 3 bits, why base-20 exists, and more), and while they are revealed they rotate in a fresh fact every 10 seconds. They wait for you to pause typing so their bubble never flickers.
 - **Base Palette** <img src="assets/icons/flower.svg" alt="" width="15" height="15" align="middle"> — The toast accents and colours shift to match the base you are working in.
 
 <details>
@@ -143,19 +143,19 @@ Check: $256 - 5 = 251 = \texttt{0xFB}$ — the two's complement of 5 is -5.
 - **Control Character Names** <img src="assets/icons/tag.svg" alt="" width="15" height="15" align="middle"> — The full 0–127 table with friendly names (NUL, SOH, LF, CR, DEL, …).
 - **Quick High-Yield Examples** <img src="assets/icons/wand.svg" alt="" width="15" height="15" align="middle"> — One-click chips for `A = 65`, `a = 97`, `0 = 48`, `Space = 32`, and `! = 33`.
 
-### 5. <img src="assets/icons/chick.svg" alt="" width="18" height="18" align="middle"> Easter Fairy Chick Companion
+### 5. <img src="assets/icons/bulb.svg" alt="" width="18" height="18" align="middle"> Switchy Companion
 
-She is the **only voice of the app** — all trivia, study tips and blessings are spoken by her, never by a separate panel.
+Switchy is the **only voice of the app** — all trivia, study tips and blessings are spoken by them, never by a separate panel.
 
-- An adorable, floating chibi Easter Fairy Chick that hovers at the bottom-right corner of every page.
-- **"Hover to show Fairy"** <img src="assets/icons/sparkle.svg" alt="" width="15" height="15" align="middle"> — she stays tucked away until you move your cursor over her (or focus her with the keyboard), so she never blocks your work. Once shown, she **lingers for one minute** (each fresh hover restarts the minute), then tucks herself away; minimizing keeps her hidden even on hover. She is a hover reveal only — the chick herself is not clickable, and the **"Hover to show Fairy"** prompt hides the moment your cursor reaches her.
-- Featuring glowing fairy wings, a flower crown, and a sparkling star wand.
-- **The trivia speaker** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — her bubble pops open with a fresh fact every time you convert a number, and while she is revealed a new trivia fact **rotates every 10 seconds** (with a little bulb icon and a sparkle shower). The rotation is skipped while she is minimized, while she is tucked away, or while the tab is in the background, and it never interrupts a study blessing.
-- Use the little pill button under her (the only control she has) to minimize or bring her back for distraction-free focus; a study blessing greets you when she returns.
-- Can be minimized anytime for distraction-free focus — and if she is minimized, trivia falls back to a toast so no fact is ever lost.
+- The Binary Conversion Exchange mascot: a binary card and a decimal card swapping values through two curved arrows, floating at the bottom-right corner of every page.
+- **"Hover to show Switchy"** <img src="assets/icons/sparkle.svg" alt="" width="15" height="15" align="middle"> — they stay tucked away until you move your cursor over them (or focus them with the keyboard), so they never block your work. Once shown, they **linger for one minute** (each fresh hover restarts the minute), then tuck themselves away; minimizing keeps them hidden even on hover. It is a hover reveal only — Switchy is not clickable, and the **"Hover to show Switchy"** prompt hides the moment your cursor reaches them.
+- Featuring glowing exchange arrows, a soft aura and a sparkling star.
+- **The trivia speaker** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — their bubble pops open with a fresh fact every time you convert a number, and while they are revealed a new trivia fact **rotates every 10 seconds** (with a little bulb icon and a sparkle shower). The rotation is skipped while they are minimized, while they are tucked away, or while the tab is in the background, and it never interrupts a study blessing.
+- Use the little pill button under them (the only control they have) to minimize or bring them back for distraction-free focus; a study blessing greets you when they return.
+- Can be minimized anytime for distraction-free focus — and if they are minimized, trivia falls back to a toast so no fact is ever lost.
 
 > [!IMPORTANT]
-> If you'd rather study in silence, minimize her once and she goes quiet — **no fact is ever lost**, trivia simply arrives as a toast instead.
+> If you'd rather study in silence, minimize them once and they go quiet — **no fact is ever lost**, trivia simply arrives as a toast instead.
 
 ---
 
@@ -218,9 +218,8 @@ Bitzy is 100% static client-side web technology — no installation, no node dep
 │   ├── feedback.js     # Toast notification engine
 │   ├── app.js          # Core wiring, base conversions, ASCII decoding, & theme
 │   ├── converter.js    # Pure mathematical conversion & step explanation engine
-│   ├── fairy.js        # The Easter Fairy Chick: the only voice for trivia & blessings
 │   ├── student.js      # 8-Bit Register, Exam Cheat Sheet & rotating concept carousel
-│   └── trivia.js       # Context-aware computing history & number trivia picker
+│   └── trivia.js       # Trivia engine + Switchy companion (the only voice of the app)
 └── tools/
     └── generate-readme-icons.js # Regenerates assets/icons/ from js/icons.js
 ```
@@ -233,7 +232,7 @@ Bitzy is 100% static client-side web technology — no installation, no node dep
 | Number bases & conversions | `js/converter.js` <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `js/app.js` |
 | Bit patterns & two's complement | `js/student.js` <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `register.html` |
 | ASCII & encoding | `js/app.js` (ASCII decoder) <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `ascii.html` |
-| The mascot & trivia content | `js/fairy.js` <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `js/trivia.js` |
+| The mascot & trivia content | `js/trivia.js` (engine + Switchy widget) |
 | Visual design & theming | `css/style.css` <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `js/icons.js` |
 
 </details>

@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const outputBaseEl = document.getElementById('output-base');
 
     if (inputValueEl && inputBaseEl && outputValueEl && outputBaseEl) {
-        // The Fairy Chick speaks after the student pauses, so her bubble never flickers mid-typing
+        // Switchy speaks after the student pauses, so their bubble never flickers mid-typing
         let triviaTimer = null;
 
         // Live conversion listeners
