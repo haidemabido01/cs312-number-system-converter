@@ -53,7 +53,7 @@ function getTriviaForConversion(inputValue, fromBase, outputValue, toBase) {
 }
 
 /**
- * Hands a trivia fact to Switchy, who says it in his bubble.
+ * Hands a trivia fact to Switchy, who says it in their bubble.
  * If Switchy is minimized or unavailable, the fact falls back to a toast
  * so no trivia is ever silently dropped.
  * @param {string} factText
@@ -86,14 +86,14 @@ const SWITCHY_CHEERS = [
 ];
 
 const SWITCHY_STUDY_TIPS = [
-    "Study tip: chunk binary into 4-bit groups and hex becomes trivial.",
-    "Study tip: the last bit (2^0) tells you if a number is even or odd.",
-    "Study tip: two's complement is just flipping every bit after the first 1.",
-    "Study tip: memorise 1 byte = 8 bits and 1 nibble = 4 bits - exams hide them.",
-    "Study tip: 0xFF is 255 in decimal - spot that pattern in hex dumps.",
-    "Study tip: ASCII only covers 0-127, anything higher needs Unicode.",
-    "Study tip: read the question twice - 'convert to' and 'convert from' flip the answer.",
-    "Study tip: write the powers of 2 from memory, every exam hides one."
+    "Switchy study tip: chunk binary into 4-bit groups and hex becomes trivial.",
+    "Switchy study tip: the last bit (2^0) tells you if a number is even or odd.",
+    "Switchy study tip: two's complement is just flipping every bit after the first 1.",
+    "Switchy study tip: memorise 1 byte = 8 bits and 1 nibble = 4 bits - exams hide them.",
+    "Switchy study tip: 0xFF is 255 in decimal - spot that pattern in hex dumps.",
+    "Switchy study tip: ASCII only covers 0-127, anything higher needs Unicode.",
+    "Switchy study tip: read the question twice - 'convert to' and 'convert from' flip the answer.",
+    "Switchy study tip: write the powers of 2 from memory, every exam hides one."
 ];
 
 /**
@@ -156,9 +156,8 @@ function initSwitchy() {
     if (switchyWired) return;
     switchyWired = true;
 
-    // "Hover to show Switchy": hovering reveals them and they then stay for
-    // up to one minute. The countdown starts on the first hover, so leaving
-    // early does not hide them immediately.
+    // Hovering Switchy reveals them and restarts their one-minute linger, so
+    // they stay on screen while the student reads the current message.
     if (widget) {
         widget.addEventListener('mouseenter', () => {
             if (widget.classList.contains('minimized')) return;
@@ -178,8 +177,8 @@ function initSwitchy() {
         });
     }
 
-    // Switchy is a hover reveal only - they are not clickable, so clicking
-    // simply keeps them visible instead of triggering a message.
+    // Switchy is not clickable - clicking them simply keeps them visible
+    // instead of triggering a message.
 
     if (bubbleClose) {
         bubbleClose.addEventListener('click', (e) => {
