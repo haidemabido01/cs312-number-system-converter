@@ -186,7 +186,7 @@ function buildFairyWidget() {
 
         <div id="fairy-avatar-wrap" class="fairy-avatar-wrap" title="Hover to show Fairy">
             <div class="fairy-aura"></div>
-            <img src="assets/fairy_chick.png" alt="Easter Fairy Chick with flower crown and star wand" class="fairy-chick-img">
+            <img src="assets/Logo.jpg" alt="Bitzy logo: the Bitzy mascot with binary conversion arrows" class="fairy-chick-img">
             <span class="fairy-wand-star">${icon('star')}</span>
             <div class="fairy-sparkles" aria-hidden="true"></div>
         </div>

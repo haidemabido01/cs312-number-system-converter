@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/fairy_chick.png" alt="Bitzy the Easter Fairy Chick" width="180" />
+<img src="assets/Logo.jpg" alt="Bitzy logo" width="480" />
 
 # Bitzy — Your Number System Bestie & CS Study Guide
 
@@ -206,7 +206,7 @@ Bitzy is 100% static client-side web technology — no installation, no node dep
 ├── cheatsheet.html     # Student Exam Cheat Sheet & CS Hacks
 ├── ascii.html          # 7-Bit ASCII Character Lab
 ├── assets/
-│   ├── fairy_chick.png # Official Easter Fairy Chick asset
+│   ├── Logo.jpg        # Bitzy logo (mascot + wordmark)
 │   └── icons/          # Standalone SVG icons used by this README
 ├── css/
 │   └── style.css       # Twilight Sunset palette, SVG icon system & responsive design
