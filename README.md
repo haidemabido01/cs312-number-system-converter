@@ -38,7 +38,7 @@
 
 ---
 
-## <img src="assets/icons/sparkle.svg" alt="" width="20" height="20" align="middle"> Twilight Beach Sunset Color Palette
+## <img src="assets/icons/glint.svg" alt="" width="20" height="20" align="middle"> Twilight Beach Sunset Color Palette
 
 Bitzy features a soothing, modern color palette inspired by an evening twilight sunset over the ocean:
 
@@ -80,7 +80,7 @@ Bitzy is a **focused four-page study system**. The landing page is deliberately 
 - **Step Breakdown** <img src="assets/icons/steps.svg" alt="" width="15" height="15" align="middle"> — Hit *"Show me how Bitzy did it"* to see the full equation, the per-digit weighting, and the repeated-division table.
 - **Toast Notifications** <img src="assets/icons/alert.svg" alt="" width="15" height="15" align="middle"> — Every conversion, invalid digit, hint and achievement is reported in a colour-coded toast notification at the top centre of the screen — no inline status lines anywhere. Repeated feedback reuses the same toast instead of stacking duplicates.
 - **Switchy Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — Every 10 seconds Switchy pops up a **trivia fact**, a **study tip** or a **cheer** — no hovering required. Switchy reveals themselves for each message and the bubble is replaced in place. They wait for you to pause typing so their bubble never flickers mid-conversion.
-- **Base Palette** <img src="assets/icons/flower.svg" alt="" width="15" height="15" align="middle"> — The toast accents and colours shift to match the base you are working in.
+- **Base Palette** <img src="assets/icons/bulb.svg" alt="" width="15" height="15" align="middle"> — The toast accents and colours shift to match the base you are working in.
 
 <details>
 <summary><strong>What does "Bases 2–36" mean?</strong></summary>
@@ -105,13 +105,13 @@ The dropdown presets are the four you'll actually use in class — Binary (2), O
 - **1-Click Copy** <img src="assets/icons/check.svg" alt="" width="15" height="15" align="middle"> — Tap the **Common CS Usage** chip in any row to copy that usage note to your clipboard (then just hit <kbd>Ctrl</kbd>+<kbd>C</kbd> / <kbd>⌘</kbd>+<kbd>C</kbd> to paste), so the table needs no extra column or icon.
 - **4-Bit Hex Nibble Grid** <img src="assets/icons/grid.svg" alt="" width="15" height="15" align="middle"> — A tight 2×8 decoder grid connecting binary `0000`–`1111` to hex `0`–`F`; click a tile to copy its binary.
 - **Professor Bitzy's Exam Shortcuts** <img src="assets/icons/cap.svg" alt="" width="15" height="15" align="middle"> — One numbered list panel, four shortcuts.
-  - *The 4-Bit Chunking Magic*: Convert binary to hex in seconds without division.
+  - *The 4-Bit Chunking Trick*: Convert binary to hex in seconds without division.
   - *The Two's Complement 3-Second Rule*: Keep bits from the right up to the first `1`, invert the rest!
   - *Instant Even/Odd Rule*: Check the least significant bit ($2^0$).
   - *Prefix Guide*: `0b` (binary), `0o` (octal), `0x` (hex).
 
 <details>
-<summary><strong>Deep dive: the 4-bit chunking magic</strong></summary>
+<summary><strong>Deep dive: the 4-bit chunking trick</strong></summary>
 
 Split the binary string into groups of four from the right, then read each group as one hex digit:
 
@@ -145,17 +145,17 @@ Check: $256 - 5 = 251 = \texttt{0xFB}$ — the two's complement of 5 is -5.
 
 ### 5. <img src="assets/icons/bulb.svg" alt="" width="18" height="18" align="middle"> Switchy Companion
 
-Switchy is the **only voice of the app** — all trivia, study tips and blessings are spoken by them, never by a separate panel.
+Switchy is the **only voice of the app** — all trivia, study tips and cheers are spoken by them, never by a separate panel.
 
 - The Binary Conversion Exchange mascot: a binary card and a decimal card swapping values through two curved arrows, floating at the bottom-right corner of every page.
-- **Every 10 Seconds** <img src="assets/icons/sparkle.svg" alt="" width="15" height="15" align="middle"> — Switchy speaks up on their own, cycling through three kinds of message with their own bubble icon:
+- **Every 10 Seconds** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — Switchy speaks up on their own, cycling through three kinds of message with their own bubble icon:
   - **Trivia** <img src="assets/icons/bulb.svg" alt="" width="14" height="14" align="middle"> — a computing-history fact, weighted to appear most often.
   - **Study tip** <img src="assets/icons/book.svg" alt="" width="14" height="14" align="middle"> — a practical trick for exams (chunking, two's complement, powers of 2).
   - **Cheer** <img src="assets/icons/heart.svg" alt="" width="14" height="14" align="middle"> — a bit of encouragement, because studying should feel good.
 - The Binary Conversion Exchange mascot: a binary card and a decimal card swapping values through two curved arrows, floating at the bottom-right corner of every page.
 - **Matched to your conversion** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — type a number and Switchy answers with a fact tied to the base you are working in (why 255 is a byte, why octal groups 3 bits, why base-20 exists, and more).
-- **Never interrupted** <img src="assets/icons/bulb.svg" alt="" width="15" height="15" align="middle"> — a greeting or blessing already on screen is never cut short, and the tick is skipped while the tab is in the background.
-- Use the little pill button under them to minimize them or bring them back for distraction-free focus; a study blessing greets you when they return.
+- **Never interrupted** <img src="assets/icons/bulb.svg" alt="" width="15" height="15" align="middle"> — a greeting already on screen is never cut short, and the tick is skipped while the tab is in the background.
+- Use the little pill button under them to minimize them or bring them back for distraction-free focus; a cheer greets you when they return.
 - If they are minimized, trivia falls back to a toast so no fact is ever lost.
 
 > [!IMPORTANT]

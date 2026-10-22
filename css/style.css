@@ -1559,7 +1559,7 @@ input[readonly] {
     height: 1.25rem;
 }
 
-.switchy-sparkles {
+.switchy-particles {
     position: absolute;
     inset: 0;
     pointer-events: none;
@@ -1696,21 +1696,21 @@ input[readonly] {
     color: var(--accent);
 }
 
-/* Floating Sparkle Particles */
-.switchy-floating-sparkle {
+/* Floating Bit Particles */
+.switchy-floating-particle {
     position: absolute;
     pointer-events: none;
-    animation: sparkleFloatUp 1.2s ease-out forwards;
+    animation: particleFloatUp 1.2s ease-out forwards;
     z-index: 10;
     color: #FFD36E;
 }
 
-.switchy-floating-sparkle .icon {
+.switchy-floating-particle .icon {
     width: 1.15rem;
     height: 1.15rem;
 }
 
-@keyframes sparkleFloatUp {
+@keyframes particleFloatUp {
     0% { transform: translateY(0) scale(0.5); opacity: 1; }
     50% { transform: translateY(-25px) scale(1.2); opacity: 0.9; }
     100% { transform: translateY(-50px) scale(0.8); opacity: 0; }

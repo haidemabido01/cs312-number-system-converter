@@ -14,7 +14,7 @@ const FEEDBACK_KINDS = {
     error: 'cross',
     warn: 'alert',
     hint: 'bulb',
-    celebrate: 'sparkle'
+    celebrate: 'glint'
 };
 
 const TOAST_DURATION = 2600;

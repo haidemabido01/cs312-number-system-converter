@@ -2,7 +2,7 @@
  * Bitzy Trivia & Switchy Companion Engine
  * ---------------------------------------------
  * Switchy is the ONE voice of the app: every trivia fact, study tip and
- * blessing is delivered inside his speech bubble. Nothing else on a page
+ * cheer is delivered inside their speech bubble. Nothing else on a page
  * renders trivia, so Switchy is always where the knowledge lives.
  *
  * Both halves of that system live in this one file:
@@ -107,18 +107,16 @@ const SWITCHY_BEATS = [
 ];
 
 const SWITCHY_BUBBLE_ICONS = {
-    greeting: 'sparkle',
-    blessing: 'star',
+    greeting: 'glint',
     trivia: 'bulb',
     tip: 'book',
     cheer: 'heart'
 };
 
-const SWITCHY_SPARKLE_ICONS = ['sparkle', 'star', 'bolt', 'chip'];
+const SWITCHY_PARTICLE_ICONS = ['glint', 'star', 'bolt', 'chip'];
 
 const SWITCHY_BUBBLE_DURATIONS = {
     greeting: 5000,
-    blessing: 6000,
     trivia: 12000,
     tip: 12000,
     cheer: 12000
@@ -135,7 +133,6 @@ const SWITCHY_GREETING = "Hi! I'm Switchy - your number system bestie. Every 10 
 
 let switchyRefs = null;
 let switchyWired = false;
-let switchyBlessingIdx = 0;
 let switchyTipIdx = -1;
 let switchyCheerIdx = -1;
 let switchyTriviaTimer = null;
@@ -202,7 +199,7 @@ function initSwitchy() {
             if (nowMinimized) {
                 bubble.classList.add('hidden');
             } else {
-                triggerBlessing();
+                triggerCheer();
             }
         });
     }
@@ -276,7 +273,7 @@ function nextInList(list, currentIndex) {
  * Each tick reveals Switchy (so the bubble is actually visible), restarts the
  * linger countdown, and replaces the message on screen in place. The tick is
  * skipped while Switchy is minimized or the tab is in the background, and a
- * greeting or blessing already on screen is never interrupted.
+ * greeting or welcome cheer already on screen is never interrupted.
  */
 function startSwitchyTriviaLoop() {
     if (switchyTriviaTimer) return;
@@ -288,8 +285,8 @@ function startSwitchyTriviaLoop() {
         const bubble = switchyRefs.bubble;
         const onScreen = !bubble.classList.contains('hidden');
         const current = bubble.dataset.variant;
-        // Never interrupt a short-lived greeting or blessing.
-        if (onScreen && (current === 'greeting' || current === 'blessing')) return;
+        // Never interrupt a short-lived greeting.
+        if (onScreen && current === 'greeting') return;
 
         // Reveal Switchy so the message is actually on screen, and keep the
         // linger countdown running so they do not tuck away mid-sentence.
@@ -337,10 +334,10 @@ function buildSwitchyWidget() {
             <div class="switchy-aura"></div>
             <img src="assets/favicon.png" alt="Binary Conversion Exchange icon" class="switchy-avatar-img">
             <span class="switchy-corner-star">${icon('star')}</span>
-            <div class="switchy-sparkles" aria-hidden="true"></div>
+            <div class="switchy-particles" aria-hidden="true"></div>
         </div>
         <button type="button" id="switchy-toggle-btn" class="switchy-toggle-btn" title="${isMinimized ? 'Show Switchy' : 'Hide Switchy'}">
-            ${isMinimized ? icon('converter') : icon('sparkle')}<span class="switchy-toggle-hint">${isMinimized ? 'Bring Switchy back' : 'Minimize Switchy'}</span>
+            ${isMinimized ? icon('converter') : icon('glint')}<span class="switchy-toggle-hint">${isMinimized ? 'Bring Switchy back' : 'Minimize Switchy'}</span>
         </button>
     `;
 
@@ -350,11 +347,11 @@ function buildSwitchyWidget() {
 /**
  * Makes Switchy say something. Every message they speak goes through here.
  * @param {string} message - The text they say.
- * @param {string} [variant] - greeting | blessing | trivia | tip | cheer
+ * @param {string} [variant] - greeting | trivia | tip | cheer
  * @param {number} [duration] - Optional override for how long the bubble stays open.
  * @returns {boolean} true when the message was delivered.
  */
-function saySwitchyMessage(message, variant = 'blessing', duration) {
+function saySwitchyMessage(message, variant = 'cheer', duration) {
     if (!switchyRefs || !switchyRefs.bubble || !message) return false;
     const { bubble, bubbleText, bubbleIcon, avatarWrap } = switchyRefs;
 
@@ -363,11 +360,11 @@ function saySwitchyMessage(message, variant = 'blessing', duration) {
     bubble.classList.remove('hidden');
 
     if (bubbleIcon) {
-        bubbleIcon.innerHTML = icon(SWITCHY_BUBBLE_ICONS[variant] || 'sparkle');
+        bubbleIcon.innerHTML = icon(SWITCHY_BUBBLE_ICONS[variant] || 'glint');
     }
 
-    // Trigger the sparkle particle shower
-    createSparkles(avatarWrap);
+    // Trigger the bit particle shower
+    createParticles(avatarWrap);
 
     // Gentle cute wobble
     if (avatarWrap) {
@@ -376,12 +373,12 @@ function saySwitchyMessage(message, variant = 'blessing', duration) {
         avatarWrap.classList.add('switchy-wobble');
     }
 
-    const ms = duration || SWITCHY_BUBBLE_DURATIONS[variant] || SWITCHY_BUBBLE_DURATIONS.blessing;
+    const ms = duration || SWITCHY_BUBBLE_DURATIONS[variant] || SWITCHY_BUBBLE_DURATIONS.cheer;
     clearTimeout(window.switchyBubbleTimer);
     // A rotating message (trivia, tip or cheer) stays on screen while Switchy
-    // is revealed; the 10 second beat replaces it in place. Greetings and
-    // blessings are short-lived and auto-hide on their own.
-    const rotating = variant === 'trivia' || variant === 'tip' || variant === 'cheer';
+    // is revealed; the 10 second beat replaces it in place. A greeting, or a
+    // cheer given an explicit duration, is short-lived and auto-hides.
+    const rotating = !duration && (variant === 'trivia' || variant === 'tip' || variant === 'cheer');
     if (rotating && switchyRefs.widget && switchyRefs.widget.classList.contains('switchy-active')) {
         return true;
     }
@@ -408,29 +405,33 @@ function showSwitchyTrivia(fact) {
 /**
  * Delivers a cheer through Switchy.
  */
-function showSwitchyBlessing(blessing) {
+function showSwitchyCheer(text) {
     if (!switchyRefs) initSwitchy();
-    return saySwitchyMessage(blessing || SWITCHY_CHEERS[0], 'blessing');
+    return saySwitchyMessage(text || SWITCHY_CHEERS[0], 'cheer', 6000);
 }
 
-function triggerBlessing() {
-    switchyBlessingIdx = (switchyBlessingIdx + 1) % SWITCHY_CHEERS.length;
-    saySwitchyMessage(SWITCHY_CHEERS[switchyBlessingIdx], 'blessing');
+/**
+ * Greets the student with a cheer when they bring Switchy back.
+ */
+function triggerCheer() {
+    const cheer = nextInList(SWITCHY_CHEERS, switchyCheerIdx);
+    switchyCheerIdx = cheer.index;
+    saySwitchyMessage(cheer.text, 'cheer', 6000);
 }
 
-function createSparkles(targetEl) {
+function createParticles(targetEl) {
     if (!targetEl) return;
     for (let i = 0; i < 7; i++) {
-        const sparkle = document.createElement('span');
-        sparkle.className = 'switchy-floating-sparkle';
-        const name = SWITCHY_SPARKLE_ICONS[Math.floor(Math.random() * SWITCHY_SPARKLE_ICONS.length)];
-        sparkle.innerHTML = icon(name);
-        sparkle.style.left = (Math.random() * 60 - 15) + 'px';
-        sparkle.style.bottom = (Math.random() * 40 + 20) + 'px';
-        sparkle.style.animationDelay = (Math.random() * 0.3) + 's';
-        targetEl.appendChild(sparkle);
+        const particle = document.createElement('span');
+        particle.className = 'switchy-floating-particle';
+        const name = SWITCHY_PARTICLE_ICONS[Math.floor(Math.random() * SWITCHY_PARTICLE_ICONS.length)];
+        particle.innerHTML = icon(name);
+        particle.style.left = (Math.random() * 60 - 15) + 'px';
+        particle.style.bottom = (Math.random() * 40 + 20) + 'px';
+        particle.style.animationDelay = (Math.random() * 0.3) + 's';
+        targetEl.appendChild(particle);
 
-        setTimeout(() => sparkle.remove(), 1200);
+        setTimeout(() => particle.remove(), 1200);
     }
 }
 
