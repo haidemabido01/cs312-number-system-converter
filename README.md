@@ -150,10 +150,10 @@ Switchy is the **only voice of the app** — all trivia, study tips and cheers a
 - The Binary Conversion Exchange mascot: a binary card and a decimal card swapping values through two curved arrows, floating at the bottom-right corner of every page.
 - **Every 10 Seconds** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — Switchy speaks up on their own, cycling through three kinds of message with their own bubble icon:
   - **Trivia** <img src="assets/icons/bulb.svg" alt="" width="14" height="14" align="middle"> — a computing-history fact, weighted to appear most often.
-  - **Study tip** <img src="assets/icons/book.svg" alt="" width="14" height="14" align="middle"> — a practical trick for exams (chunking, two's complement, powers of 2).
+  - **Study tip** <img src="assets/icons/book.svg" alt="" width="14" height="14" align="middle"> — a practical exam trick: flip it both ways, build a place-value chart, memorise the nibble table, or drill for 10 minutes a day.
   - **Cheer** <img src="assets/icons/heart.svg" alt="" width="14" height="14" align="middle"> — a bit of encouragement, because studying should feel good.
 - The Binary Conversion Exchange mascot: a binary card and a decimal card swapping values through two curved arrows, floating at the bottom-right corner of every page.
-- **Matched to your conversion** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — type a number and Switchy answers with a fact tied to the base you are working in (why 255 is a byte, why octal groups 3 bits, why base-20 exists, and more).
+- **Matched to your conversion** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — type a number and Switchy answers with a fact tied to the base you are working in (why a byte is 8 bits, why a hex digit is exactly one nibble, why octal divides cleanly by 3, and more).
 - **Never interrupted** <img src="assets/icons/bulb.svg" alt="" width="15" height="15" align="middle"> — a greeting already on screen is never cut short, and the tick is skipped while the tab is in the background.
 - Use the little pill button under them to minimize them or bring them back for distraction-free focus; a cheer greets you when they return.
 - If they are minimized, trivia falls back to a toast so no fact is ever lost.
