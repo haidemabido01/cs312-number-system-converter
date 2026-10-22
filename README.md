@@ -62,7 +62,7 @@ Bitzy is a **focused four-page study system**. The landing page is deliberately 
 
 | Path | Page | Description |
 | :--- | :--- | :--- |
-| `index.html` | **Live Base Converter** | The home page: instant, as-you-type conversion across Bases 2–36 with a "Show me how Bitzy did it" step breakdown, toast notifications, and trivia spoken by Switchy (on each conversion and every 10 seconds while they are revealed). |
+| `index.html` | **Live Base Converter** | The home page: instant, as-you-type conversion across Bases 2–36 with a "Show me how Bitzy did it" step breakdown, toast notifications, and trivia spoken by Switchy (on each conversion and automatically every 10 seconds). |
 | `register.html` | **8-Bit Register Playground** | Interactive visual bit-flipper ($b_7$ to $b_0$), High/Low nibbles, signed two's complement sign-bit, and live formula sum. |
 | `cheatsheet.html` | **Exam Cheat Sheet & CS Hacks** | Segmented-tab reference: searchable Powers of 2 lookup ($2^0$ to $2^{16}$) with 1-click copy, an 8-column nibble decoder grid, and 4 legendary exam shortcuts. |
 | `ascii.html` | **ASCII Character Lab** | 7-bit ASCII decimal-to-character interactive laboratory with quick high-yield example chips. |
@@ -79,7 +79,7 @@ Bitzy is a **focused four-page study system**. The landing page is deliberately 
 - **Instant Conversion** <img src="assets/icons/bolt.svg" alt="" width="15" height="15" align="middle"> — Converts as you type across Bases 2, 8, 10, and 16 from the quick-pick dropdown, with a dedicated result pane. (The engine underneath handles *any* base from 2 to 36.)
 - **Step Breakdown** <img src="assets/icons/steps.svg" alt="" width="15" height="15" align="middle"> — Hit *"Show me how Bitzy did it"* to see the full equation, the per-digit weighting, and the repeated-division table.
 - **Toast Notifications** <img src="assets/icons/alert.svg" alt="" width="15" height="15" align="middle"> — Every conversion, invalid digit, hint and achievement is reported in a colour-coded toast notification at the top centre of the screen — no inline status lines anywhere. Repeated feedback reuses the same toast instead of stacking duplicates.
-- **Switchy Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — Every conversion makes Switchy pop up a computing-history fact in their speech bubble (why 255 is a byte, why octal groups 3 bits, why base-20 exists, and more), and while they are revealed they rotate in a fresh fact every 10 seconds. They wait for you to pause typing so their bubble never flickers.
+- **Switchy Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — A fresh fact pops open **automatically every 10 seconds**, no hovering required. Switchy reveals themselves for each fact and the bubble is replaced in place. They wait for you to pause typing so their bubble never flickers mid-conversion.
 - **Base Palette** <img src="assets/icons/flower.svg" alt="" width="15" height="15" align="middle"> — The toast accents and colours shift to match the base you are working in.
 
 <details>
@@ -148,11 +148,11 @@ Check: $256 - 5 = 251 = \texttt{0xFB}$ — the two's complement of 5 is -5.
 Switchy is the **only voice of the app** — all trivia, study tips and blessings are spoken by them, never by a separate panel.
 
 - The Binary Conversion Exchange mascot: a binary card and a decimal card swapping values through two curved arrows, floating at the bottom-right corner of every page.
-- **"Hover to show Switchy"** <img src="assets/icons/sparkle.svg" alt="" width="15" height="15" align="middle"> — they stay tucked away until you move your cursor over them (or focus them with the keyboard), so they never block your work. Once shown, they **linger for one minute** (each fresh hover restarts the minute), then tuck themselves away; minimizing keeps them hidden even on hover. It is a hover reveal only — Switchy is not clickable, and the **"Hover to show Switchy"** prompt hides the moment your cursor reaches them.
-- Featuring glowing exchange arrows, a soft aura and a sparkling star.
-- **The trivia speaker** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — their bubble pops open with a fresh fact every time you convert a number, and while they are revealed a new trivia fact **rotates every 10 seconds** (with a little bulb icon and a sparkle shower). The rotation is skipped while they are minimized, while they are tucked away, or while the tab is in the background, and it never interrupts a study blessing.
-- Use the little pill button under them (the only control they have) to minimize or bring them back for distraction-free focus; a study blessing greets you when they return.
-- Can be minimized anytime for distraction-free focus — and if they are minimized, trivia falls back to a toast so no fact is ever lost.
+- **Automatic Trivia** <img src="assets/icons/sparkle.svg" alt="" width="15" height="15" align="middle"> — a fresh fact pops open **every 10 seconds on its own**. Switchy reveals themselves for each fact, the bubble is replaced in place, and the linger countdown keeps them on screen while the facts keep coming.
+- **Matched to your conversion** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — type a number and Switchy answers with a fact tied to the base you are working in (why 255 is a byte, why octal groups 3 bits, why base-20 exists, and more).
+- **Never interrupted** <img src="assets/icons/bulb.svg" alt="" width="15" height="15" align="middle"> — a greeting or blessing already on screen is never cut short, and the tick is skipped while the tab is in the background.
+- Use the little pill button under them to minimize them or bring them back for distraction-free focus; a study blessing greets you when they return.
+- If they are minimized, trivia falls back to a toast so no fact is ever lost.
 
 > [!IMPORTANT]
 > If you'd rather study in silence, minimize them once and they go quiet — **no fact is ever lost**, trivia simply arrives as a toast instead.

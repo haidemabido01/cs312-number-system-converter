@@ -1729,11 +1729,8 @@ input[readonly] {
 .switchy-container:not(.minimized):not(.switchy-active) .switchy-bubble {
     display: none;
 }
-
-/* Once the cursor hovers Switchy, the "Hover to show Switchy" prompt hides */
-.switchy-container.switchy-active .switchy-toggle-hint {
-    display: none;
-}
+/* The hint explains what the pill button does - Switchy now appears on
+   their own, so it is not hidden when they are active. */
 
 @media (max-width: 650px) {
     .switchy-container {

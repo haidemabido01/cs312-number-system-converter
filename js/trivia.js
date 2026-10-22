@@ -99,7 +99,7 @@ const SWITCHY_LINGER_DURATION = 60000;
 // While Switchy is revealed, the trivia fact rotates every 10 seconds.
 const SWITCHY_TRIVIA_ROTATE_INTERVAL = 10000;
 
-const SWITCHY_GREETING = "Hi! I'm Switchy - your number system bestie. Hover over me to say hello, and I'll share trivia while you convert!";
+const SWITCHY_GREETING = "Hi! I'm Switchy - your number system bestie. I pop up a fresh trivia fact every 10 seconds while you convert!";
 
 let switchyRefs = null;
 let switchyWired = false;
@@ -163,6 +163,8 @@ function initSwitchy() {
             const nowMinimized = widget.classList.contains('minimized');
             localStorage.setItem('bitzy-switchy-minimized', nowMinimized);
             toggleBtn.title = nowMinimized ? 'Show Switchy' : 'Hide Switchy';
+            const hint = toggleBtn.querySelector('.switchy-toggle-hint');
+            if (hint) hint.textContent = nowMinimized ? 'Bring Switchy back' : 'Minimize Switchy';
             if (nowMinimized) {
                 bubble.classList.add('hidden');
             } else {
@@ -205,22 +207,29 @@ function startSwitchyLinger() {
 }
 
 /**
- * While Switchy is revealed they rotate a fresh trivia fact every 10 seconds.
- * The current fact is replaced in place. Skips the tick while they are
- * minimized, not shown, or the tab is hidden. Blessings (e.g. on restore) are
- * never interrupted - only a trivia bubble is rotated.
+ * Switchy speaks up on their own every 10 seconds: a fresh trivia fact pops
+ * open automatically, without the student needing to hover anything.
+ *
+ * Each tick reveals Switchy (so the bubble is actually visible), restarts the
+ * linger countdown, and replaces the fact on screen in place. The tick is
+ * skipped while Switchy is minimized or the tab is in the background, and a
+ * greeting or blessing already on screen is never interrupted.
  */
 function startSwitchyTriviaLoop() {
     if (switchyTriviaTimer) return;
     switchyTriviaTimer = setInterval(() => {
         if (!switchyRefs || !switchyRefs.widget || !switchyRefs.bubble) return;
         if (switchyRefs.widget.classList.contains('minimized')) return;
-        if (!switchyRefs.widget.classList.contains('switchy-active')) return;
         if (document.hidden) return;
 
         const bubble = switchyRefs.bubble;
         const alreadyTrivia = !bubble.classList.contains('hidden') && bubble.dataset.variant === 'trivia';
         if (!bubble.classList.contains('hidden') && !alreadyTrivia) return;
+
+        // Reveal Switchy so the fact is actually on screen, and keep the
+        // linger countdown running so they do not tuck away mid-sentence.
+        switchyRefs.widget.classList.add('switchy-active');
+        startSwitchyLinger();
 
         const fact = (typeof getTriviaForConversion === 'function')
             ? getTriviaForConversion('', 10, '', 10)
@@ -245,14 +254,14 @@ function buildSwitchyWidget() {
             <button type="button" id="switchy-bubble-close" class="switchy-bubble-close" aria-label="Close dialog">${icon('close')}</button>
         </div>
 
-        <div id="switchy-avatar-wrap" class="switchy-avatar-wrap" title="Hover to show Switchy">
+        <div id="switchy-avatar-wrap" class="switchy-avatar-wrap" title="Switchy - your study companion">
             <div class="switchy-aura"></div>
             <img src="assets/favicon.png" alt="Binary Conversion Exchange icon" class="switchy-avatar-img">
             <span class="switchy-wand-star">${icon('star')}</span>
             <div class="switchy-sparkles" aria-hidden="true"></div>
         </div>
-        <button type="button" id="switchy-toggle-btn" class="switchy-toggle-btn" title="Show Switchy">
-            ${isMinimized ? icon('converter') : icon('sparkle')}<span class="switchy-toggle-hint">Hover to show Switchy</span>
+        <button type="button" id="switchy-toggle-btn" class="switchy-toggle-btn" title="${isMinimized ? 'Show Switchy' : 'Hide Switchy'}">
+            ${isMinimized ? icon('converter') : icon('sparkle')}<span class="switchy-toggle-hint">${isMinimized ? 'Bring Switchy back' : 'Minimize Switchy'}</span>
         </button>
     `;
 
