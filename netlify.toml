@@ -1,0 +1,59 @@
+# Bitzy — Netlify configuration
+#
+# Bitzy is a 100% static site: no build step, no dependencies, no backend.
+# Netlify simply publishes the repository root exactly as it is on GitHub.
+
+[build]
+  publish = "."
+  command = ""
+
+# ---------------------------------------------------------------------------
+# Pretty URLs — serve the pages without the .html extension
+# ---------------------------------------------------------------------------
+[[redirects]]
+  from = "/converter"
+  to = "/index.html"
+  status = 301
+
+[[redirects]]
+  from = "/register"
+  to = "/register.html"
+  status = 301
+
+[[redirects]]
+  from = "/cheatsheet"
+  to = "/cheatsheet.html"
+  status = 301
+
+[[redirects]]
+  from = "/ascii"
+  to = "/ascii.html"
+  status = 301
+
+# ---------------------------------------------------------------------------
+# Caching — hashed-style long cache for the icon set, short for code
+# ---------------------------------------------------------------------------
+[[headers]]
+  for = "/assets/icons/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

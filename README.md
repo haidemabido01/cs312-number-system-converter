@@ -205,6 +205,8 @@ Bitzy is 100% static client-side web technology — no installation, no node dep
 ├── register.html       # 8-Bit Visual Register Playground
 ├── cheatsheet.html     # Student Exam Cheat Sheet & CS Hacks
 ├── ascii.html          # 7-Bit ASCII Character Lab
+├── 404.html            # Friendly not-found page (links back into the app)
+├── netlify.toml        # Netlify build config, pretty URLs & cache headers
 ├── assets/
 │   ├── binary-conversion-exchange.png # Binary Conversion Exchange icon (transparent)
 │   ├── favicon.png                    # Square exchange mark — app avatar & browser-tab favicon
