@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/Logo.jpg" alt="Bitzy logo" width="480" />
+<img src="assets/favicon.png" alt="Bitzy logo" width="128" />
 
 # Bitzy — Your Number System Bestie & CS Study Guide
 
@@ -206,8 +206,8 @@ Bitzy is 100% static client-side web technology — no installation, no node dep
 ├── cheatsheet.html     # Student Exam Cheat Sheet & CS Hacks
 ├── ascii.html          # 7-Bit ASCII Character Lab
 ├── assets/
-│   ├── Logo.jpg        # Bitzy logo (mascot + wordmark)
-│   └── icons/          # Standalone SVG icons used by this README
+│   ├── favicon.png      # Bitzy mascot — app logo, header mark & browser-tab favicon
+│   └── icons/           # Standalone SVG icons used by this README
 ├── css/
 │   └── style.css       # Twilight Sunset palette, SVG icon system & responsive design
 ├── js/

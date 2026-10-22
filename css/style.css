@@ -318,11 +318,11 @@ h2 .icon {
     fill: none;
 }
 
-.icon-logo {
-    width: 1em;
-    height: 1em;
-    vertical-align: -0.1em;
-    color: var(--accent);
+.header-logo-img {
+    height: 3.2rem;
+    width: auto;
+    max-width: 100%;
+    display: block;
 }
 
 .bz-sprite {
@@ -1401,6 +1401,9 @@ input[readonly] {
         position: absolute;
         top: 14px;
         right: 14px;
+    }
+    .header-logo-img {
+        height: 2.6rem;
     }
     .converter-panes {
         flex-direction: column;
