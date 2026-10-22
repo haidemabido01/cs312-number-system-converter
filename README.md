@@ -207,7 +207,7 @@ Bitzy is 100% static client-side web technology — no installation, no node dep
 ├── ascii.html          # 7-Bit ASCII Character Lab
 ├── assets/
 │   ├── binary-conversion-exchange.png # Binary Conversion Exchange icon (transparent)
-│   ├── favicon.png                    # Bitzy mascot — app logo, header mark & browser-tab favicon
+│   ├── favicon.png                    # Square exchange mark — app avatar & browser-tab favicon
 │   ├── Logo.jpg                       # Bitzy robot logo with wordmark (source artwork)
 │   ├── number-system-converter-logo.png # Number System Converter logo with text
 │   └── icons/                         # Standalone SVG icons used by this README
