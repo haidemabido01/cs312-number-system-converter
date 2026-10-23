@@ -62,7 +62,7 @@ BitSeen is a **focused four-page study system**. The landing page is deliberatel
 
 | Path | Page | Description |
 | :--- | :--- | :--- |
-| `index.html` | **Live Base Converter** | The home page: instant, as-you-type conversion across Bases 2–36 with a "Show me how BitSeen did it" step breakdown, toast notifications, and trivia spoken by Switchy (on each conversion and automatically every 10 seconds). |
+| `index.html` | **Live Base Converter** | The home page: instant, as-you-type conversion across Bases 2–36 with a "Show me how BitSeen did it" step breakdown, toast notifications, and trivia spoken by Switchy (on each conversion and automatically every 13 seconds — 8s visible plus 5s rest). |
 | `register.html` | **8-Bit Register Playground** | Interactive visual bit-flipper ($b_7$ to $b_0$), High/Low nibbles, signed two's complement sign-bit, and live formula sum. |
 | `cheatsheet.html` | **Exam Cheat Sheet & CS Hacks** | Segmented-tab reference: searchable Powers of 2 lookup ($2^0$ to $2^{16}$) with 1-click copy, an 8-column nibble decoder grid, and 4 legendary exam shortcuts. |
 | `ascii.html` | **ASCII Character Lab** | 7-bit ASCII decimal-to-character interactive laboratory with quick high-yield example chips. |
@@ -79,7 +79,7 @@ BitSeen is a **focused four-page study system**. The landing page is deliberatel
 - **Instant Conversion** <img src="assets/icons/bolt.svg" alt="" width="15" height="15" align="middle"> — Converts as you type across Bases 2, 8, 10, and 16 from the quick-pick dropdown, with a dedicated result pane. (The engine underneath handles *any* base from 2 to 36.)
 - **Step Breakdown** <img src="assets/icons/steps.svg" alt="" width="15" height="15" align="middle"> — Hit *"Show me how BitSeen did it"* to see the full equation, the per-digit weighting, and the repeated-division table.
 - **Toast Notifications** <img src="assets/icons/alert.svg" alt="" width="15" height="15" align="middle"> — Every conversion, invalid digit, hint and achievement is reported in a colour-coded toast notification at the top centre of the screen — no inline status lines anywhere. Repeated feedback reuses the same toast instead of stacking duplicates.
-- **Switchy Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — Every 10 seconds Switchy pops up a **trivia fact**, a **study tip** or a **cheer** as a notification in the bottom-right corner, then tucks it away after 8 seconds.
+- **Switchy Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — Every 13 seconds Switchy pops up a **trivia fact**, a **study tip** or a **cheer** as a notification in the bottom-right corner, tucks it away after 8 seconds, then rests for 5 seconds.
 - **Base Palette** <img src="assets/icons/bulb.svg" alt="" width="15" height="15" align="middle"> — The toast accents and colours shift to match the base you are working in.
 
 <details>
@@ -148,8 +148,8 @@ Check: $256 - 5 = 251 = \texttt{0xFB}$ — the two's complement of 5 is -5.
 Switchy is the **only voice of the app** — all trivia, study tips and cheers arrive as Switchy's notification in the bottom-right corner, never in a separate panel.
 
 - **Bottom-right notification** — a dark card with a glowing cyan border and a soft glow, pinned `30px` from the bottom and right edges of every page. There is no logo button: the trivia itself slides into the corner and out again.
-- **Greets you on load** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — Switchy shows a first card shortly after the page settles, then falls into the 10-second rhythm.
-- **Every 10 Seconds** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — a card appears **on its own, with no trigger at all**. A random line is pulled from `switchyData` in `js/trivia.js`:
+- **Greets you on load** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — Switchy shows a first card shortly after the page settles, then falls into the 8-second-on, 5-second-rest rhythm.
+- **Every 13 Seconds** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — a card appears **on its own, with no trigger at all** and rests for 5 seconds once it hides. A random line is pulled from `switchyData` in `js/trivia.js`:
   - **Trivia** <img src="assets/icons/bulb.svg" alt="" width="14" height="14" align="middle"> — a computing-history fact.
   - **Study tip** <img src="assets/icons/book.svg" alt="" width="14" height="14" align="middle"> — a practical exam trick: flip it both ways, build a place-value chart, memorise the nibble table, or drill for 10 minutes a day.
   - **Cheer** <img src="assets/icons/heart.svg" alt="" width="14" height="14" align="middle"> — a bit of encouragement, because studying should feel good.

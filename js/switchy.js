@@ -5,8 +5,8 @@
  * study tip or cheer arrives as a small dark notification card in the
  * bottom-right corner of the page.
  *
- * The card appears on its own every 10 seconds, stays open for 8 seconds,
- * then tucks itself away.
+ * The card appears on its own every 13 seconds, stays open for 8 seconds,
+ * then rests for 5 seconds before the next one appears.
  *
  * The words live in js/trivia.js, which publishes this array:
  *
@@ -23,10 +23,19 @@
  *     import { switchyData } from './trivia.js';
  */
 
-const SWITCHY_INTERVAL_MS = 10000;     // how often a notification appears
 const SWITCHY_VISIBLE_MS = 8000;       // how long the notification stays open
+const SWITCHY_REST_MS = 5000;          // quiet gap with no notification on screen
+const SWITCHY_INTERVAL_MS = SWITCHY_VISIBLE_MS + SWITCHY_REST_MS; // full cycle
 const SWITCHY_GREETING_DELAY_MS = 900; // first notification once the page settles
 const SWITCHY_RECENT_LIMIT = 3;        // avoid repeating the last few lines
+
+// Header shown above each line, based on the entry's category.
+const SWITCHY_HEADINGS = {
+    'TRIVIA': 'Switchy Trivia:',
+    'STUDY TIP': 'Switchy Tips:',
+    'CHEER': 'Switchy Cheer:'
+};
+const SWITCHY_DEFAULT_HEADING = 'Switchy Trivia:';
 
 const switchyItems = Array.isArray(window.switchyData) ? window.switchyData : [];
 
@@ -47,6 +56,7 @@ function buildSwitchyWidget() {
 
     container.innerHTML = `
         <div id="switchy-bubble" class="switchy-bubble" role="status" aria-live="polite" aria-hidden="true">
+            <p id="switchy-bubble-heading" class="switchy-bubble-heading"></p>
             <p id="switchy-bubble-text" class="switchy-bubble-text"></p>
         </div>
     `;
@@ -58,13 +68,15 @@ function buildSwitchyWidget() {
 /**
  * Shows a message in the notification and schedules it to hide after 8s.
  * @param {string} text
+ * @param {string} [category] one of "TRIVIA", "STUDY TIP" or "CHEER"
  * @returns {boolean} true when the message was displayed
  */
-function displaySwitchyMessage(text) {
+function displaySwitchyMessage(text, category) {
     if (!switchyRefs || !text) return false;
 
-    const { bubble, bubbleText } = switchyRefs;
+    const { bubble, bubbleHeading, bubbleText } = switchyRefs;
 
+    bubbleHeading.textContent = SWITCHY_HEADINGS[category] || SWITCHY_DEFAULT_HEADING;
     bubbleText.textContent = text;
     bubble.classList.add('switchy-bubble-visible');
     bubble.setAttribute('aria-hidden', 'false');
@@ -130,11 +142,12 @@ function showRandomTrivia() {
     const entry = pickRandomSwitchyEntry();
     if (!entry) return false;
 
-    return displaySwitchyMessage(entry.text);
+    return displaySwitchyMessage(entry.text, entry.category);
 }
 
 /**
- * Restarts the countdown so the next notification arrives 10 seconds from now.
+ * Restarts the countdown so the next notification arrives one full cycle
+ * (8s visible + 5s rest) from now.
  */
 function startSwitchyTimer() {
     clearInterval(switchyInterval);
@@ -146,7 +159,7 @@ function startSwitchyTimer() {
 
 /**
  * Wires up the notification: visibility handling and the automatic timer.
- * The first card appears shortly after load, then the 10 second rhythm begins.
+ * The first card appears shortly after load, then the 8s card / 5s rest rhythm begins.
  */
 function initSwitchy() {
     if (switchyRefs) return;
@@ -156,6 +169,7 @@ function initSwitchy() {
     switchyRefs = {
         container,
         bubble: container.querySelector('#switchy-bubble'),
+        bubbleHeading: container.querySelector('#switchy-bubble-heading'),
         bubbleText: container.querySelector('#switchy-bubble-text')
     };
 
@@ -169,7 +183,7 @@ function initSwitchy() {
         }
     });
 
-    // Show one card once the page settles, then begin the 10 second rhythm.
+    // Show one card once the page settles, then begin the 8s card / 5s rest rhythm.
     switchyGreetingTimeout = setTimeout(() => {
         switchyGreetingTimeout = null;
         showRandomTrivia();
@@ -186,7 +200,7 @@ function initSwitchy() {
 function showSwitchyTrivia(fact) {
     if (!fact) return false;
     if (!switchyRefs) initSwitchy();
-    return displaySwitchyMessage(fact);
+    return displaySwitchyMessage(fact, 'TRIVIA');
 }
 
 /**
@@ -196,7 +210,7 @@ function showSwitchyTrivia(fact) {
  */
 function showSwitchyCheer(text) {
     if (!switchyRefs) initSwitchy();
-    return displaySwitchyMessage(text);
+    return displaySwitchyMessage(text, 'CHEER');
 }
 
 document.addEventListener('DOMContentLoaded', initSwitchy);

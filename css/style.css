@@ -1535,6 +1535,14 @@ input[readonly] {
     transform: translateX(0) scale(1);
 }
 
+.switchy-bubble-heading {
+    margin: 0 0 5px;
+    color: var(--switchy-cyan);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
 .switchy-bubble-text {
     margin: 0;
     font-weight: 600;
