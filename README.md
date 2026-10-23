@@ -2,10 +2,18 @@
 
 <img src="assets/binary-conversion-exchange.png" alt="Binary Conversion Exchange icon: a binary card and a decimal card joined by exchange arrows" width="280" />
 
-<h1 align="center">BitSeen</h1>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/bitseen-wordmark-dark.png">
+    <img src="assets/bitseen-wordmark-light.png" alt="BitSeen" width="520">
+  </picture>
+</p>
 
 <p align="center">
-  <sub><em>𝒴𝑜𝓊𝓇 𝒩𝓊𝓂𝒷𝑒𝓇 𝒮𝓎𝓈𝓉𝑒𝓂 𝐵𝑒𝓈𝓉𝒾𝑒 &amp; 𝒞𝒮 𝒮𝓉𝓊𝒹𝓎 𝒢𝓊𝒾𝒹𝑒</em></sub>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/bitseen-tagline-dark.png">
+    <img src="assets/bitseen-tagline-light.png" alt="Your Number System Bestie &amp; CS Study Guide" width="680">
+  </picture>
 </p>
 
 > *"Tiny bits, big numbers — you've got this, bestie!"*
