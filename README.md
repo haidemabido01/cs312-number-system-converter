@@ -3,7 +3,10 @@
 <img src="assets/binary-conversion-exchange.png" alt="Binary Conversion Exchange icon: a binary card and a decimal card joined by exchange arrows" width="280" />
 
 <p align="center">
-  <img src="assets/bitseen-wordmark.png" alt="BitSeen" width="520">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/bitseen-wordmark-dark.png">
+    <img src="assets/bitseen-wordmark.png" alt="BitSeen" width="520">
+  </picture>
 </p>
 
 <p align="center">
