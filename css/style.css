@@ -1481,10 +1481,10 @@ input[readonly] {
 }
 
 /* ==========================================================
-   SWITCHY COMPANION
-   A floating mascot pinned to the bottom-right corner: a 65px
-   circular logo button with a glowing cyan ring, and a dark
-   speech bubble that points down at it.
+   SWITCHY NOTIFICATIONS
+   A trivia notification pinned to the bottom-right corner:
+   a dark card with a glowing cyan border that slides in,
+   stays for 8 seconds, then slides away.
    ========================================================== */
 .switchy-container {
     position: fixed;
@@ -1494,11 +1494,8 @@ input[readonly] {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 14px;
     pointer-events: none;
     user-select: none;
-    transform-origin: bottom right;
-    animation: switchyEnter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 
     --switchy-cyan: #22D3EE;
     --switchy-bubble-bg: #18181B;
@@ -1510,154 +1507,39 @@ input[readonly] {
     pointer-events: auto;
 }
 
-/* Soft entrance as Switchy arrives in the corner */
-@keyframes switchyEnter {
-    from {
-        opacity: 0;
-        transform: translateY(18px) scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Holds the logo plus the rotating aura behind it */
-.switchy-avatar-wrap {
-    position: relative;
-    width: 65px;
-    height: 65px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.switchy-avatar-halo {
-    position: absolute;
-    inset: -6px;
-    z-index: 0;
-    border-radius: 50%;
-    background: conic-gradient(
-        from 0deg,
-        transparent 0deg 70deg,
-        rgba(34, 211, 238, 0.55) 150deg,
-        transparent 220deg 360deg
-    );
-    filter: blur(2px);
-    opacity: 0.75;
-    pointer-events: none;
-    animation: switchyHaloSpin 7s linear infinite;
-}
-
-@keyframes switchyHaloSpin {
-    to { transform: rotate(360deg); }
-}
-
-/* The 65px circular logo button */
-.switchy-avatar {
-    position: relative;
-    z-index: 1;
-    width: 65px;
-    height: 65px;
-    padding: 0;
-    border: 2px solid var(--switchy-cyan);
-    border-radius: 50%;
-    background: var(--switchy-bubble-bg);
-    overflow: hidden;
-    line-height: 0;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    animation: switchyPulse 2.6s ease-in-out infinite;
-    transition: transform 0.2s ease;
-}
-
-.switchy-avatar-img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    pointer-events: none;
-}
-
-/* Little wiggle when a fresh line appears */
-.switchy-avatar-talking .switchy-avatar-img {
-    animation: switchyTalk 0.45s ease-in-out 2;
-}
-
-@keyframes switchyTalk {
-    0%, 100% { transform: scale(1) rotate(0deg); }
-    35%      { transform: scale(1.1) rotate(-4deg); }
-    70%      { transform: scale(1.08) rotate(4deg); }
-}
-
-.switchy-avatar:hover {
-    transform: scale(1.07);
-}
-
-.switchy-avatar:focus-visible {
-    outline: 3px solid var(--switchy-cyan);
-    outline-offset: 3px;
-}
-
-/* Subtle breathing glow around the logo */
-@keyframes switchyPulse {
-    0%, 100% {
-        box-shadow:
-            0 0 0 3px rgba(34, 211, 238, 0.10),
-            0 0 14px rgba(34, 211, 238, 0.30);
-    }
-    50% {
-        box-shadow:
-            0 0 0 6px rgba(34, 211, 238, 0.05),
-            0 0 26px rgba(34, 211, 238, 0.55);
-    }
-}
-
-/* Dark speech bubble above the logo */
+/* Dark trivia notification card in the bottom-right corner */
 .switchy-bubble {
     position: relative;
     width: max-content;
-    max-width: min(300px, calc(100vw - 60px));
-    padding: 12px 34px 12px 14px;
+    max-width: min(340px, calc(100vw - 60px));
+    padding: 14px 40px 14px 18px;
     background: var(--switchy-bubble-bg);
     color: var(--switchy-text);
     border: 1.5px solid var(--switchy-cyan);
+    border-left-width: 4px;
     border-radius: 14px;
     box-shadow:
         0 10px 30px rgba(0, 0, 0, 0.45),
         0 0 20px rgba(34, 211, 238, 0.18);
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     line-height: 1.55;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(8px) scale(0.96);
+    transform: translateX(26px) scale(0.98);
     transform-origin: bottom right;
-    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.25s;
 }
 
 .switchy-bubble-visible {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0) scale(1);
-}
-
-/* The little triangle pointing down at the logo */
-.switchy-bubble::after {
-    content: "";
-    position: absolute;
-    right: 24px;
-    bottom: -7px;
-    width: 12px;
-    height: 12px;
-    background: var(--switchy-bubble-bg);
-    border-right: 1.5px solid var(--switchy-cyan);
-    border-bottom: 1.5px solid var(--switchy-cyan);
-    transform: rotate(45deg);
+    transform: translateX(0) scale(1);
 }
 
 .switchy-bubble-category {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     margin-bottom: 6px;
     font-size: 0.62rem;
     font-weight: 800;
@@ -1666,15 +1548,35 @@ input[readonly] {
     color: var(--switchy-cyan);
 }
 
+/* Small status dot whose colour matches the message type */
+.switchy-bubble-category::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--switchy-cyan);
+    box-shadow: 0 0 8px var(--switchy-cyan);
+}
+
+.switchy-bubble[data-category="STUDY TIP"] .switchy-bubble-category::before {
+    background: #A78BFA;
+    box-shadow: 0 0 8px #A78BFA;
+}
+
+.switchy-bubble[data-category="CHEER"] .switchy-bubble-category::before {
+    background: #FB7185;
+    box-shadow: 0 0 8px #FB7185;
+}
+
 .switchy-bubble-text {
     margin: 0;
     font-weight: 600;
 }
 
-/* Small X in the corner of the bubble */
+/* Small X in the corner of the notification */
 .switchy-bubble-close {
     position: absolute;
-    top: 6px;
+    top: 8px;
     right: 8px;
     display: flex;
     align-items: center;
@@ -1715,21 +1617,8 @@ input[readonly] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .switchy-container,
-    .switchy-avatar,
-    .switchy-avatar-halo,
-    .switchy-avatar-talking .switchy-avatar-img {
-        animation: none;
-    }
-
-    .switchy-avatar {
-        box-shadow:
-            0 0 0 3px rgba(34, 211, 238, 0.10),
-            0 0 18px rgba(34, 211, 238, 0.35);
-    }
-
-    .switchy-avatar,
     .switchy-bubble {
         transition: none;
     }
 }
+

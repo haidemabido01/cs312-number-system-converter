@@ -1,12 +1,12 @@
 /**
- * Switchy — the floating study companion
+ * Switchy — bottom-right trivia notifications
  * ---------------------------------------------
- * A small mascot anchored to the bottom-right corner of every page. Every
- * 10 seconds Switchy pops up a speech bubble with a random trivia fact,
- * study tip or cheer, then tucks the bubble away after 8 seconds.
+ * Switchy is the ONE voice of the app, but is not a mascot: each trivia fact,
+ * study tip or cheer arrives as a small dark notification card in the
+ * bottom-right corner of the page.
  *
- * Clicking the logo asks for another line immediately and restarts the
- * 10 second countdown. The X on the bubble closes the current message.
+ * The card appears on its own every 10 seconds, stays open for 8 seconds,
+ * then tucks itself away. The X (or Escape) closes the current message.
  *
  * The words live in js/trivia.js, which publishes this array:
  *
@@ -23,9 +23,9 @@
  *     import { switchyData } from './trivia.js';
  */
 
-const SWITCHY_INTERVAL_MS = 10000;     // how often Switchy speaks up
-const SWITCHY_VISIBLE_MS = 8000;       // how long the bubble stays open
-const SWITCHY_GREETING_DELAY_MS = 900; // first hello once the page settles
+const SWITCHY_INTERVAL_MS = 10000;     // how often a notification appears
+const SWITCHY_VISIBLE_MS = 8000;       // how long the notification stays open
+const SWITCHY_GREETING_DELAY_MS = 900; // first notification once the page settles
 const SWITCHY_RECENT_LIMIT = 3;        // avoid repeating the last few lines
 
 const SWITCHY_CATEGORY_LABELS = {
@@ -43,8 +43,8 @@ let switchyGreetingTimeout = null;
 let switchyRecentIndices = [];
 
 /**
- * Builds the fixed container, the speech bubble and the circular logo
- * button, then attaches it to the page. Safe to call more than once.
+ * Builds the fixed notification container and attaches it to the page.
+ * Safe to call more than once.
  */
 function buildSwitchyWidget() {
     const container = document.createElement('div');
@@ -57,14 +57,6 @@ function buildSwitchyWidget() {
             <button type="button" id="switchy-bubble-close" class="switchy-bubble-close" aria-label="Close Switchy's message">&times;</button>
             <p id="switchy-bubble-text" class="switchy-bubble-text"></p>
         </div>
-
-        <!-- Replace the src below with your own Switchy artwork when ready. -->
-        <div class="switchy-avatar-wrap">
-            <span class="switchy-avatar-halo" aria-hidden="true"></span>
-            <button type="button" id="switchy-avatar" class="switchy-avatar" aria-label="Ask Switchy for another fact">
-                <img id="switchy-avatar-img" class="switchy-avatar-img" src="assets/binary-conversion-exchange.png" alt="Switchy, the BitSeen mascot">
-            </button>
-        </div>
     `;
 
     document.body.appendChild(container);
@@ -72,7 +64,7 @@ function buildSwitchyWidget() {
 }
 
 /**
- * Shows a message in the bubble and schedules it to hide again after 8s.
+ * Shows a message in the notification and schedules it to hide after 8s.
  * @param {string} category - "TRIVIA" | "STUDY TIP" | "CHEER"
  * @param {string} text
  * @returns {boolean} true when the message was displayed
@@ -88,13 +80,6 @@ function displaySwitchyMessage(category, text) {
     bubble.classList.add('switchy-bubble-visible');
     bubble.setAttribute('aria-hidden', 'false');
 
-    // A quick "talking" wobble on the avatar while the bubble is up.
-    if (switchyRefs.avatar) {
-        switchyRefs.avatar.classList.remove('switchy-avatar-talking');
-        void switchyRefs.avatar.offsetWidth; // restart the animation
-        switchyRefs.avatar.classList.add('switchy-avatar-talking');
-    }
-
     clearTimeout(switchyHideTimeout);
     switchyHideTimeout = setTimeout(hideSwitchyBubble, SWITCHY_VISIBLE_MS);
 
@@ -102,7 +87,7 @@ function displaySwitchyMessage(category, text) {
 }
 
 /**
- * Hides the current speech bubble and stops the talking wobble.
+ * Hides the current notification.
  */
 function hideSwitchyBubble() {
     clearTimeout(switchyHideTimeout);
@@ -111,7 +96,6 @@ function hideSwitchyBubble() {
     if (!switchyRefs) return;
     switchyRefs.bubble.classList.remove('switchy-bubble-visible');
     switchyRefs.bubble.setAttribute('aria-hidden', 'true');
-    if (switchyRefs.avatar) switchyRefs.avatar.classList.remove('switchy-avatar-talking');
 }
 
 /**
@@ -147,8 +131,8 @@ function pickRandomSwitchyEntry() {
 }
 
 /**
- * Pops up a random line from js/trivia.js. Used by the timer, the on-load
- * greeting and by clicking Switchy.
+ * Surfaces a random line from js/trivia.js. Used by the timer, the on-load
+ * greeting and by the converter.
  * @returns {boolean} true when something was shown
  */
 function showRandomTrivia() {
@@ -161,8 +145,7 @@ function showRandomTrivia() {
 }
 
 /**
- * Restarts the countdown. Called after the greeting and every time the logo
- * is clicked, so a manual click always buys a fresh 10 seconds.
+ * Restarts the countdown so the next notification arrives 10 seconds from now.
  */
 function startSwitchyTimer() {
     clearInterval(switchyInterval);
@@ -173,8 +156,8 @@ function startSwitchyTimer() {
 }
 
 /**
- * Wires up the widget: logo click, close button, visibility handling and the
- * automatic timer. The first line appears shortly after load, then the
+ * Wires up the notification: close button, visibility handling and the
+ * automatic timer. The first card appears shortly after load, then the
  * 10 second rhythm begins.
  */
 function initSwitchy() {
@@ -187,19 +170,10 @@ function initSwitchy() {
         bubble: container.querySelector('#switchy-bubble'),
         bubbleCategory: container.querySelector('#switchy-bubble-category'),
         bubbleText: container.querySelector('#switchy-bubble-text'),
-        bubbleClose: container.querySelector('#switchy-bubble-close'),
-        avatar: container.querySelector('#switchy-avatar')
+        bubbleClose: container.querySelector('#switchy-bubble-close')
     };
 
-    // Clicking Switchy speaks immediately and resets the 10 second timer.
-    switchyRefs.avatar.addEventListener('click', () => {
-        clearTimeout(switchyGreetingTimeout);
-        switchyGreetingTimeout = null;
-        showRandomTrivia();
-        startSwitchyTimer();
-    });
-
-    // Let keyboard users close the bubble with Escape as well as the X.
+    // The X and Escape close the current notification.
     switchyRefs.bubbleClose.addEventListener('click', hideSwitchyBubble);
     container.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') hideSwitchyBubble();
@@ -215,7 +189,7 @@ function initSwitchy() {
         }
     });
 
-    // Say hello once the page settles, then begin the 10 second rhythm.
+    // Show one card once the page settles, then begin the 10 second rhythm.
     switchyGreetingTimeout = setTimeout(() => {
         switchyGreetingTimeout = null;
         showRandomTrivia();
@@ -224,7 +198,7 @@ function initSwitchy() {
 }
 
 /**
- * Delivers a specific trivia fact through Switchy's bubble. Kept for the
+ * Delivers a specific trivia fact through the notification. Kept for the
  * converter, which pairs a conversion with a matching fact.
  * @param {string} fact
  * @returns {boolean} true when Switchy delivered it
@@ -236,7 +210,7 @@ function showSwitchyTrivia(fact) {
 }
 
 /**
- * Delivers a specific cheer through Switchy's bubble.
+ * Delivers a specific cheer through the notification.
  * @param {string} text
  * @returns {boolean} true when Switchy delivered it
  */

@@ -49,7 +49,7 @@ BitSeen features a soothing, modern color palette inspired by an evening twiligh
 | <img src="assets/icons/swatch-dusk-plum-violet.svg" alt="" width="20" height="20"> | **Dusk Plum / Violet** | `#573F5A` | Secondary headers & decimal base |
 | <img src="assets/icons/swatch-muted-mauve-slate.svg" alt="" width="20" height="20"> | **Muted Mauve Slate** | `#81697E` | Step-by-step borders, octal base, & badges |
 | <img src="assets/icons/swatch-twilight-sunset-rose.svg" alt="" width="20" height="20"> | **Twilight Sunset Rose** | `#B7687C` | Highlights, buttons, streak badges, & hex base |
-| <img src="assets/icons/swatch-soft-dawn-blush-pink.svg" alt="" width="20" height="20"> | **Soft Dawn Blush Pink** | `#F4C7CB` | Light mode tint, speech bubbles, & mascot blush |
+| <img src="assets/icons/swatch-soft-dawn-blush-pink.svg" alt="" width="20" height="20"> | **Soft Dawn Blush Pink** | `#F4C7CB` | Light mode tint, soft borders, & notification accents |
 
 > [!NOTE]
 > These are the exact light-mode values from `css/style.css` (`:root` custom properties). Dark mode re-tunes every one of them for contrast.
@@ -79,7 +79,7 @@ BitSeen is a **focused four-page study system**. The landing page is deliberatel
 - **Instant Conversion** <img src="assets/icons/bolt.svg" alt="" width="15" height="15" align="middle"> — Converts as you type across Bases 2, 8, 10, and 16 from the quick-pick dropdown, with a dedicated result pane. (The engine underneath handles *any* base from 2 to 36.)
 - **Step Breakdown** <img src="assets/icons/steps.svg" alt="" width="15" height="15" align="middle"> — Hit *"Show me how BitSeen did it"* to see the full equation, the per-digit weighting, and the repeated-division table.
 - **Toast Notifications** <img src="assets/icons/alert.svg" alt="" width="15" height="15" align="middle"> — Every conversion, invalid digit, hint and achievement is reported in a colour-coded toast notification at the top centre of the screen — no inline status lines anywhere. Repeated feedback reuses the same toast instead of stacking duplicates.
-- **Switchy Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — Every 10 seconds Switchy pops up a **trivia fact**, a **study tip** or a **cheer**, then tucks the bubble away after 8 seconds. Click the logo any time for another line.
+- **Switchy Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — Every 10 seconds Switchy pops up a **trivia fact**, a **study tip** or a **cheer** as a notification in the bottom-right corner, then tucks it away after 8 seconds.
 - **Base Palette** <img src="assets/icons/bulb.svg" alt="" width="15" height="15" align="middle"> — The toast accents and colours shift to match the base you are working in.
 
 <details>
@@ -143,18 +143,18 @@ Check: $256 - 5 = 251 = \texttt{0xFB}$ — the two's complement of 5 is -5.
 - **Control Character Names** <img src="assets/icons/tag.svg" alt="" width="15" height="15" align="middle"> — The full 0–127 table with friendly names (NUL, SOH, LF, CR, DEL, …).
 - **Quick High-Yield Examples** <img src="assets/icons/star.svg" alt="" width="15" height="15" align="middle"> — One-click chips for `A = 65`, `a = 97`, `0 = 48`, `Space = 32`, and `! = 33`.
 
-### 5. <img src="assets/icons/bulb.svg" alt="" width="18" height="18" align="middle"> Switchy Companion
+### 5. <img src="assets/icons/bulb.svg" alt="" width="18" height="18" align="middle"> Switchy Notifications
 
-Switchy is the **only voice of the app** — all trivia, study tips and cheers are spoken by them, never by a separate panel.
+Switchy is the **only voice of the app** — all trivia, study tips and cheers arrive as Switchy's notification in the bottom-right corner, never in a separate panel.
 
-- **Bottom-right mascot** — a fixed `65 × 65` circular logo button, `30px` from the bottom and right edges of every page, ringed with a glowing cyan border that pulses gently and a slowly rotating aura behind it.
-- **Greets you on load** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — Switchy says a first line shortly after the page settles, then falls into the 10-second rhythm. Each new line gives the logo a quick talking wiggle.
-- **Every 10 Seconds** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — Switchy speaks up **on their own, with no trigger at all**. A random line is pulled from `switchyData` in `js/trivia.js`:
+- **Bottom-right notification** — a dark card with a glowing cyan border and a soft glow, pinned `30px` from the bottom and right edges of every page. There is no logo button: the trivia itself slides into the corner and out again.
+- **Greets you on load** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — Switchy shows a first card shortly after the page settles, then falls into the 10-second rhythm.
+- **Every 10 Seconds** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — a card appears **on its own, with no trigger at all**. A random line is pulled from `switchyData` in `js/trivia.js`:
   - **Trivia** <img src="assets/icons/bulb.svg" alt="" width="14" height="14" align="middle"> — a computing-history fact.
   - **Study tip** <img src="assets/icons/book.svg" alt="" width="14" height="14" align="middle"> — a practical exam trick: flip it both ways, build a place-value chart, memorise the nibble table, or drill for 10 minutes a day.
-  - **Cheer** <img src="assets/icons/heart.svg" alt="" width="14" height="14" align="middle"> — a bit of encouragement, because studying should feel good.
-- **Auto-hide** — the dark, cyan-bordered bubble stays open for **8 seconds**, then fades out on its own. Its little triangle points down at the logo.
-- **Click for more** — click the logo to ask for another line immediately; the click also **resets the 10-second countdown**. The **X** on the bubble (or `Escape`) closes the current message.
+  - **Cheer** <img src="assets/icons/heart.svg" alt="" width="14" height="14" align="middle"> — a bit of encouragement, because studying should feel good. A tiny dot changes colour with the category.
+- **Auto-hide** — the notification stays open for **8 seconds**, then slides away on its own.
+- **Dismiss** — the **X** on the card (or `Escape`) closes the current message.
 - **Matched to your conversion** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — type a number and Switchy answers with a fact tied to the base you are working in (why a byte is 8 bits, why a hex digit is exactly one nibble, why octal divides cleanly by 3, and more).
 - **Never repeats back-to-back** — the picker steers clear of the last three lines, and pauses the beat while the tab is in the background.
 
@@ -221,7 +221,7 @@ BitSeen is 100% static client-side web technology — no installation, no node d
 │   ├── converter.js    # Pure mathematical conversion & step explanation engine
 │   ├── student.js      # 8-Bit Register, Exam Cheat Sheet & rotating concept carousel
 │   ├── trivia.js       # Trivia, study-tip and cheer pools + switchyData
-│   └── switchy.js      # Floating Switchy widget, timers and speech bubble
+│   └── switchy.js      # Bottom-right trivia notifications and timers
 └── tools/
     └── generate-readme-icons.js # Regenerates assets/icons/ from js/icons.js
 ```
@@ -234,7 +234,7 @@ BitSeen is 100% static client-side web technology — no installation, no node d
 | Number bases & conversions | `js/converter.js` <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `js/app.js` |
 | Bit patterns & two's complement | `js/student.js` <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `register.html` |
 | ASCII & encoding | `js/app.js` (ASCII decoder) <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `ascii.html` |
-| The mascot & trivia content | `js/switchy.js` (widget) <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `js/trivia.js` (content) |
+| Trivia notifications | `js/switchy.js` (widget) <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `js/trivia.js` (content) |
 | Visual design & theming | `css/style.css` <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `js/icons.js` |
 
 </details>
