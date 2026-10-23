@@ -10,7 +10,10 @@
 </p>
 
 <p align="center">
-  <sub><em>𝒴𝑜𝓊𝓇 𝒩𝓊𝓂𝒷𝑒𝓇 𝒮𝓎𝓈𝓉𝑒𝓂 𝐵𝑒𝓈𝓉𝒾𝑒 &amp; 𝒞𝒮 𝒮𝓉𝓊𝒹𝓎 𝒢𝓊𝒾𝒹𝑒</em></sub>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/bitseen-tagline-dark.png">
+    <img src="assets/bitseen-tagline.png" alt="Your Number System Bestie &amp; Study Guide" width="560">
+  </picture>
 </p>
 
 </div>
