@@ -152,9 +152,8 @@ Switchy is the **only voice of the app** — all trivia, study tips and cheers a
 - **Every 10 Seconds** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — a card appears **on its own, with no trigger at all**. A random line is pulled from `switchyData` in `js/trivia.js`:
   - **Trivia** <img src="assets/icons/bulb.svg" alt="" width="14" height="14" align="middle"> — a computing-history fact.
   - **Study tip** <img src="assets/icons/book.svg" alt="" width="14" height="14" align="middle"> — a practical exam trick: flip it both ways, build a place-value chart, memorise the nibble table, or drill for 10 minutes a day.
-  - **Cheer** <img src="assets/icons/heart.svg" alt="" width="14" height="14" align="middle"> — a bit of encouragement, because studying should feel good. A tiny dot changes colour with the category.
+  - **Cheer** <img src="assets/icons/heart.svg" alt="" width="14" height="14" align="middle"> — a bit of encouragement, because studying should feel good.
 - **Auto-hide** — the notification stays open for **8 seconds**, then slides away on its own.
-- **Dismiss** — the **X** on the card (or `Escape`) closes the current message.
 - **Matched to your conversion** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — type a number and Switchy answers with a fact tied to the base you are working in (why a byte is 8 bits, why a hex digit is exactly one nibble, why octal divides cleanly by 3, and more).
 - **Never repeats back-to-back** — the picker steers clear of the last three lines, and pauses the beat while the tab is in the background.
 

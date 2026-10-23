@@ -6,7 +6,7 @@
  * bottom-right corner of the page.
  *
  * The card appears on its own every 10 seconds, stays open for 8 seconds,
- * then tucks itself away. The X (or Escape) closes the current message.
+ * then tucks itself away.
  *
  * The words live in js/trivia.js, which publishes this array:
  *
@@ -28,12 +28,6 @@ const SWITCHY_VISIBLE_MS = 8000;       // how long the notification stays open
 const SWITCHY_GREETING_DELAY_MS = 900; // first notification once the page settles
 const SWITCHY_RECENT_LIMIT = 3;        // avoid repeating the last few lines
 
-const SWITCHY_CATEGORY_LABELS = {
-    'TRIVIA': 'Trivia',
-    'STUDY TIP': 'Study tip',
-    'CHEER': 'Cheer'
-};
-
 const switchyItems = Array.isArray(window.switchyData) ? window.switchyData : [];
 
 let switchyRefs = null;
@@ -53,8 +47,6 @@ function buildSwitchyWidget() {
 
     container.innerHTML = `
         <div id="switchy-bubble" class="switchy-bubble" role="status" aria-live="polite" aria-hidden="true">
-            <span id="switchy-bubble-category" class="switchy-bubble-category">Trivia</span>
-            <button type="button" id="switchy-bubble-close" class="switchy-bubble-close" aria-label="Close Switchy's message">&times;</button>
             <p id="switchy-bubble-text" class="switchy-bubble-text"></p>
         </div>
     `;
@@ -65,18 +57,15 @@ function buildSwitchyWidget() {
 
 /**
  * Shows a message in the notification and schedules it to hide after 8s.
- * @param {string} category - "TRIVIA" | "STUDY TIP" | "CHEER"
  * @param {string} text
  * @returns {boolean} true when the message was displayed
  */
-function displaySwitchyMessage(category, text) {
+function displaySwitchyMessage(text) {
     if (!switchyRefs || !text) return false;
 
-    const { bubble, bubbleCategory, bubbleText } = switchyRefs;
+    const { bubble, bubbleText } = switchyRefs;
 
-    bubbleCategory.textContent = SWITCHY_CATEGORY_LABELS[category] || 'Switchy';
     bubbleText.textContent = text;
-    bubble.setAttribute('data-category', category || 'TRIVIA');
     bubble.classList.add('switchy-bubble-visible');
     bubble.setAttribute('aria-hidden', 'false');
 
@@ -141,7 +130,7 @@ function showRandomTrivia() {
     const entry = pickRandomSwitchyEntry();
     if (!entry) return false;
 
-    return displaySwitchyMessage(entry.category, entry.text);
+    return displaySwitchyMessage(entry.text);
 }
 
 /**
@@ -156,9 +145,8 @@ function startSwitchyTimer() {
 }
 
 /**
- * Wires up the notification: close button, visibility handling and the
- * automatic timer. The first card appears shortly after load, then the
- * 10 second rhythm begins.
+ * Wires up the notification: visibility handling and the automatic timer.
+ * The first card appears shortly after load, then the 10 second rhythm begins.
  */
 function initSwitchy() {
     if (switchyRefs) return;
@@ -168,16 +156,8 @@ function initSwitchy() {
     switchyRefs = {
         container,
         bubble: container.querySelector('#switchy-bubble'),
-        bubbleCategory: container.querySelector('#switchy-bubble-category'),
-        bubbleText: container.querySelector('#switchy-bubble-text'),
-        bubbleClose: container.querySelector('#switchy-bubble-close')
+        bubbleText: container.querySelector('#switchy-bubble-text')
     };
-
-    // The X and Escape close the current notification.
-    switchyRefs.bubbleClose.addEventListener('click', hideSwitchyBubble);
-    container.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') hideSwitchyBubble();
-    });
 
     // Pause the cadence in a hidden tab, then pick it back up on return.
     document.addEventListener('visibilitychange', () => {
@@ -206,7 +186,7 @@ function initSwitchy() {
 function showSwitchyTrivia(fact) {
     if (!fact) return false;
     if (!switchyRefs) initSwitchy();
-    return displaySwitchyMessage('TRIVIA', fact);
+    return displaySwitchyMessage(fact);
 }
 
 /**
@@ -216,7 +196,7 @@ function showSwitchyTrivia(fact) {
  */
 function showSwitchyCheer(text) {
     if (!switchyRefs) initSwitchy();
-    return displaySwitchyMessage('CHEER', text);
+    return displaySwitchyMessage(text);
 }
 
 document.addEventListener('DOMContentLoaded', initSwitchy);

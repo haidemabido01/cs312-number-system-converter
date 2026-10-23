@@ -1500,7 +1500,6 @@ input[readonly] {
     --switchy-cyan: #22D3EE;
     --switchy-bubble-bg: #18181B;
     --switchy-text: #E6FAFF;
-    --switchy-text-muted: #9FDDE8;
 }
 
 .switchy-container * {
@@ -1512,7 +1511,7 @@ input[readonly] {
     position: relative;
     width: max-content;
     max-width: min(340px, calc(100vw - 60px));
-    padding: 14px 40px 14px 18px;
+    padding: 14px 18px;
     background: var(--switchy-bubble-bg);
     color: var(--switchy-text);
     border: 1.5px solid var(--switchy-cyan);
@@ -1536,72 +1535,9 @@ input[readonly] {
     transform: translateX(0) scale(1);
 }
 
-.switchy-bubble-category {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 6px;
-    font-size: 0.62rem;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--switchy-cyan);
-}
-
-/* Small status dot whose colour matches the message type */
-.switchy-bubble-category::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--switchy-cyan);
-    box-shadow: 0 0 8px var(--switchy-cyan);
-}
-
-.switchy-bubble[data-category="STUDY TIP"] .switchy-bubble-category::before {
-    background: #A78BFA;
-    box-shadow: 0 0 8px #A78BFA;
-}
-
-.switchy-bubble[data-category="CHEER"] .switchy-bubble-category::before {
-    background: #FB7185;
-    box-shadow: 0 0 8px #FB7185;
-}
-
 .switchy-bubble-text {
     margin: 0;
     font-weight: 600;
-}
-
-/* Small X in the corner of the notification */
-.switchy-bubble-close {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    background: transparent;
-    border: 0;
-    border-radius: 6px;
-    color: var(--switchy-text-muted);
-    font-size: 1.1rem;
-    line-height: 1;
-    cursor: pointer;
-    transition: color 0.15s ease, background 0.15s ease;
-}
-
-.switchy-bubble-close:hover {
-    color: #FFFFFF;
-    background: rgba(34, 211, 238, 0.16);
-}
-
-.switchy-bubble-close:focus-visible {
-    outline: 2px solid var(--switchy-cyan);
-    outline-offset: 1px;
 }
 
 @media (max-width: 480px) {
