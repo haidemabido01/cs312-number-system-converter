@@ -42,6 +42,7 @@
 
 - [Twilight Beach Sunset Color Palette](#twilight-beach-sunset-color-palette)
 - [App Architecture](#app-architecture)
+- [Interface Preview](#interface-preview)
 - [Student Goods & Study Features](#student-goods--study-features)
   - [1. Live Base Converter (Home Page)](#1-live-base-converter-home-page)
   - [2. 8-Bit Register Playground (Visual Bit Flipper)](#2-8-bit-register-playground-visual-bit-flipper)
@@ -87,6 +88,61 @@ BitSeen is a **focused four-page study system**. The landing page is deliberatel
 
 > [!TIP]
 > **Cross-page superpower:** every page links back into the converter. Flip bits in the register playground, hit **Send to Converter**, and land on `index.html` with the full step-by-step math already loaded.
+
+---
+
+## <img src="assets/icons/grid.svg" alt="" width="20" height="20" align="middle"> Interface Preview
+
+<p align="center">
+  <img src="UI/converter-light.png" alt="Live Base Converter in light mode" width="49%">
+  <img src="UI/converter-dark.png" alt="Live Base Converter in dark mode" width="49%">
+  <br>
+  <sub><strong>Live Base Converter</strong> — light &amp; dark mode</sub>
+</p>
+
+<p align="center">
+  <img src="UI/register-light.png" alt="8-Bit Register Playground in light mode" width="49%">
+  <img src="UI/register-dark.png" alt="8-Bit Register Playground in dark mode" width="49%">
+  <br>
+  <sub><strong>8-Bit Register Playground</strong> — light &amp; dark mode</sub>
+</p>
+
+<p align="center">
+  <img src="UI/cheatsheet-light.png" alt="Student Exam Cheat Sheet in light mode" width="49%">
+  <img src="UI/cheatsheet-dark.png" alt="Student Exam Cheat Sheet in dark mode" width="49%">
+  <br>
+  <sub><strong>Student Exam Cheat Sheet</strong> — light &amp; dark mode</sub>
+</p>
+
+<p align="center">
+  <img src="UI/ascii-light.png" alt="ASCII Character Lab in light mode" width="49%">
+  <img src="UI/ascii-dark.png" alt="ASCII Character Lab in dark mode" width="49%">
+  <br>
+  <sub><strong>ASCII Character Lab</strong> — light &amp; dark mode</sub>
+</p>
+
+<details>
+<summary><strong>More screenshots</strong></summary>
+
+<p align="center">
+  <img src="UI/converter-octal-light.png" alt="Decimal to octal conversion" width="32%">
+  <img src="UI/converter-hex-light.png" alt="Decimal to hexadecimal conversion" width="32%">
+  <img src="UI/ascii-dark-toast.png" alt="ASCII Lab with a toast notification" width="32%">
+</p>
+
+<p align="center">
+  <img src="UI/register-light-theory.png" alt="Register playground with the theory card" width="32%">
+  <img src="UI/register-theory-light.png" alt="Register theory carousel in light mode" width="32%">
+  <img src="UI/register-theory-dark.png" alt="Register theory carousel in dark mode" width="32%">
+</p>
+
+<p align="center">
+  <img src="UI/cheatsheet-light-search.png" alt="Cheat sheet search and powers of 2" width="32%">
+  <img src="UI/cheatsheet-light-table.png" alt="Powers of 2 table in light mode" width="32%">
+  <img src="UI/cheatsheet-dark-table.png" alt="Powers of 2 table in dark mode" width="32%">
+</p>
+
+</details>
 
 ---
 
