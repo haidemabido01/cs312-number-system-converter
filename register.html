@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>8-Bit Register Playground - BitSeen</title>
-    <!-- Google Font: Nunito -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
 
 <body>
     <div class="app-container">
-        <!-- 1. HEADER -->
+
         <header class="header">
             <div class="header-spacer"></div>
             <div class="header-title">
@@ -35,7 +35,6 @@
             </div>
         </header>
 
-        <!-- MULTI-PATH NAVIGATION -->
         <nav class="student-nav" aria-label="Main Navigation">
             <a href="index.html" class="nav-pill">
                 <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-converter"></use></svg>
@@ -55,7 +54,6 @@
             </a>
         </nav>
 
-        <!-- 2. 8-BIT REGISTER PLAYGROUND -->
         <section id="register-section" class="card">
             <div class="section-header-row">
                 <div>
@@ -71,7 +69,6 @@
                 </span>
             </div>
 
-            <!-- Bit Strip -->
             <div class="reg-bitstrip">
                 <div class="reg-nibble-heads">
                     <span class="reg-nibble-head">High &middot; b&#8327;&ndash;b&#8308;</span>
@@ -125,7 +122,6 @@
                 </div>
             </div>
 
-            <!-- Live Readouts -->
             <div class="reg-readouts">
                 <div class="reg-readout">
                     <span class="metric-title">Decimal</span>
@@ -154,7 +150,6 @@
                 </div>
             </div>
 
-            <!-- Action Rail -->
             <div class="reg-actions-bar">
                 <button type="button" id="reg-clear-btn" class="reg-tool-btn" title="Clear every bit (0x00)" aria-label="Clear every bit">
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-eraser"></use></svg>
@@ -181,7 +176,6 @@
             </div>
         </section>
 
-        <!-- 3. STUDENT LEARNING GUIDE -->
         <section class="card">
             <div class="section-header-row">
                 <div>
@@ -199,7 +193,6 @@
                 </div>
             </div>
 
-            <!-- Auto-rotating concept carousel: one card at a time to avoid information overload -->
             <div class="hack-carousel" id="hack-carousel" data-interval="7000" role="region" aria-roledescription="carousel" aria-label="Core register concepts">
                 <div class="hack-carousel-viewport">
                     <div class="hack-carousel-track" id="hack-track">
@@ -241,7 +234,6 @@
         </section>
     </div>
 
-    <!-- Scripts -->
     <script src="js/icons.js"></script>
     <script src="js/feedback.js"></script>
     <script src="js/converter.js"></script>

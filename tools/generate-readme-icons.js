@@ -1,42 +1,18 @@
-/**
- * BitSeen README Icon Generator
- * ----------------------------
- * Renders standalone SVG files for the README from the *same* source of truth
- * as the app: the inline SVG sprite in `js/icons.js`.
- *
- * Why standalone files instead of inline <svg> in the Markdown?
- *   - GitHub's Markdown sanitizer strips per-element `fill`/`stroke`
- *     attributes, which breaks mixed fill+stroke icons.
- *   - An <img> pointing at a real .svg file is rendered verbatim, so the
- *     artwork can never be mangled.
- *
- * Each generated file carries its own theme awareness:
- *   - presentation attributes  -> light mode colour (Twilight Beach palette)
- *   - embedded <style> block  -> dark mode override via prefers-color-scheme
- *   If a browser ignores the <style> block, the light colour is still used.
- *
- * Usage:  node tools/generate-readme-icons.js
- */
-
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const ICONS_DIR = path.join(ROOT, 'assets', 'icons');
 
-/* ------------------------------------------------------------------ *
- * Palette (must match the :root custom properties in css/style.css)
- * ------------------------------------------------------------------ */
 const LIGHT = {
-    stroke: '#573F5A', // Dusk Plum / Violet  -> secondary headers & decimal base
+    stroke: '#573F5A',
     solid: '#573F5A'
 };
 const DARK = {
-    stroke: '#F4C7CB', // Soft Dawn Blush Pink -> light mode tint, mascot blush
+    stroke: '#F4C7CB',
     solid: '#F4C7CB'
 };
 
-/* Icons referenced by README.md */
 const ICON_NAMES = [
     'alert', 'arrowRight', 'bolt', 'book', 'bulb', 'cap', 'chat', 'check',
     'chip', 'clipboard', 'converter', 'grid', 'heart',
@@ -44,7 +20,6 @@ const ICON_NAMES = [
     'tag', 'target', 'toggle', 'type'
 ];
 
-/* Colour swatches for the palette table */
 const SWATCHES = [
     { slug: 'night-charcoal', hex: '#18181B' },
     { slug: 'deep-oceanic-teal', hex: '#0E5B6A' },
@@ -54,9 +29,6 @@ const SWATCHES = [
     { slug: 'soft-dawn-blush-pink', hex: '#F4C7CB' }
 ];
 
-/* ------------------------------------------------------------------ *
- * Parse BITSEEN_ICON_DEFS out of js/icons.js without evaluating it
- * ------------------------------------------------------------------ */
 function readIconDefs() {
     const source = fs.readFileSync(path.join(ROOT, 'js', 'icons.js'), 'utf8');
     const defs = {};
@@ -68,9 +40,6 @@ function readIconDefs() {
     return defs;
 }
 
-/* ------------------------------------------------------------------ *
- * Build a standalone SVG file
- * ------------------------------------------------------------------ */
 function buildIconSvg(def) {
     const elements = def.match(/<(path|circle|rect|line|polyline|polygon)\b[^>]*\/>/g) || [];
 
@@ -122,9 +91,6 @@ function buildSwatchSvg(hex) {
     ].join('');
 }
 
-/* ------------------------------------------------------------------ *
- * Main
- * ------------------------------------------------------------------ */
 function main() {
     const defs = readIconDefs();
     fs.mkdirSync(ICONS_DIR, { recursive: true });

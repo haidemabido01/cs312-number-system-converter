@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BitSeen - Live Base Converter &amp; Number System Bestie</title>
-    <!-- Google Font: Nunito -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
 
 <body>
     <div class="app-container">
-        <!-- 1. HEADER -->
+
         <header class="header">
             <div class="header-spacer"></div>
             <div class="header-title">
@@ -35,7 +35,6 @@
             </div>
         </header>
 
-        <!-- MULTI-PATH NAVIGATION -->
         <nav class="student-nav" aria-label="Main Navigation">
             <a href="index.html" class="nav-pill active">
                 <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-converter"></use></svg>
@@ -55,7 +54,6 @@
             </a>
         </nav>
 
-        <!-- 2. CONVERTER SECTION -->
         <section id="converter-section" class="card">
             <div class="section-header-row">
                 <div>
@@ -69,7 +67,7 @@
             </div>
 
             <div class="converter-panes">
-                <!-- Input Pane -->
+
                 <div class="pane input-pane">
                     <label for="input-value">Your number</label>
                     <input type="text" id="input-value" placeholder="e.g. 255" autocomplete="off">
@@ -82,7 +80,6 @@
                     </select>
                 </div>
 
-                <!-- Output Pane -->
                 <div class="pane output-pane">
                     <label for="output-value">Result</label>
                     <input type="text" id="output-value" placeholder="&mdash;" readonly>
@@ -107,12 +104,11 @@
             </p>
 
             <div id="steps-panel" class="steps-panel hidden">
-                <!-- Rendered by app.js -->
+
             </div>
         </section>
     </div>
 
-    <!-- Scripts -->
     <script src="js/icons.js"></script>
     <script src="js/feedback.js"></script>
     <script src="js/converter.js"></script>

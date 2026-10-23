@@ -1,12 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Dark Mode Logic ---
+
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
     function setTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('bitseen-theme', theme);
     }
-    // Fall back to the pre-rebrand key so an existing student's saved
-    // theme survives the Bitzy -> BitSeen rename.
+
     const savedTheme = localStorage.getItem('bitseen-theme') || localStorage.getItem('bitzy-theme');
     if (savedTheme) {
         setTheme(savedTheme);
@@ -22,22 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Converter Logic (Only runs if elements exist) ---
     const inputValueEl = document.getElementById('input-value');
     const inputBaseEl = document.getElementById('input-base');
     const outputValueEl = document.getElementById('output-value');
     const outputBaseEl = document.getElementById('output-base');
 
     if (inputValueEl && inputBaseEl && outputValueEl && outputBaseEl) {
-        // Switchy speaks after the student pauses, so their bubble never flickers mid-typing
+
         let triviaTimer = null;
 
-        // Live conversion listeners
         inputValueEl.addEventListener('input', handleConversion);
         inputBaseEl.addEventListener('change', handleConversion);
         outputBaseEl.addEventListener('change', handleConversion);
 
-        // Check URL parameters (e.g. from 8-bit register: ?val=169&base=10)
         const urlParams = new URLSearchParams(window.location.search);
         const valParam = urlParams.get('val');
         const baseParam = urlParams.get('base');
@@ -87,14 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 650);
             }
 
-            // Update steps if panel is open
             const stepsPanel = document.getElementById('steps-panel');
             if (stepsPanel && !stepsPanel.classList.contains('hidden')) {
                 updateStepsPanel();
             }
         }
 
-        // --- Steps Panel Logic ---
         const showStepsBtn = document.getElementById('show-steps-btn');
         const stepsPanel = document.getElementById('steps-panel');
 
@@ -143,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- ASCII Mode Logic ---
     const asciiDec = document.getElementById('ascii-dec');
     const asciiChar = document.getElementById('ascii-char');
     const asciiBin = document.getElementById('ascii-bin');

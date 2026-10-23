@@ -1,19 +1,5 @@
-/**
- * BitSeen Inline SVG Icon Library
- * ---------------------------------------------
- * A zero-dependency, offline-friendly icon set that replaces every emoji in
- * the app with crisp, themeable SVG stroke icons.
- *
- * Usage in HTML:
- *   <svg class="icon" aria-hidden="true"><use href="#bs-converter"></use></svg>
- *
- * Usage in JavaScript:
- *   element.innerHTML = icon('converter');
- *   element.innerHTML = icon('check', 'icon-success');
- */
-
 const BITSEEN_ICON_DEFS = {
-    // --- Navigation ---
+
     converter: `<path d="M4 8.5h13M14 5l3 3.5-3 3.5M20 15.5H7M10 12l-3 3.5 3 3.5"/>`,
     chip: `<rect x="6" y="6" width="12" height="12" rx="2.5"/>
             <path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3"/>`,
@@ -22,12 +8,10 @@ const BITSEEN_ICON_DEFS = {
                 <path d="M9 11h6M9 15.5h4"/>`,
     type: `<path d="M4 8V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2M8 12h8M8 16h5M17 13.5V20M15 16.75 17 19l2-2.25"/>`,
 
-    // --- Theme ---
     moon: `<path d="M20.5 14.3A8.5 8.5 0 1 1 9.7 3.5a6.8 6.8 0 0 0 10.8 10.8Z"/>`,
     sun: `<circle cx="12" cy="12" r="4.2"/>
            <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/>`,
 
-    // --- Section markers ---
     bulb: `<path d="M12 2.5a6.5 6.5 0 0 0-3.8 11.8c.6.4 1 1.1 1 1.9v.3h5.6v-.3c0-.8.4-1.5 1-1.9A6.5 6.5 0 0 0 12 2.5Z"/>
             <path d="M9.6 19h4.8M10.4 21.2h3.2"/>`,
     steps: `<path d="M3 20.5h4.5v-4.5H12v-4.5h4.5V7H21"/>`,
@@ -47,7 +31,6 @@ const BITSEEN_ICON_DEFS = {
               <circle cx="12" cy="10" r="1.8"/>
               <path d="M9.5 15.3 7 18.8l2.6.7M14.5 15.3l2.5 3.5-2.6.7"/>`,
 
-    // --- Actions ---
     arrowRight: `<path d="M4.5 12h15M13.5 6l6 6-6 6"/>`,
     arrowLeft: `<path d="M19.5 12h-15M10.5 6l-6 6 6 6"/>`,
     arrowUp: `<path d="M12 19.5v-15M6 10.5l6-6 6 6"/>`,
@@ -71,7 +54,6 @@ const BITSEEN_ICON_DEFS = {
     play: `<path d="M8 4.8 19 12 8 19.2Z"/>`,
     pause: `<path d="M9 4.5v15M15 4.5v15"/>`,
 
-    // --- Status ---
     check: `<path d="M4.5 12.5 9.5 17.5 19.5 6.5"/>`,
     cross: `<path d="M6 6l12 12M18 6 6 18"/>`,
     alert: `<path d="M10.3 3.9 2.5 17.4A2 2 0 0 0 4.2 20.5h15.6a2 2 0 0 0 1.7-3.1L13.7 3.9a2 2 0 0 0-3.4 0Z"/>
@@ -79,7 +61,6 @@ const BITSEEN_ICON_DEFS = {
     info: `<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6h.01"/>`,
     chat: `<path d="M20.5 11.7c0 4-3.8 7.2-8.5 7.2-1 0-2-.2-2.9-.4L4 20.5l1.4-3.6A6.9 6.9 0 0 1 3.5 11.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/>`,
 
-    // --- Decorative (Switchy companion) ---
     heart: `<path fill="currentColor" stroke="none" d="M12 20.5s-7.6-4.6-7.6-9.4A4.4 4.4 0 0 1 12 8.2a4.4 4.4 0 0 1 7.6 2.9c0 4.8-7.6 9.4-7.6 9.4Z"/>`,
     glint: `<path fill="currentColor" stroke="none" d="M12 2.5c.5 3.6 1.4 4.5 5 5-3.6.5-4.5 1.4-5 5-.5-3.6-1.4-4.5-5-5 3.6-.5 4.5-1.4 5-5Z"/>`,
     star: `<path fill="currentColor" stroke="none" d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.8 6.7 19.7l1.1-6.1L3.4 9.4l6-.8L12 3Z"/>`,
@@ -88,10 +69,6 @@ const BITSEEN_ICON_DEFS = {
 
 const BITSEEN_ICON_STROKE = 'fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
 
-/**
- * Builds the hidden inline SVG sprite that holds every icon definition.
- * @returns {string}
- */
 function buildIconSprite() {
     const symbols = Object.keys(BITSEEN_ICON_DEFS).map(name => {
         return `<symbol id="bs-${name}" viewBox="0 0 24 24" ${BITSEEN_ICON_STROKE}>${BITSEEN_ICON_DEFS[name]}</symbol>`;
@@ -100,12 +77,6 @@ function buildIconSprite() {
     return `<svg xmlns="http://www.w3.org/2000/svg" class="bs-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">${symbols}</svg>`;
 }
 
-/**
- * Returns inline SVG markup for a named icon.
- * @param {string} name - Key from BITSEEN_ICON_DEFS (case-insensitive)
- * @param {string} [extraClass] - Additional CSS classes for the <svg> element
- * @returns {string} SVG markup
- */
 function icon(name, extraClass = '') {
     const key = String(name).replace(/[-_\s]/g, '').toLowerCase();
     const resolved = Object.keys(BITSEEN_ICON_DEFS).find(k => k.toLowerCase() === key);
@@ -114,19 +85,11 @@ function icon(name, extraClass = '') {
     return `<svg class="${cls}" aria-hidden="true" focusable="false"><use href="#bs-${resolved}"></use></svg>`;
 }
 
-/**
- * Swaps the icon rendered inside an element.
- * @param {Element} element
- * @param {string} name
- */
 function setIcon(element, name) {
     if (!element) return;
     element.innerHTML = icon(name);
 }
 
-/**
- * Injects the SVG sprite into the document. Safe to call more than once.
- */
 function mountIconSprite() {
     if (!document.body || document.getElementById('bs-icon-sprite')) return;
     const host = document.createElement('div');

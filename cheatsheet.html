@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Exam Cheat Sheet - BitSeen</title>
-    <!-- Google Font: Nunito -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
 
 <body>
     <div class="app-container">
-        <!-- 1. HEADER -->
+
         <header class="header">
             <div class="header-spacer"></div>
             <div class="header-title">
@@ -35,7 +35,6 @@
             </div>
         </header>
 
-        <!-- MULTI-PATH NAVIGATION -->
         <nav class="student-nav" aria-label="Main Navigation">
             <a href="index.html" class="nav-pill">
                 <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-converter"></use></svg>
@@ -55,7 +54,6 @@
             </a>
         </nav>
 
-        <!-- 2. STUDENT EXAM CHEAT SHEET -->
         <section id="cheatsheet-section" class="card">
             <div class="section-header-row">
                 <div>
@@ -71,7 +69,6 @@
                 </span>
             </div>
 
-            <!-- Tabs -->
             <div class="cs-tabs-header" role="tablist" aria-label="Cheat sheet sections">
                 <button type="button" class="cs-tab-btn active" data-target="pane-powers" role="tab" aria-selected="true">
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="#bs-bolt"></use></svg>
@@ -87,7 +84,6 @@
                 </button>
             </div>
 
-            <!-- Pane 1: Powers of 2 -->
             <div id="pane-powers" class="cs-tab-pane" role="tabpanel">
                 <div class="powers-search-row">
                     <svg class="icon search-icon" aria-hidden="true" focusable="false"><use href="#bs-search"></use></svg>
@@ -104,21 +100,19 @@
                             </tr>
                         </thead>
                         <tbody id="powers-table-body">
-                            <!-- Rendered by student.js -->
+
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Pane 2: Nibbles Grid -->
             <div id="pane-nibbles" class="cs-tab-pane hidden" role="tabpanel">
                 <p class="tab-helper-text">Every 4 bits map to 1 hex symbol. Click a tile to copy its binary.</p>
                 <div id="nibble-grid" class="nibble-grid">
-                    <!-- Rendered by student.js -->
+
                 </div>
             </div>
 
-            <!-- Pane 3: Exam Hacks -->
             <div id="pane-hacks" class="cs-tab-pane hidden" role="tabpanel">
                 <div class="hacks-list">
                     <article class="hack-item">
@@ -177,7 +171,6 @@
         </section>
     </div>
 
-    <!-- Scripts -->
     <script src="js/icons.js"></script>
     <script src="js/feedback.js"></script>
     <script src="js/converter.js"></script>

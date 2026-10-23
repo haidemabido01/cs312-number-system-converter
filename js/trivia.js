@@ -1,22 +1,3 @@
-/**
- * BitSeen Trivia & Data Engine
- * ---------------------------------------------
- * Switchy is the ONE voice of the app: every trivia fact, study tip and
- * cheer is delivered inside their speech bubble. Nothing else on a page
- * renders trivia, so Switchy is always where the knowledge lives.
- *
- * This file owns the words and the conversion-aware picker:
- *   - the trivia / study-tip / cheer pools
- *   - getTriviaForConversion(), used after a conversion
- *   - switchyData, the flat { category, text } list that js/switchy.js speaks
- *
- * The floating widget itself lives in js/switchy.js.
- */
-
-/* ==========================================================
-   TRIVIA POOLS
-   ========================================================== */
-
 const CONTEXT_TRIVIA = [
     { match: (v, f, o, t) => v === "255" || o === "255", text: "Did you know that a 'byte' is 8 bits — and it can represent 256 different values (0 to 255)? That's why old video games had '255' as the max score!" },
     { match: (v, f, o, t) => f === 16 || t === 16, text: "Did you know that the hexadecimal system is popular because one hex digit = exactly 4 bits (one nibble)? That's why programmers love it — it's binary in a compact costume!" },
@@ -65,12 +46,6 @@ function getTriviaForConversion(inputValue, fromBase, outputValue, toBase) {
     return chosenFact;
 }
 
-/**
- * Hands a trivia fact to Switchy, who says it in their bubble.
- * If Switchy is unavailable, the fact falls back to a toast
- * so no trivia is ever silently dropped.
- * @param {string} factText
- */
 function showTrivia(factText) {
     if (!factText) return;
 
@@ -82,10 +57,6 @@ function showTrivia(factText) {
         setFeedback(factText, 'hint', 'trivia');
     }
 }
-
-/* ==========================================================
-   THE DATA SWITCHY SPEAKS
-   ========================================================== */
 
 const SWITCHY_STUDY_TIPS = [
     "'Flip It' Practice — Switchy says: practice converting BOTH ways (decimal → binary AND binary → decimal). Master the flip in both directions!",
@@ -114,18 +85,6 @@ const SWITCHY_CHEERS = [
     "Switchy says: YOU are the brightest bit in the system!"
 ];
 
-/**
- * Every line Switchy can say, flattened into the shape the widget expects:
- * an array of { category, text } objects.
- *
- * categories: "TRIVIA" | "STUDY TIP" | "CHEER"
- *
- * js/switchy.js reads this array. Classic script tags cannot use ES imports,
- * so the array is published on window as well. If you switch the project to
- * ES modules, the import becomes:
- *
- *     import { switchyData } from './trivia.js';
- */
 const switchyData = buildSwitchyData();
 
 function buildSwitchyData() {

@@ -2,7 +2,11 @@
 
 <img src="assets/binary-conversion-exchange.png" alt="Binary Conversion Exchange icon: a binary card and a decimal card joined by exchange arrows" width="280" />
 
-# BitSeen — Your Number System Bestie & CS Study Guide
+<h1 align="center">BitSeen</h1>
+
+<p align="center">
+  <sub><em>𝒴𝑜𝓊𝓇 𝒩𝓊𝓂𝒷𝑒𝓇 𝒮𝓎𝓈𝓉𝑒𝓂 𝐵𝑒𝓈𝓉𝒾𝑒 &amp; 𝒞𝒮 𝒮𝓉𝓊𝒹𝓎 𝒢𝓊𝒾𝒹𝑒</em></sub>
+</p>
 
 > *"Tiny bits, big numbers — you've got this, bestie!"*
 

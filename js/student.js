@@ -1,12 +1,4 @@
-/**
- * BitSeen Student Tools & Features
- * - 8-Bit Interactive Register Playground
- * - Student Exam Cheat Sheet Hub (Powers of 2, Nibbles, Exam Hacks)
- * - Auto-rotating concept carousel (one card at a time)
- */
-
-// --- 8-BIT REGISTER PLAYGROUND ---
-let registerBits = [0, 0, 0, 0, 0, 0, 0, 0]; // Index 0 is Bit 7 (128), Index 7 is Bit 0 (1)
+let registerBits = [0, 0, 0, 0, 0, 0, 0, 0];
 
 const ASCII_CONTROL_NAMES = {
     0: "NUL (Null)", 1: "SOH (Start of Heading)", 2: "STX (Start of Text)", 3: "ETX (End of Text)",
@@ -40,7 +32,6 @@ function initRegister() {
         });
     });
 
-    // Preset action buttons
     const clearBtn = document.getElementById('reg-clear-btn');
     const setAllBtn = document.getElementById('reg-set-all-btn');
     const invertBtn = document.getElementById('reg-invert-btn');
@@ -116,7 +107,7 @@ function initRegister() {
                 if (convSection) convSection.scrollIntoView({ behavior: 'smooth' });
                 setFeedback(`Sent ${unsignedVal} to the converter. Open "Show me how" to see the breakdown.`, 'hint', 'register');
             } else {
-                // Multi-page redirection to index.html with query parameter
+
                 window.location.href = `index.html?val=${unsignedVal}&base=10`;
             }
         });
@@ -149,7 +140,6 @@ function updateRegisterUI() {
         }
     });
 
-    // Math equation readout
     const equationEl = document.getElementById('reg-equation');
     if (equationEl) {
         if (sumParts.length === 0) {
@@ -159,12 +149,9 @@ function updateRegisterUI() {
         }
     }
 
-    // Unsigned Decimal
     const unsignedEl = document.getElementById('reg-unsigned');
     if (unsignedEl) unsignedEl.textContent = unsignedVal;
 
-    // Signed (Two's Complement)
-    // If MSB (Bit 7) is 1, value is unsignedVal - 256
     const msb = registerBits[0];
     const signedVal = msb === 1 ? unsignedVal - 256 : unsignedVal;
     const signedEl = document.getElementById('reg-signed');
@@ -180,7 +167,6 @@ function updateRegisterUI() {
         }
     }
 
-    // Hexadecimal (High & Low Nibbles)
     const highNibbleVal = (registerBits[0] * 8) + (registerBits[1] * 4) + (registerBits[2] * 2) + registerBits[3];
     const lowNibbleVal = (registerBits[4] * 8) + (registerBits[5] * 4) + (registerBits[6] * 2) + registerBits[7];
     const hexHigh = highNibbleVal.toString(16).toUpperCase();
@@ -193,11 +179,9 @@ function updateRegisterUI() {
     if (hexHighEl) hexHighEl.textContent = `${hexHigh} (${registerBits.slice(0, 4).join('')})`;
     if (hexLowEl) hexLowEl.textContent = `${hexLow} (${registerBits.slice(4).join('')})`;
 
-    // Octal
     const octalEl = document.getElementById('reg-octal');
     if (octalEl) octalEl.textContent = `0o${unsignedVal.toString(8).padStart(3, '0')}`;
 
-    // ASCII Preview
     const asciiEl = document.getElementById('reg-ascii');
     if (asciiEl) {
         if (unsignedVal in ASCII_CONTROL_NAMES) {
@@ -213,7 +197,6 @@ function updateRegisterUI() {
     }
 }
 
-// --- STUDENT EXAM CHEAT SHEET ---
 const POWERS_OF_TWO_DATA = [
     { power: 0, val: 1, hex: "0x1", note: "Minimum nonzero bit" },
     { power: 1, val: 2, hex: "0x2", note: "Even base" },
@@ -357,7 +340,6 @@ function fallbackCopy(text, successMsg) {
     setFeedback(successMsg, 'success', 'cheatsheet');
 }
 
-// --- ROTATING CONCEPT CAROUSEL ---
 const HACK_CAROUSEL_DEFAULT_INTERVAL = 7000;
 
 function initHackCarousel() {
@@ -369,7 +351,7 @@ function initHackCarousel() {
     const dotsWrap = carousel.querySelector('.hack-dots');
     const prevBtn = carousel.querySelector('.hack-nav-btn[aria-label^="Previous"]');
     const nextBtn = carousel.querySelector('.hack-nav-btn[aria-label^="Next"]');
-    // The play/pause toggle sits beside the section badge, outside the carousel.
+
     const playBtn = document.getElementById('hack-play-btn');
     const slides = Array.from(carousel.querySelectorAll('.hack-slide'));
     if (!track || !viewport || !dotsWrap || slides.length === 0) return;
@@ -388,7 +370,6 @@ function initHackCarousel() {
         return label ? label.textContent.trim() : '';
     };
 
-    // --- Build the dot indicators ---
     slides.forEach((slide, i) => {
         const dot = document.createElement('button');
         dot.type = 'button';
@@ -399,7 +380,6 @@ function initHackCarousel() {
     });
     const dots = Array.from(dotsWrap.children);
 
-    // --- Viewport height follows the tallest visible card so nothing is clipped ---
     const syncHeight = () => {
         const active = slides[index];
         if (active) viewport.style.height = active.offsetHeight + 'px';
@@ -443,19 +423,16 @@ function initHackCarousel() {
         });
     }
 
-    // Pause while the student is reading or interacting with the card
     carousel.addEventListener('mouseenter', () => { hovered = true; stopTimer(); });
     carousel.addEventListener('mouseleave', () => { hovered = false; syncTimer(); });
     carousel.addEventListener('focusin', () => { hovered = true; stopTimer(); });
     carousel.addEventListener('focusout', () => { hovered = false; syncTimer(); });
 
-    // Keyboard navigation
     carousel.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(index - 1, true); }
         if (e.key === 'ArrowRight') { e.preventDefault(); goTo(index + 1, true); }
     });
 
-    // Pause when the tab is hidden
     document.addEventListener('visibilitychange', () => {
         pageHidden = document.hidden;
         syncTimer();
@@ -468,13 +445,11 @@ function initHackCarousel() {
     syncTimer();
 }
 
-// --- INIT ALL ON DOMContentLoaded ---
 document.addEventListener('DOMContentLoaded', () => {
     initRegister();
     initCheatSheet();
     initHackCarousel();
 
-    // Smooth scroll only for hash anchors (#)
     const navLinks = document.querySelectorAll('.nav-pill');
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
