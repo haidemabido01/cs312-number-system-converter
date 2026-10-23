@@ -79,7 +79,7 @@ BitSeen is a **focused four-page study system**. The landing page is deliberatel
 - **Instant Conversion** <img src="assets/icons/bolt.svg" alt="" width="15" height="15" align="middle"> — Converts as you type across Bases 2, 8, 10, and 16 from the quick-pick dropdown, with a dedicated result pane. (The engine underneath handles *any* base from 2 to 36.)
 - **Step Breakdown** <img src="assets/icons/steps.svg" alt="" width="15" height="15" align="middle"> — Hit *"Show me how BitSeen did it"* to see the full equation, the per-digit weighting, and the repeated-division table.
 - **Toast Notifications** <img src="assets/icons/alert.svg" alt="" width="15" height="15" align="middle"> — Every conversion, invalid digit, hint and achievement is reported in a colour-coded toast notification at the top centre of the screen — no inline status lines anywhere. Repeated feedback reuses the same toast instead of stacking duplicates.
-- **Switchy Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — Every 10 seconds Switchy pops up a **trivia fact**, a **study tip** or a **cheer** — no hovering required. Switchy reveals themselves for each message and the bubble is replaced in place. They wait for you to pause typing so their bubble never flickers mid-conversion.
+- **Switchy Trivia** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — Every 10 seconds Switchy pops up a **trivia fact**, a **study tip** or a **cheer**, then tucks the bubble away after 8 seconds. Click the logo any time for another line.
 - **Base Palette** <img src="assets/icons/bulb.svg" alt="" width="15" height="15" align="middle"> — The toast accents and colours shift to match the base you are working in.
 
 <details>
@@ -147,18 +147,16 @@ Check: $256 - 5 = 251 = \texttt{0xFB}$ — the two's complement of 5 is -5.
 
 Switchy is the **only voice of the app** — all trivia, study tips and cheers are spoken by them, never by a separate panel.
 
-- The Binary Conversion Exchange mascot: a binary card and a decimal card swapping values through two curved arrows, docked in the **bottom-right corner** of every page, floating gently and **giggling every time it speaks**.
-- **Every 10 Seconds** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — Switchy speaks up **on their own, with no trigger at all**. The beat cycles through three kinds of message, each with its own bubble icon:
-  - **Trivia** <img src="assets/icons/bulb.svg" alt="" width="14" height="14" align="middle"> — a computing-history fact, weighted to appear most often.
+- **Bottom-right mascot** — a fixed `65 × 65` circular logo button, `30px` from the bottom and right edges of every page, ringed with a glowing cyan border that pulses gently and a slowly rotating aura behind it.
+- **Greets you on load** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — Switchy says a first line shortly after the page settles, then falls into the 10-second rhythm. Each new line gives the logo a quick talking wiggle.
+- **Every 10 Seconds** <img src="assets/icons/glint.svg" alt="" width="15" height="15" align="middle"> — Switchy speaks up **on their own, with no trigger at all**. A random line is pulled from `switchyData` in `js/trivia.js`:
+  - **Trivia** <img src="assets/icons/bulb.svg" alt="" width="14" height="14" align="middle"> — a computing-history fact.
   - **Study tip** <img src="assets/icons/book.svg" alt="" width="14" height="14" align="middle"> — a practical exam trick: flip it both ways, build a place-value chart, memorise the nibble table, or drill for 10 minutes a day.
   - **Cheer** <img src="assets/icons/heart.svg" alt="" width="14" height="14" align="middle"> — a bit of encouragement, because studying should feel good.
+- **Auto-hide** — the dark, cyan-bordered bubble stays open for **8 seconds**, then fades out on its own. Its little triangle points down at the logo.
+- **Click for more** — click the logo to ask for another line immediately; the click also **resets the 10-second countdown**. The **X** on the bubble (or `Escape`) closes the current message.
 - **Matched to your conversion** <img src="assets/icons/chat.svg" alt="" width="15" height="15" align="middle"> — type a number and Switchy answers with a fact tied to the base you are working in (why a byte is 8 bits, why a hex digit is exactly one nibble, why octal divides cleanly by 3, and more).
-- **Never interrupted** <img src="assets/icons/bulb.svg" alt="" width="15" height="15" align="middle"> — a greeting already on screen is never cut short, and the tick is skipped while the tab is in the background.
-- Use the little pill button under them to minimize them or bring them back for distraction-free focus; a cheer greets you when they return.
-- Even while minimized the 10-second beat keeps running — the message simply arrives as a toast, so **no fact is ever lost**.
-
-> [!IMPORTANT]
-> If you'd rather study in silence, minimize them once and they go quiet — **no fact is ever lost**, the 10-second beat simply arrives as a toast instead.
+- **Never repeats back-to-back** — the picker steers clear of the last three lines, and pauses the beat while the tab is in the background.
 
 ---
 
@@ -222,7 +220,8 @@ BitSeen is 100% static client-side web technology — no installation, no node d
 │   ├── app.js          # Core wiring, base conversions, ASCII decoding, & theme
 │   ├── converter.js    # Pure mathematical conversion & step explanation engine
 │   ├── student.js      # 8-Bit Register, Exam Cheat Sheet & rotating concept carousel
-│   └── trivia.js       # Trivia engine + Switchy companion (the only voice of the app)
+│   ├── trivia.js       # Trivia, study-tip and cheer pools + switchyData
+│   └── switchy.js      # Floating Switchy widget, timers and speech bubble
 └── tools/
     └── generate-readme-icons.js # Regenerates assets/icons/ from js/icons.js
 ```
@@ -235,7 +234,7 @@ BitSeen is 100% static client-side web technology — no installation, no node d
 | Number bases & conversions | `js/converter.js` <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `js/app.js` |
 | Bit patterns & two's complement | `js/student.js` <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `register.html` |
 | ASCII & encoding | `js/app.js` (ASCII decoder) <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `ascii.html` |
-| The mascot & trivia content | `js/trivia.js` (engine + Switchy widget) |
+| The mascot & trivia content | `js/switchy.js` (widget) <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `js/trivia.js` (content) |
 | Visual design & theming | `css/style.css` <img src="assets/icons/arrowRight.svg" alt="" width="14" height="14" align="middle"> `js/icons.js` |
 
 </details>

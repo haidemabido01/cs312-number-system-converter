@@ -1,17 +1,20 @@
 /**
- * BitSeen Trivia & Switchy Companion Engine
+ * BitSeen Trivia & Data Engine
  * ---------------------------------------------
  * Switchy is the ONE voice of the app: every trivia fact, study tip and
  * cheer is delivered inside their speech bubble. Nothing else on a page
  * renders trivia, so Switchy is always where the knowledge lives.
  *
- * Both halves of that system live in this one file:
- *   Part 1 - the trivia engine that picks the right fact for a conversion
- *   Part 2 - the companion widget that says it out loud
+ * This file owns the words and the conversion-aware picker:
+ *   - the trivia / study-tip / cheer pools
+ *   - getTriviaForConversion(), used after a conversion
+ *   - switchyData, the flat { category, text } list that js/switchy.js speaks
+ *
+ * The floating widget itself lives in js/switchy.js.
  */
 
 /* ==========================================================
-   PART 1 - TRIVIA ENGINE
+   TRIVIA POOLS
    ========================================================== */
 
 const CONTEXT_TRIVIA = [
@@ -64,7 +67,7 @@ function getTriviaForConversion(inputValue, fromBase, outputValue, toBase) {
 
 /**
  * Hands a trivia fact to Switchy, who says it in their bubble.
- * If Switchy is minimized or unavailable, the fact falls back to a toast
+ * If Switchy is unavailable, the fact falls back to a toast
  * so no trivia is ever silently dropped.
  * @param {string} factText
  */
@@ -81,8 +84,21 @@ function showTrivia(factText) {
 }
 
 /* ==========================================================
-   PART 2 - SWITCHY COMPANION
+   THE DATA SWITCHY SPEAKS
    ========================================================== */
+
+const SWITCHY_STUDY_TIPS = [
+    "'Flip It' Practice — Switchy says: practice converting BOTH ways (decimal → binary AND binary → decimal). Master the flip in both directions!",
+    "Make a Place-Value Chart — Write powers of 2 across the top: 128, 64, 32, 16, 8, 4, 2, 1. Then just place 1s and 0s under them. Switchy's favorite cheat sheet!",
+    "Learn the 'Nibble Trick' — Memorize the 4-bit → hex table (0000=0 ... 1111=F). It makes binary↔hex conversions lightning fast.",
+    "Show Your Work in Columns — For decimal→binary, use repeated division by 2 and read remainders bottom to top. Switchy reminds you: don't forget to flip the order!",
+    "Use the 'Subtraction Method' — To convert decimal to binary, subtract the largest power of 2 that fits, mark a 1, repeat. Great for big numbers.",
+    "Say It Out Loud — Read binary numbers digit by digit ('one-zero-one-one') to avoid mixing them up with decimal numbers.",
+    "10-Minute Daily Drills — Five conversions a day beats one long cram session. Switchy powers up a little every day!",
+    "Color-Code Your Digits — Highlight each group of 4 bits when converting to hex. Grouping prevents careless errors.",
+    "Check Your Answer Backwards — Convert your result back to the original base. If it matches, you're golden!",
+    "Quiz a Friend with Switchy's Game — One person says a decimal number, the other races to write it in binary. Winner gets bragging rights! Flip that switch — you're on the right circuit!"
+];
 
 const SWITCHY_CHEERS = [
     "Don't be binary-ous — you've got this!",
@@ -98,370 +114,34 @@ const SWITCHY_CHEERS = [
     "Switchy says: YOU are the brightest bit in the system!"
 ];
 
-const SWITCHY_STUDY_TIPS = [
-    "'Flip It' Practice — Switchy says: practice converting BOTH ways (decimal → binary AND binary → decimal). Master the flip in both directions!",
-    "Make a Place-Value Chart — Write powers of 2 across the top: 128, 64, 32, 16, 8, 4, 2, 1. Then just place 1s and 0s under them. Switchy's favorite cheat sheet!",
-    "Learn the 'Nibble Trick' — Memorize the 4-bit → hex table (0000=0 ... 1111=F). It makes binary↔hex conversions lightning fast.",
-    "Show Your Work in Columns — For decimal→binary, use repeated division by 2 and read remainders bottom to top. Switchy reminds you: don't forget to flip the order!",
-    "Use the 'Subtraction Method' — To convert decimal to binary, subtract the largest power of 2 that fits, mark a 1, repeat. Great for big numbers.",
-    "Say It Out Loud — Read binary numbers digit by digit ('one-zero-one-one') to avoid mixing them up with decimal numbers.",
-    "10-Minute Daily Drills — Five conversions a day beats one long cram session. Switchy powers up a little every day!",
-    "Color-Code Your Digits — Highlight each group of 4 bits when converting to hex. Grouping prevents careless errors.",
-    "Check Your Answer Backwards — Convert your result back to the original base. If it matches, you're golden!",
-    "Quiz a Friend with Switchy's Game — One person says a decimal number, the other races to write it in binary. Winner gets bragging rights! Flip that switch — you're on the right circuit!"
-];
-
 /**
- * The three things Switchy says on their 10 second beat. Trivia is weighted
- * highest because it is the most useful thing they can tell you.
- */
-const SWITCHY_BEATS = [
-    { variant: 'trivia', icon: 'bulb', weight: 3 },
-    { variant: 'tip', icon: 'book', weight: 2 },
-    { variant: 'cheer', icon: 'heart', weight: 2 }
-];
-
-const SWITCHY_BUBBLE_ICONS = {
-    greeting: 'glint',
-    trivia: 'bulb',
-    tip: 'book',
-    cheer: 'heart'
-};
-
-const SWITCHY_PARTICLE_ICONS = ['glint', 'star', 'bolt', 'chip'];
-
-const SWITCHY_BUBBLE_DURATIONS = {
-    greeting: 5000,
-    trivia: 12000,
-    tip: 12000,
-    cheer: 12000
-};
-
-// Once you hover Switchy they stay revealed for up to one minute.
-const SWITCHY_LINGER_DURATION = 60000;
-
-// Every 10 seconds Switchy says something new: a trivia fact, a study tip
-// or a bit of cheering.
-const SWITCHY_BEAT_INTERVAL = 10000;
-
-const SWITCHY_GREETING = "Hi! I'm Switchy - your number system bestie. Every 10 seconds I pop up a trivia fact, a study tip or a cheer while you convert!";
-
-let switchyRefs = null;
-let switchyWired = false;
-let switchyTipIdx = -1;
-let switchyCheerIdx = -1;
-let switchyTriviaTimer = null;
-let switchyLingerTimer = null;
-
-function initSwitchy() {
-    if (!document.getElementById('switchy-widget')) {
-        buildSwitchyWidget();
-    }
-
-    const widget = document.getElementById('switchy-widget');
-    const avatarWrap = document.getElementById('switchy-avatar-wrap');
-    const bubble = document.getElementById('switchy-bubble');
-    const bubbleText = document.getElementById('switchy-bubble-text');
-    const bubbleIcon = document.getElementById('switchy-bubble-icon');
-    const bubbleClose = document.getElementById('switchy-bubble-close');
-    const toggleBtn = document.getElementById('switchy-toggle-btn');
-
-    switchyRefs = { widget, avatarWrap, bubble, bubbleText, bubbleIcon, bubbleClose, toggleBtn };
-
-    if (switchyWired) return;
-    switchyWired = true;
-
-    // Hovering Switchy reveals them and restarts their one-minute linger, so
-    // they stay on screen while the student reads the current message.
-    if (widget) {
-        widget.addEventListener('mouseenter', () => {
-            if (widget.classList.contains('minimized')) return;
-            widget.classList.add('switchy-active');
-            startSwitchyLinger();
-        });
-        widget.addEventListener('mouseleave', () => {
-            if (!switchyLingerTimer) widget.classList.remove('switchy-active');
-        });
-        widget.addEventListener('focusin', () => {
-            if (widget.classList.contains('minimized')) return;
-            widget.classList.add('switchy-active');
-            startSwitchyLinger();
-        });
-        widget.addEventListener('focusout', () => {
-            if (!switchyLingerTimer) widget.classList.remove('switchy-active');
-        });
-    }
-
-    // Switchy is not clickable - clicking them simply keeps them visible
-    // instead of triggering a message.
-
-    if (bubbleClose) {
-        bubbleClose.addEventListener('click', (e) => {
-            e.stopPropagation();
-            bubble.classList.add('hidden');
-        });
-    }
-
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-            widget.classList.toggle('minimized');
-            const nowMinimized = widget.classList.contains('minimized');
-            localStorage.setItem('bitseen-switchy-minimized', nowMinimized);
-            toggleBtn.title = nowMinimized ? 'Show Switchy' : 'Hide Switchy';
-            const hint = toggleBtn.querySelector('.switchy-toggle-hint');
-            if (hint) hint.textContent = nowMinimized ? 'Bring Switchy back' : 'Minimize Switchy';
-            if (nowMinimized) {
-                bubble.classList.add('hidden');
-            } else {
-                triggerCheer();
-            }
-        });
-    }
-
-    // Greet the student on page load with a warm hello
-    setTimeout(() => {
-        if (!widget.classList.contains('minimized') && bubble.classList.contains('hidden')) {
-            widget.classList.add('switchy-active');
-            saySwitchyMessage(SWITCHY_GREETING, 'greeting');
-            startSwitchyLinger();
-        }
-    }, 1200);
-
-    startSwitchyTriviaLoop();
-}
-
-/**
- * Keeps Switchy revealed for one minute after they are shown. Each fresh
- * hover restarts the minute; when the minute ends and the cursor is gone,
- * they tuck themselves away again.
- */
-function startSwitchyLinger() {
-    if (!switchyRefs || !switchyRefs.widget) return;
-    clearTimeout(switchyLingerTimer);
-    switchyLingerTimer = setTimeout(() => {
-        switchyLingerTimer = null;
-        const widget = switchyRefs.widget;
-        if (widget.classList.contains('minimized')) return;
-        if (widget.matches(':hover') || widget.contains(document.activeElement)) {
-            startSwitchyLinger();
-            return;
-        }
-        widget.classList.remove('switchy-active');
-        if (switchyRefs.bubble) switchyRefs.bubble.classList.add('hidden');
-    }, SWITCHY_LINGER_DURATION);
-}
-
-/**
- * Picks which kind of message Switchy says next. Trivia is weighted higher
- * than tips and cheers because it carries the most learning value.
- * @returns {object} one of the SWITCHY_BEATS entries
- */
-function pickSwitchyBeat() {
-    const total = SWITCHY_BEATS.reduce((sum, beat) => sum + beat.weight, 0);
-    let roll = Math.random() * total;
-    for (const beat of SWITCHY_BEATS) {
-        roll -= beat.weight;
-        if (roll <= 0) return beat;
-    }
-    return SWITCHY_BEATS[0];
-}
-
-/**
- * Walks a list one step at a time, wrapping around, so Switchy never
- * repeats the same tip or cheer twice in a row.
- * @param {string[]} list
- * @param {number} currentIndex
- * @returns {{ text: string, index: number }}
- */
-function nextInList(list, currentIndex) {
-    if (!list.length) return { text: '', index: currentIndex };
-    const index = (currentIndex + 1) % list.length;
-    return { text: list[index], index };
-}
-
-/**
- * Switchy speaks up on their own every 10 seconds: a trivia fact, a study
- * tip or a cheer pops open automatically, without the student needing to
- * hover anything.
+ * Every line Switchy can say, flattened into the shape the widget expects:
+ * an array of { category, text } objects.
  *
- * Each tick reveals Switchy (so the bubble is actually visible), restarts the
- * linger countdown, and replaces the message on screen in place. The tick is
- * skipped while Switchy is minimized or the tab is in the background, and a
- * greeting or welcome cheer already on screen is never interrupted.
+ * categories: "TRIVIA" | "STUDY TIP" | "CHEER"
+ *
+ * js/switchy.js reads this array. Classic script tags cannot use ES imports,
+ * so the array is published on window as well. If you switch the project to
+ * ES modules, the import becomes:
+ *
+ *     import { switchyData } from './trivia.js';
  */
-function startSwitchyTriviaLoop() {
-    if (switchyTriviaTimer) return;
-    switchyTriviaTimer = setInterval(() => {
-        if (!switchyRefs || !switchyRefs.widget || !switchyRefs.bubble) return;
-        if (document.hidden) return;
+const switchyData = buildSwitchyData();
 
-        const bubble = switchyRefs.bubble;
-        const onScreen = !bubble.classList.contains('hidden');
-        const current = bubble.dataset.variant;
-        // Never interrupt a short-lived greeting.
-        if (onScreen && current === 'greeting') return;
+function buildSwitchyData() {
+    const seen = new Set();
+    const entries = [
+        ...CONTEXT_TRIVIA.map(rule => ({ category: 'TRIVIA', text: rule.text })),
+        ...FALLBACK_TRIVIA.map(text => ({ category: 'TRIVIA', text })),
+        ...SWITCHY_STUDY_TIPS.map(text => ({ category: 'STUDY TIP', text })),
+        ...SWITCHY_CHEERS.map(text => ({ category: 'CHEER', text }))
+    ];
 
-        const beat = pickSwitchyBeat();
-        let text = '';
-
-        if (beat.variant === 'trivia') {
-            text = (typeof getTriviaForConversion === 'function')
-                ? getTriviaForConversion('', 10, '', 10)
-                : '';
-        } else if (beat.variant === 'tip') {
-            const tip = nextInList(SWITCHY_STUDY_TIPS, switchyTipIdx);
-            switchyTipIdx = tip.index;
-            text = tip.text;
-        } else {
-            const cheer = nextInList(SWITCHY_CHEERS, switchyCheerIdx);
-            switchyCheerIdx = cheer.index;
-            text = cheer.text;
-        }
-
-        if (!text) return;
-
-        // Minimized? The message still goes out, just as a toast, so the
-        // student never has to trigger anything to hear from Switchy.
-        if (switchyRefs.widget.classList.contains('minimized')) {
-            if (typeof setFeedback === 'function') setFeedback(text, 'hint', 'trivia');
-            return;
-        }
-
-        // Reveal Switchy so the message is actually on screen, and keep the
-        // linger countdown running so they do not tuck away mid-sentence.
-        switchyRefs.widget.classList.add('switchy-active');
-        startSwitchyLinger();
-        saySwitchyMessage(text, beat.variant);
-    }, SWITCHY_BEAT_INTERVAL);
-}
-
-function buildSwitchyWidget() {
-    // Check if the student minimized Switchy previously
-    // Fall back to the pre-rebrand key so an existing student's choice
-    // survives the Bitzy -> BitSeen rename.
-    const isMinimized = localStorage.getItem('bitseen-switchy-minimized') === 'true'
-        || localStorage.getItem('bitzy-switchy-minimized') === 'true';
-
-    const widget = document.createElement('div');
-    widget.id = 'switchy-widget';
-    widget.className = `switchy-container ${isMinimized ? 'minimized' : ''}`;
-    widget.setAttribute('aria-label', 'Switchy Companion');
-
-    widget.innerHTML = `
-        <div id="switchy-bubble" class="switchy-bubble hidden" data-variant="greeting" role="status" aria-live="polite">
-            <span id="switchy-bubble-icon" class="switchy-bubble-icon" aria-hidden="true"></span>
-            <span id="switchy-bubble-text">${SWITCHY_GREETING}</span>
-            <button type="button" id="switchy-bubble-close" class="switchy-bubble-close" aria-label="Close dialog">${icon('close')}</button>
-        </div>
-
-        <div id="switchy-avatar-wrap" class="switchy-avatar-wrap" title="Switchy - your study companion">
-            <div class="switchy-aura"></div>
-            <img src="assets/favicon.png" alt="Binary Conversion Exchange icon" class="switchy-avatar-img">
-            <span class="switchy-corner-star">${icon('star')}</span>
-            <div class="switchy-particles" aria-hidden="true"></div>
-        </div>
-        <button type="button" id="switchy-toggle-btn" class="switchy-toggle-btn" title="${isMinimized ? 'Show Switchy' : 'Hide Switchy'}">
-            ${isMinimized ? icon('converter') : icon('glint')}<span class="switchy-toggle-hint">${isMinimized ? 'Bring Switchy back' : 'Minimize Switchy'}</span>
-        </button>
-    `;
-
-    document.body.appendChild(widget);
-}
-
-/**
- * Makes Switchy say something. Every message they speak goes through here.
- * @param {string} message - The text they say.
- * @param {string} [variant] - greeting | trivia | tip | cheer
- * @param {number} [duration] - Optional override for how long the bubble stays open.
- * @returns {boolean} true when the message was delivered.
- */
-function saySwitchyMessage(message, variant = 'cheer', duration) {
-    if (!switchyRefs || !switchyRefs.bubble || !message) return false;
-    const { bubble, bubbleText, bubbleIcon, avatarWrap } = switchyRefs;
-
-    bubbleText.textContent = message;
-    bubble.dataset.variant = variant;
-    bubble.classList.remove('hidden');
-
-    if (bubbleIcon) {
-        bubbleIcon.innerHTML = icon(SWITCHY_BUBBLE_ICONS[variant] || 'glint');
-    }
-
-    // Trigger the bit particle shower
-    createParticles(avatarWrap);
-
-    // Jiggle the Switchy logo so every message lands with a little bounce.
-    // The jiggle lives on the image, not the wrapper, so the wrapper keeps
-    // floating continuously.
-    const avatarImg = avatarWrap ? avatarWrap.querySelector('.switchy-avatar-img') : null;
-    if (avatarImg) {
-        avatarImg.classList.remove('switchy-jiggle');
-        void avatarImg.offsetWidth;
-        avatarImg.classList.add('switchy-jiggle');
-    }
-
-    const ms = duration || SWITCHY_BUBBLE_DURATIONS[variant] || SWITCHY_BUBBLE_DURATIONS.cheer;
-    clearTimeout(window.switchyBubbleTimer);
-    // A rotating message (trivia, tip or cheer) stays on screen while Switchy
-    // is revealed; the 10 second beat replaces it in place. A greeting, or a
-    // cheer given an explicit duration, is short-lived and auto-hides.
-    const rotating = !duration && (variant === 'trivia' || variant === 'tip' || variant === 'cheer');
-    if (rotating && switchyRefs.widget && switchyRefs.widget.classList.contains('switchy-active')) {
+    return entries.filter(entry => {
+        if (seen.has(entry.text)) return false;
+        seen.add(entry.text);
         return true;
-    }
-    window.switchyBubbleTimer = setTimeout(() => {
-        bubble.classList.add('hidden');
-    }, ms);
-
-    return true;
+    });
 }
 
-/**
- * Delivers a trivia fact through Switchy.
- * @param {string} fact
- * @returns {boolean} true when Switchy delivered it, false when unavailable.
- */
-function showSwitchyTrivia(fact) {
-    if (!fact) return false;
-    if (!switchyRefs) initSwitchy();
-    if (!switchyRefs || !switchyRefs.widget) return false;
-    if (switchyRefs.widget.classList.contains('minimized')) return false;
-    return saySwitchyMessage(fact, 'trivia');
-}
-
-/**
- * Delivers a cheer through Switchy.
- */
-function showSwitchyCheer(text) {
-    if (!switchyRefs) initSwitchy();
-    return saySwitchyMessage(text || SWITCHY_CHEERS[0], 'cheer', 6000);
-}
-
-/**
- * Greets the student with a cheer when they bring Switchy back.
- */
-function triggerCheer() {
-    const cheer = nextInList(SWITCHY_CHEERS, switchyCheerIdx);
-    switchyCheerIdx = cheer.index;
-    saySwitchyMessage(cheer.text, 'cheer', 6000);
-}
-
-function createParticles(targetEl) {
-    if (!targetEl) return;
-    for (let i = 0; i < 7; i++) {
-        const particle = document.createElement('span');
-        particle.className = 'switchy-floating-particle';
-        const name = SWITCHY_PARTICLE_ICONS[Math.floor(Math.random() * SWITCHY_PARTICLE_ICONS.length)];
-        particle.innerHTML = icon(name);
-        particle.style.left = (Math.random() * 60 - 15) + 'px';
-        particle.style.bottom = (Math.random() * 40 + 20) + 'px';
-        particle.style.animationDelay = (Math.random() * 0.3) + 's';
-        targetEl.appendChild(particle);
-
-        setTimeout(() => particle.remove(), 1200);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    initSwitchy();
-});
+window.switchyData = switchyData;
